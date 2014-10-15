@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DicesGame", "DicesGame\DicesGame.csproj", "{867B3D94-4E73-40DC-A055-5C5E1DEF3250}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{867B3D94-4E73-40DC-A055-5C5E1DEF3250}.Debug|x86.ActiveCfg = Debug|x86
+		{867B3D94-4E73-40DC-A055-5C5E1DEF3250}.Debug|x86.Build.0 = Debug|x86
+		{867B3D94-4E73-40DC-A055-5C5E1DEF3250}.Release|x86.ActiveCfg = Release|x86
+		{867B3D94-4E73-40DC-A055-5C5E1DEF3250}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = DicesGame\DicesGame.csproj
+	EndGlobalSection
+EndGlobal
