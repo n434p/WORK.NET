@@ -1,0 +1,6 @@
+D:\MyProjects\StrFormula\StrFormula\bin\Debug\StrFormula.exe.config
+D:\MyProjects\StrFormula\StrFormula\bin\Debug\StrFormula.exe
+D:\MyProjects\StrFormula\StrFormula\bin\Debug\StrFormula.pdb
+D:\MyProjects\StrFormula\StrFormula\obj\Debug\StrFormula.csprojResolveAssemblyReference.cache
+D:\MyProjects\StrFormula\StrFormula\obj\Debug\StrFormula.exe
+D:\MyProjects\StrFormula\StrFormula\obj\Debug\StrFormula.pdb
