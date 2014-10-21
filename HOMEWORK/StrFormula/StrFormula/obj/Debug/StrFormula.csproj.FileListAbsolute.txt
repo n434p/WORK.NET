@@ -7,3 +7,9 @@ D:\MyProjects\StrFormula\StrFormula\obj\Debug\StrFormula.pdb
 D:\MyProjects\WORK.NET\HOMEWORK\StrFormula\StrFormula\bin\Debug\StrFormula.exe.config
 D:\MyProjects\WORK.NET\HOMEWORK\StrFormula\StrFormula\obj\Debug\StrFormula.exe
 D:\MyProjects\WORK.NET\HOMEWORK\StrFormula\StrFormula\obj\Debug\StrFormula.pdb
+D:\Kolomiets\WORK.NET\HOMEWORK\StrFormula\StrFormula\bin\Debug\StrFormula.exe.config
+D:\Kolomiets\WORK.NET\HOMEWORK\StrFormula\StrFormula\obj\Debug\StrFormula.exe
+D:\Kolomiets\WORK.NET\HOMEWORK\StrFormula\StrFormula\obj\Debug\StrFormula.pdb
+D:\Kolomiets\WORK.NET\HOMEWORK\StrFormula\StrFormula\bin\Debug\StrFormula.exe
+D:\Kolomiets\WORK.NET\HOMEWORK\StrFormula\StrFormula\bin\Debug\StrFormula.pdb
+D:\Kolomiets\WORK.NET\HOMEWORK\StrFormula\StrFormula\obj\Debug\StrFormula.csprojResolveAssemblyReference.cache
