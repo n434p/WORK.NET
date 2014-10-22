@@ -4,3 +4,6 @@ D:\My projects\Snail\Snail\bin\Debug\Snail.pdb
 D:\My projects\Snail\Snail\obj\Debug\Snail.csprojResolveAssemblyReference.cache
 D:\My projects\Snail\Snail\obj\Debug\Snail.exe
 D:\My projects\Snail\Snail\obj\Debug\Snail.pdb
+D:\My projects\WORK.NET\HOMEWORK\Snail\Snail\bin\Debug\Snail.exe.config
+D:\My projects\WORK.NET\HOMEWORK\Snail\Snail\obj\Debug\Snail.exe
+D:\My projects\WORK.NET\HOMEWORK\Snail\Snail\obj\Debug\Snail.pdb
