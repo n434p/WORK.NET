@@ -3,36 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
+
 
 namespace FractionsCalc
-{
+{    
     class Fraction
     {
-        int numerator;
-        int denumerator;
+        int num;
+        int denum;
         int intPart;
 
-        public Fraction(int numerator = 1, int denumerator = 1, int intPart = 0)
+        public Fraction(int num = 0, int denum = 1, int intPart = 0)
         {
-            this.numerator = numerator;
-            this.denumerator = denumerator;
+            this.num = num;
+            this.denum = denum;
             this.intPart = intPart;
         }
 
-        public int Numerator
+        public int Num
         {
-            get { return this.numerator; }
-            set { this.numerator = value; }
+            get { return this.num; }
+            set { this.num = value; }
         }
 
-        public int Denumerator
+        public int Denum
         {
-            get { return this.denumerator; }
+            get { return this.denum; }
             set
             {
-                if (value == 0) this.denumerator = 1;
-                else this.denumerator = value;
+                if (value == 0) this.denum = 1;
+                else this.denum = value;
             }
         }
 
@@ -44,55 +44,60 @@ namespace FractionsCalc
 
         public Fraction Sum(Fraction frac1, Fraction frac2)
         {
-            Fraction res = new Fraction();
-            res.numerator = frac1.numerator * frac2.denumerator + frac2.numerator * frac1.denumerator;
-            res.denumerator = frac1.denumerator * frac2.denumerator;
-            return res;
+            num = frac1.Num * frac2.Denum + frac2.Num * frac1.Denum;
+            denum = frac1.Denum * frac2.Denum;
+            return this;
         }
 
         public Fraction Subtract(Fraction frac1, Fraction frac2)
         {
-            Fraction res = new Fraction();
-            res.numerator = frac1.numerator * frac2.denumerator - frac2.numerator * frac1.denumerator;
-            res.denumerator = frac1.denumerator * frac2.denumerator;
-            return res;
+            num = frac1.Num * frac2.Denum - frac2.Num * frac1.Denum;
+            denum = frac1.Denum * frac2.Denum;
+            return this;
         }
 
         public Fraction Multiplication(Fraction frac1, Fraction frac2)
         {
-            Fraction res = new Fraction();
-            res.numerator = frac1.numerator * frac2.numerator;
-            res.denumerator = frac1.denumerator * frac2.denumerator;
-            return res;
+            num = frac1.Num * frac2.Num;
+            denum = frac1.Denum * frac2.Denum;
+            return this;
         }
 
         public Fraction Division(Fraction frac1, Fraction frac2)
         {
-            Fraction res = new Fraction();
-            res.numerator = frac1.numerator * frac2.denumerator;
-            res.denumerator = frac1.denumerator * frac2.numerator;
-            return res;
+
+            num = frac1.num * frac2.denum;
+            denum = frac1.denum * frac2.num;
+            return this;
         }
 
-        
-
         public override string ToString()
-        {
-            int param = Numerator > Denumerator ? Denumerator : Numerator;
+        {   
+            // The biggest delimeter for the both elements (numerator and denumerator) is a result of count down cycle.
+            // it avoids from another/next division.
+            int sign = (num  <0)?-1:1;
+            num *= sign;
+
+            int param = num > denum ? denum : num;
             for (int i = param; i > 1; i--)
             {
-                if (Numerator % i == 0 && Denumerator % i == 0)
+                if (num % i == 0 && denum % i == 0)
                 {
-                    Numerator /= i;
-                    Denumerator /= i;
+                    this.num /= i;
+                    this.denum /= i;
                 }
             }
-            if (Numerator > Denumerator)
+            // transforms in proper fraction form.
+            if (num >= denum)
             {
-                IntPart = Numerator / Denumerator;
-                Numerator -= IntPart * Denumerator;
+                intPart = num / denum;
+                num -= intPart * denum;
             }
-            return string.Format("{0} {1}/{2}", IntPart, Numerator, Denumerator);
+             
+            // displays result for each case(only integer part, without integer part, whole fraction) of fraction.
+            if (num == 0) return (intPart*sign).ToString() ;
+            else if (intPart == 0) return string.Format("{0}/{1}", num*sign, denum);
+            else return string.Format("{0} {1}/{2}", intPart*sign, num, denum);
         }
 
 
@@ -100,59 +105,85 @@ namespace FractionsCalc
 
     class Program
     {
+        static bool error = false;
+
+        /// <summary>
+        /// Converts string into improper fraction
+        /// </summary>
+        /// <param name="strFrac"></param>
+        /// <returns></returns>
         static Fraction StrToFrac(string strFrac) 
         {
             Fraction resFrac = new Fraction();
             try 
-            {
-            List<string> frac = strFrac.Split(' ', '/').ToList();
-            if (frac.Count == 2)
-            {
-                resFrac.Numerator = Convert.ToInt32(frac[0]);
-                resFrac.Denumerator = Convert.ToInt32(frac[1]);
-            }
-            if (frac.Count == 3)
-            {
-                resFrac.IntPart = Convert.ToInt32(frac[0]);
-                resFrac.Numerator = Convert.ToInt32(frac[1]);
-                resFrac.Denumerator = Convert.ToInt32(frac[2]);
-            }
+            {   // Checks for the right entry.
+                //foreach (char item in strFrac)
+                //{
+                //    if (!char.IsDigit(item) || item != ' ' || item != '/') throw new Exception();
+                //}
+
+
+                List<string> frac = strFrac.Split('-',' ', '/').ToList();
+                switch (frac.Count)
+                {   case 1:
+                        resFrac.IntPart = Convert.ToInt32(frac[0]);
+                        break;
+                    case 2:
+                        if (!strFrac.Contains('/')) throw new Exception();
+                        resFrac.Num = Convert.ToInt32(frac[0]);
+                        resFrac.Denum = Convert.ToInt32(frac[1]);
+                        break;
+                    case 3:
+                        resFrac.IntPart = Convert.ToInt32(frac[0]);
+                        resFrac.Num = Convert.ToInt32(frac[1]);
+                        resFrac.Denum = Convert.ToInt32(frac[2]);
+                        break;
+                }
+
             }
             catch
-            { Console.WriteLine("Your entry has mistakes."); }
+            {  
+                Console.WriteLine("Wrong fraction!");
+                error = true;
+            }
+
+            resFrac.Num += resFrac.Denum * resFrac.IntPart;
+            resFrac.IntPart = 0;
+
             return resFrac;
 
         }
-
-        static void CalcForm(ref Fraction frac)
-        {
-            frac.Numerator = frac.Numerator + frac.IntPart * frac.Denumerator;
-            frac.IntPart = 0;
-        }
-
+                
         static void Main(string[] args)
         {
-
+          
             while (true)
             {
-                Console.WriteLine("Fraction Calculator: \n Fraction must have next order: IntPart_Numerator/Denumerator\n Negative fractions are not allowed to enter.\n");
+                error = false;
+                Console.WriteLine("Fraction Calculator: \n Fraction must have next order: IntPart Numerator/Denumerator\n Negative fractions are not allowed to enter.\n");
+
                 Console.WriteLine("\nPlease enter 1-st fraction:  ");
                 Fraction frac1 = StrToFrac(Console.ReadLine());
+                 
 
-
-                Console.WriteLine("\nPlease enter 2-st fraction:  ");
+                Console.WriteLine("\nPlease enter 2-nd fraction:  ");
                 Fraction frac2 = StrToFrac(Console.ReadLine());
-                Fraction resFrac = new Fraction();
 
-                CalcForm(ref frac1);
-                CalcForm(ref frac2);
+                // Checks for the zero denumerators.
+                if (error) 
+                {
+                    Console.WriteLine("Your entry has mistakes");
+                    Console.Clear();
+                    return;
+                }
+
+                Fraction resFrac = new Fraction();
 
                 Console.WriteLine("Choose any operation in: + - * /  ");
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.Add:
                         resFrac.Sum(frac1, frac2);
-                        Console.WriteLine(resFrac);
                         break;
                     case ConsoleKey.Divide:
                         resFrac.Division(frac1, frac2);
@@ -163,12 +194,15 @@ namespace FractionsCalc
                     case ConsoleKey.Subtract:
                         resFrac.Subtract(frac1, frac2);
                         break;
-                    default: return ;
+                    default: Console.Clear(); continue;
                         break;
                 }
-                Console.WriteLine("Your result: {0}",resFrac);
+                Console.WriteLine("\n\nYour result: {0}", resFrac);
 
-            } 
+                Console.WriteLine("\nPress any key to try again. \nFor exit press q... ");
+                if (Console.ReadKey().Key == ConsoleKey.Q) return;
+                Console.Clear();
+            }
         }
     }
 }
