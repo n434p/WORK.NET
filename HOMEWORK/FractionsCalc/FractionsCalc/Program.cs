@@ -100,7 +100,7 @@ namespace FractionsCalc
             else return string.Format("{0} {1}/{2}", intPart*sign, num, denum);
         }
 
-
+        
     }
 
     class Program
@@ -194,7 +194,7 @@ namespace FractionsCalc
                     case ConsoleKey.Subtract:
                         resFrac.Subtract(frac1, frac2);
                         break;
-                    default: Console.Clear(); continue;
+                    default: Console.Clear(); return;
                         break;
                 }
                 Console.WriteLine("\n\nYour result: {0}", resFrac);
