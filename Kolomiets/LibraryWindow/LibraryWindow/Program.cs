@@ -8,34 +8,109 @@ using System.Threading.Tasks;
 namespace LibraryWindow
 {
     class Library
-    { 
-    
+    {
+        public static int[] countChartBooks { get; private set;}
+        string[] genres = {"Science","Fiction","Study"};
+
+        List<Book> LibraryList;
+
+        public static int MaxClientsNumber { get; private set;}
+
+        public Library(string libName = "NET14/2")
+        {
+            Random r = new Random();
+            LibraryList = new List<Book>();
+            MaxClientsNumber = r.Next(1,5);
+            for (int i = 0; i < genres.Length; i++)
+            {
+                int count = r.Next(1, 5);
+                for (int j = 0; j < count; j++)
+                {
+                   LibraryList.Add(new Book("Library-" + libName + ":" + genres[i] + " Book" + j));
+                }
+                countChartBooks[i] = count;
+            }
+        }
+
+        public int TotalBooks() 
+        {
+            int total = 0;
+            foreach (var item in countChartBooks)
+            {
+                total += item;
+            }
+            return total;
+        }
+
+        public void GiveBook(Book book) 
+        {
+            if (LibraryList.Contains(book)) LibraryList.Remove(book);
+            else Console.WriteLine("We can't find your book. Maybe someone borrows it. Sorry!");
+        }
+
+        public void 
+
+        public override string ToString()
+        {
+            Console.WriteLine("Library \"{0}\" has {1} directions.\n Total books count: {2}\n\t\t LIST: \n",LibraryName,genres.Length,TotalBooks());
+            foreach (Book item in LibraryList)
+            {
+                Console.WriteLine(item);
+            }
+            return "********";
+        }
+
     }
 
-    class Book
+    class ReaderCard
     {
-       public string Name { get; set;}
-       public string Author { get; set; }
-       public int Year { get; set; }
+        public static int CardNumber { get; private set; }
+         
+        public int BorrowBooks { get; private set; }
+        public string Name { get; private set; }
+        
+        
+        List<Book> ReaderList { get; private set; }
 
-       Random r = new Random();
+        public void TakeBook()
+        {
 
-       public Book()
-       {
-           Author = "Petrov"+r.Next(1,15).ToString();
-           Name = "C# for dummies v."+r.Next(1,5).ToString();
-           Year = r.Next(1970, 2014);
-       }
+        }
 
-        //public string SetAuthor()
-        //{
-        //    set { Author += r.Next(1,15);};
-        //}
+        public ReaderCard(string LibraryClient = "Simple client")
+        {
+            ReaderList = new List<Book>();
+            Name = LibraryClient;
+            BorrowBooks = 0;
+            if (CardNumber < Library.MaxClientsNumber) CardNumber++;
+            else Console.WriteLine("Library can't take you. Sorry!");
+           
+        }
 
-       public override string ToString()
-       {
-           return string.Format("Book: {0}  Author: {1} Year: {2}",Name, Author , Year);
-       }
+        public override string ToString()
+        {
+            Console.WriteLine(" Current client: {0} Credit: {1} \n", Name, BorrowBooks);
+            //foreach (Book item in ReaderList )
+            //{
+            //    Console.WriteLine("Card #: {0} Title:  {1}",CardNumber,item);
+            //}
+            return "******";
+        }
+    }
+
+    class Book 
+    {
+        public string Title { get; private set; }
+
+        public Book(string bookname= "Other book")
+        {
+            Title = bookname;
+        }
+
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 
 
@@ -44,28 +119,16 @@ namespace LibraryWindow
         static void Main(string[] args)
         {
             Random r = new Random();
-            Book[] Library = new Book[r.Next(1,10)];
 
-            for (int i = 0; i < Library.Length; i++)
-            {
-                Thread.Sleep(20);
-                Library[i] = new Book();
-            }
+            Library lib1 = new Library();
 
-            //do
-            //{
-            //    indexFilial = r.Next(0, 4);
-            //    Console.WriteLine(filials[indexFilial].NameFilial);
-            //    Console.WriteLine("1 - Выдача кредита\n2 - Получить баланс банка\n0 - Выход");
-            //    choose = Convert.ToInt32(Console.ReadLine());
-            //    switch(choose)
+            ReaderCard rc1 = new ReaderCard("Maksim");
+
             
 
-            foreach (Book item in Library)
-	{
-		 Console.WriteLine(item);
-	}
-            
+            Console.WriteLine(rc1);
+
+                       
                         
             Console.ReadKey();
         }
