@@ -10,7 +10,7 @@ namespace LibraryWindow
     class Library
     {
         public static int[] countChartBooks { get; private set;}
-        string[] genres = {"Science","Fiction","Study"};
+        
 
         List<Book> LibraryList;
 
@@ -21,25 +21,16 @@ namespace LibraryWindow
             Random r = new Random();
             LibraryList = new List<Book>();
             MaxClientsNumber = r.Next(1,5);
-            for (int i = 0; i < genres.Length; i++)
-            {
-                int count = r.Next(1, 5);
-                for (int j = 0; j < count; j++)
+            for (int j = 0; j < r.Next(5,15); j++)
                 {
                    LibraryList.Add(new Book("Library-" + libName + ":" + genres[i] + " Book" + j));
                 }
-                countChartBooks[i] = count;
-            }
+                
         }
 
         public int TotalBooks() 
         {
-            int total = 0;
-            foreach (var item in countChartBooks)
-            {
-                total += item;
-            }
-            return total;
+            return LibraryList.Count;
         }
 
         public void GiveBook(Book book) 
@@ -48,7 +39,7 @@ namespace LibraryWindow
             else Console.WriteLine("We can't find your book. Maybe someone borrows it. Sorry!");
         }
 
-        public void 
+        
 
         public override string ToString()
         {
@@ -101,15 +92,23 @@ namespace LibraryWindow
     class Book 
     {
         public string Title { get; private set; }
+        public string Genre { get; private set; }//= {"Science","Fiction","Study"};
+        public static string[] genres = {"Science","Fiction","Study"};
+        public bool Borrowed { get; private set; }
+        
 
-        public Book(string bookname= "Other book")
+        public Book(string bookname= "Other book", bool borrowed=false)
         {
             Title = bookname;
+            Random r = new Random();
+            Genre = genres[r.Next(0,genres.Length +1)];
+            Borrowed = borrowed;          
         }
 
         public override string ToString()
         {
-            return Title;
+
+            return string.Format("{0}",);
         }
     }
 
