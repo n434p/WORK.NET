@@ -91,24 +91,26 @@ namespace LibraryWindow
 
     class Book 
     {
+        
         public string Title { get; private set; }
         public string Genre { get; private set; }//= {"Science","Fiction","Study"};
         public static string[] genres = {"Science","Fiction","Study"};
         public bool Borrowed { get; private set; }
         
 
-        public Book(string bookname= "Other book", bool borrowed=false)
+
+        public Book(string bookname= "Other book")
         {
             Title = bookname;
             Random r = new Random();
             Genre = genres[r.Next(0,genres.Length +1)];
-            Borrowed = borrowed;          
+            Borrowed = false;          
         }
 
         public override string ToString()
         {
-
-            return string.Format("{0}",);
+            string str = (Borrowed == false)?"FREE to take":; 
+            return string.Format("Genre:{0} {1} - {2}",Genre,Title,str);
         }
     }
 
@@ -124,6 +126,8 @@ namespace LibraryWindow
             ReaderCard rc1 = new ReaderCard("Maksim");
 
             
+            int [][] nums = new int[][];
+
 
             Console.WriteLine(rc1);
 
