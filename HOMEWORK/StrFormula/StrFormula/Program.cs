@@ -25,7 +25,7 @@ namespace StrFormula
 
             while (currentStr.Contains("(")) //while true it finds deepest bracket '(' in formula 
             {
-                 
+                
                 begBracket = currentStr.IndexOf('(');
                 currentStr = currentStr.Substring(begBracket + 1, currentStr.Length - begBracket-1);
             
@@ -41,7 +41,7 @@ namespace StrFormula
                     numStr = currentStr;
                 }
             }
-
+        Console.ForegroundColor = ConsoleColor.Green;
         return CalcNoBrackets(numStr);
              
         }
@@ -70,7 +70,7 @@ namespace StrFormula
 
             // Multiplication and divide have priority and work first.
             // Any operation replaces by result previous element and removes next two.
-
+            
             int i = 0;
             while (i < formCode.Count)
             {
@@ -80,6 +80,7 @@ namespace StrFormula
                         formCode.RemoveRange(i, 2);
                         break;
                     case "/":
+                        if (Convert.ToDouble(formCode[i + 1]) == 0) return "During calculation something divides by 0.";
                         formCode[i - 1] = Convert.ToString(Convert.ToDouble(formCode[i - 1]) / Convert.ToDouble(formCode[i + 1]));
                         formCode.RemoveRange(i, 2);
                         break;
@@ -145,8 +146,10 @@ namespace StrFormula
             if (!validSigns.Contains(item)) return false;
             /// hasn't two operators.
             for (int i = 0; i < strCheck.Length-1; i++)
+            {
                 if ((strCheck[i] == strCheck[i + 1]) && (operations.Contains(strCheck[i])) && (strCheck[i] != '-')) return false;
-   
+                if (strCheck[i] == ')'&& (strCheck[i-1]=='('||operations.Contains(strCheck[i-1]))) return false;
+            }
             return true;
         }
 
