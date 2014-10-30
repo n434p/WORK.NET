@@ -93,7 +93,7 @@ namespace LibraryWindow
     class ReaderCard
     {
         public string Name { get; private set; }
-        public int CardNumber { get; private set; }
+        public static int CardNumber { get; private set; }
         public List<Book> ReaderList { get; private set; }
 
         public void MakeRec(Book book)
