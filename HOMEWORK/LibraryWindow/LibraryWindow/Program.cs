@@ -36,7 +36,7 @@ namespace LibraryWindow
         /// <summary>
         /// Takes/returns given book.
         /// </summary>
-        /// <param name="book"></param>
+        /// <param name="book"> bla </param>
         /// <param name="reader"></param>
         public void GetBook(Book book,ReaderCard reader) 
         {
@@ -130,7 +130,7 @@ namespace LibraryWindow
         public string Genre { get; private set; }//= {"Science","Fiction","Study"};
         static string[] genres = {"Science","Fiction","Study  ","Comics  ","Magazine","Encyclopedy"};
         public bool Borrowed { get; private set; }
-        public string Reader { get; private set; }
+        
 
         public void ChangeStatus() 
         {
