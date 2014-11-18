@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace GeometryProject
 {
-    abstract class Figure 
+    interface IInit 
+    {
+        double Height { get; set; }
+        double[] Side { get; set; }
+    }
+
+    abstract class Figure
     {
         public string Name { get; set; }
         
@@ -15,162 +21,194 @@ namespace GeometryProject
             Name = n;
         }
 
+        
         public abstract double GetSquare();
         public abstract double GetPerimetr();
 
 
         public override string ToString()
         {
-            return string.Format("{0} S = {1} P = {2}", Name, GetSquare(), GetPerimetr ());
+            return string.Format("{0} S = {1:F} P = {2:F}", Name, GetSquare(), GetPerimetr ());
         }
 
     }
 
-    class Triangle: Figure 
-    {
-        double height;
-        double aSide, bSide, cSide;
 
+    class Triangle: Figure, IInit
+    {
+
+        public double Height { get; set; }
+        
+        public double[] Side { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="h"> triangle height</param>
+        /// <param name="a"> 1st sidde</param>
+        /// <param name="b"> 2nd side</param>
+        /// <param name="c"> 3rd side</param>
         public Triangle(double h = 4,double a = 3,double b = 4,double c = 5 ):base("Triangle") 
         {
-            height = h;
-            aSide = a;
-            bSide = b;
-            cSide = c;
+            
+            Height = h;
+            Side = new double[3] {a,b,c};
+         
         }
 
         public override double GetPerimetr()
         {
-            return aSide + bSide + cSide;
+            return Side[0] + Side[1] + Side[2];
         }
 
         public override double GetSquare()
         {
-            return  aSide * height/2;
+            return  Side[0] * Height/2;
         }
     }
 
-    class Quad : Figure
+    class Quad : Figure,  IInit
     {
-        
-        double aSide;
 
+        public double Height { get; set; }
+        public double[] Side { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"> basis side </param>
         public Quad(double a = 3):base("Quad")
         {
-            aSide = a;        
+            Height = a;      
         }
 
         public override double GetPerimetr()
         {
-            return aSide*4;
+            return Height*4;
         }
 
         public override double GetSquare()
         {
-            return  aSide * aSide;
+            return Height * Height;
         }
     }
 
-    class Rectangle : Figure
+    class Rectangle : Figure , IInit
     {
+        public double Height { get; set; }
+        public double[] Side { get; set; }
 
-        double aSide;
-        double bSide;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"> long side</param>
+        /// <param name="b"> short side</param>
         public Rectangle(double a = 3, double b =4)
             : base("Rectangle")
         {
-            aSide = a;
-            bSide = b;
+            Height = a;
+            Side = new double [1]{b};
         }
 
         public override double GetPerimetr()
         {
-            return (aSide+bSide) * 2;
+            return (Height+Side[0]) * 2;
         }
 
         public override double GetSquare()
         {
-            return aSide * bSide;
+            return Side[0] * Height;
         }
     }
 
-    class Rhombus : Figure
+    class Rhombus : Figure, IInit
     {
 
-        double aSide;
-        double height;
+        public double Height { get; set; }
+        public double[] Side { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"> basis side</param>
+        /// <param name="h"> height </param>
         public Rhombus(double a = 3, double h = 4)
             : base("Rhombus ")
         {
-            aSide = a;
-            height = h;
+            Height = h;
+            Side = new double[1] { a };
         }
 
         public override double GetPerimetr()
         {
-            return 4*aSide;
+            return 4*Side[0];
         }
 
         public override double GetSquare()
         {
-            return aSide*height;
+            return Side[0]*Height;
         }
     }
 
-    class Parallelogram : Figure
+    class Parallelogram : Figure, IInit
     {
 
-        double baseSide;
-        double leftSide;
-        double height;
+        public double Height { get; set; }
+        public double[] Side { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="b"> basis line</param>
+        /// <param name="l"> left side </param>
+        /// <param name="h"> height </param>
         public Parallelogram(double b = 3, double l =2, double h = 4)
             : base("Parallelogram")
         {
-            baseSide = b;
-            height = h;
+            Side = new double[2]{b,l} ;
+            Height = h;
         }
 
         public override double GetPerimetr()
         {
-            return 2*(baseSide+leftSide);
+            return 2*(Side[0]+Side[1]);
         }
 
         public override double GetSquare()
         {
-            return baseSide * height;
+            return Side[0] * Height;
         }
     }
 
-    class Trapezoid : Figure
+    class Trapezoid : Figure, IInit
     {
 
-        double bottomSide;
-        double topSide;
-        double leftSide;
-        double rightSide;
-        double height;
+        public double Height { get; set; }
+        public double[] Side { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="b"> bottom side</param>
+        /// <param name="t"> top side</param>
+        /// <param name="l"> left side</param>
+        /// <param name="r"> right side</param>
+        /// <param name="h"> height </param>
         public Trapezoid(double b = 3, double t = 2, double l = 3, double r = 3, double h = 4)
             : base("Trapezoid ")
         {
-            bottomSide = b;
-            topSide = t;
-            leftSide = l;
-            rightSide = r;
-            height = h;
+            Side = new double [4]{b, t,l,r};
+            Height = h;
         }
 
         public override double GetPerimetr()
         {
-            return bottomSide + topSide+leftSide+rightSide ;
+            return Side[0] + Side[1]+Side[2]+Side[3] ;
         }
 
         public override double GetSquare()
         {
-            return (bottomSide+topSide)*2/height;
+            return (Side[0]+Side[1])*2/Height;
         }
     }
 
