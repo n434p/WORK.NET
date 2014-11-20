@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace StorageProject
 {
     enum Group { Food, AdultStuff, HouseChemical};
-    enum Status { OK, NotAvailable, Expired, Broken};
+    enum Status { Ok, NotAvailable, Expired, Broken};
     abstract class Product
     {
         public string Name { get; set; }
@@ -39,6 +39,7 @@ namespace StorageProject
             Date.AddDays(new Random().Next(-120, -30));
             EvalDays = eval;
         }
+
         public Status Check(Product p) 
         {
             try
@@ -55,9 +56,10 @@ namespace StorageProject
             }
             return p.ProductStatus;
         }
+
         public override string ToString()
         {
-            return base.ToString()+"\n"+"\t DATE: "+Date.ToShortDateString()+"\tEVAL: "+EvalDays;
+            return base.ToString()+"\n"+"\t DATE: "+Date.ToShortDateString()+"\tEVAL: "+EvalDays+" days";
         }
     }
     class AdultOne: Product
