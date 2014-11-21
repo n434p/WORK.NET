@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace StorageProject
 {
-    interface IExpire
+    interface IBroken
     {
-        bool TimeLimit { get; set; }
+        bool Fragile { get; set; }
         Status Check(Product p);
     }
 }

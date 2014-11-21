@@ -49,7 +49,7 @@ namespace TestProj
             Console.WriteLine("Student: {0} - {1} - {2} - IPrintable", Name, SurName, GroupName);
         }
 
-        public void Print() 
+        public new void Print() 
         {
             Console.WriteLine("Student: {0} - {1} - {2}", Name, SurName, GroupName);
         }

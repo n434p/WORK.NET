@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBroken.cs" />
+    <Compile Include="IExcise.cs" />
     <Compile Include="IExpire.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductException.cs" />

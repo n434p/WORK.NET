@@ -9,7 +9,7 @@ namespace EnumProject
     public interface IEnum 
     {
         int Length { get; set; }
-        object Current { get; set; }
+        object Current { get; }
         int Counter { get; set; }
         void Next();
         void Reset();
@@ -21,7 +21,7 @@ namespace EnumProject
         public object Current 
         {
             get { return arr[Counter]; }
-            set { Current = value; } 
+            
         }
         public int Counter { get; set; }
 
@@ -29,14 +29,13 @@ namespace EnumProject
 
         public SomeArray(params object [] arg)
         {
-            object [] arr = arg;
+            arr = arg;
             Counter = 0;
             Length = arr.Length;
         }
-
-        public void Next() 
+        public void Next()
         {
-            if (Counter < arr.Length) Counter++;
+            if (Counter < Length - 1) Counter++;
             else this.Reset();
         }
 
@@ -47,7 +46,7 @@ namespace EnumProject
 
         public override string ToString()
         {
-            return Convert.ToString(this.Current);
+            return this.Counter + " " + this.Current + " " ;
         }
 
     }
@@ -56,7 +55,16 @@ namespace EnumProject
     {
         static void Main(string[] args)
         {
+            SomeArray sa = new SomeArray("11", "22", "33", "44");
+            
+            for (int i = 0; i < sa.Length+5; i++)
+            {
+                Console.WriteLine(sa);
+                sa.Next();
+            }
 
+       
+           
         }
     }
 }

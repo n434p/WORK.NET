@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace StorageProject
 {
-    interface IExpire
+    interface IExcise
     {
-        bool TimeLimit { get; set; }
+        bool Excise { get; set; }
         Status Check(Product p);
     }
 }

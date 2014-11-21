@@ -6,55 +6,39 @@ using System.Threading.Tasks;
 
 namespace StorageProject
 {
-    enum Group { Food, AdultStuff, HouseChemical};
-    enum Status { Ok, NotAvailable, Expired, Broken};
+
     abstract class Product
     {
         public string Name { get; set; }
         public Group ProductGroup;
-        public Status ProductStatus;       
-        public Product(string name = "Some product", Group group= Group.Food, Status status = Status.OK)
+        public bool TimeLimit { get; set; }
+        public bool Fragile { get; set; }
+        public bool Excise { get; set; }
+        public Product(string name = "Some product", Group g = Group.Food, bool timelim=false,bool fragile=false,bool excise=false)
         {
             Name = name;
-            ProductGroup = group;
-            ProductStatus = status;
+            ProductGroup = g;
+            TimeLimit = timelim;
+            Fragile = fragile;
+            Excise = excise;
         }
 
         public override string ToString()
         {
-            return string.Format("ITEM: {0} \tGROUP: {1} \tSTATUS: {2}\t\n",Name,ProductGroup,ProductStatus);
+            return string.Format("ITEM: {0} \tGROUP: {1} \t\nTimeLimit: {2}\t Fragile: {3}\t Excise: {4}\n",Name,ProductGroup,TimeLimit,Fragile,Excise);
         }
     }
 
-    class FoodOne: Product, IExpire 
+    class FoodOne: Product
     {
-        public DateTime Date { get; set; }
-        public int EvalDays { get; set; }
+        public DateTime Date { get; protected set; }
+        public int EvalDays { get; protected set; }
         
-        public FoodOne(string n = "Some food", int eval = 90)
-            : base(n, Group.Food)
+        public FoodOne(string n = "Some food", int  eval = 90): base(n, Group.Food,true)
         {
-            Name = n;
             Date = DateTime.Now;
-            Date.AddDays(new Random().Next(-120, -30));
+            Date = Date.AddDays(new Random().Next(-(Date.DayOfYear-1),0) ) ;
             EvalDays = eval;
-        }
-
-        public Status Check(Product p) 
-        {
-            try
-            {
-                if (DateTime.Now.DayOfYear > Date.DayOfYear + EvalDays)
-                {
-                    p.ProductStatus = Status.Expired;
-                    throw new ProductException(string.Format("\n {0} is expired!", p.Name));
-                }
-            }
-            catch (ProductException pEx) 
-            {
-                Console.WriteLine(pEx.Message);
-            }
-            return p.ProductStatus;
         }
 
         public override string ToString()
@@ -64,10 +48,15 @@ namespace StorageProject
     }
     class AdultOne: Product
     {
-
+        public AdultOne(string n = "Some excise product") : base (n, Group.AdultStuff,false,true,true)
+        {    
+        }
     }
-    class HouseChemicalOne: Product
+    class HouseChemical: Product
     {
-
+        public HouseChemical(string n = "House chemical product"): base(n, Group.HouseChemical) 
+        {       
+            
+        } 
     }
 }
