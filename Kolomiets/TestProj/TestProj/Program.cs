@@ -35,13 +35,73 @@ namespace TestProj
 
     }
 
-    class Student : Person, IPrintable 
+    class Student : Person, IPrintable, IComparable
     {
         public string GroupName { get; set; }
+        public enum Criteries { name, group, surname };
+        static public Criteries SortKey { get; set; }
 
         public Student(string n="John", string sn="Doe", string g = "NET14/2"):base(n,sn)
         {
             GroupName = g;
+        }
+
+        public int CompareTo(object obj) 
+        {
+            Student st = (Student) obj;
+            switch (SortKey)
+            {
+                case Criteries.name:
+                    if (this.Name.CompareTo(st.Name) < 0) return -1;
+                    if (this.Name.CompareTo(st.Name) > 0) return 1;
+                    return 0;
+                    
+                case Criteries.group:
+                    if (this.GroupName.CompareTo(st.GroupName) < 0) return -1;
+                    if (this.GroupName.CompareTo(st.GroupName) > 0) return 1;
+                    return 0;
+                    
+                case Criteries.surname:
+                    if (this.SurName.CompareTo(st.SurName) < 0) return -1;
+                    if (this.SurName.CompareTo(st.SurName) > 0) return 1;
+                    return 0;
+                    
+                default:
+                    return 0;
+            }
+        }
+
+        public class StudentComparer :  IComparer<Student> 
+        {
+            
+            public StudentComparer(Criteries key) 
+            {
+                SortKey = key;
+            }
+
+            int IComparer<Student>.Compare(Student st1, Student st2)
+            {
+              switch (SortKey)
+            {
+                case Criteries.name:
+                    if (st1.Name.CompareTo(st2.Name) < 0) return -1;
+                    if (st1.Name.CompareTo(st2.Name) > 0) return 1;
+                    return 0;
+                    
+                case Criteries.group:
+                    if (st1.GroupName.CompareTo(st2.GroupName) < 0) return -1;
+                    if (st1.GroupName.CompareTo(st2.GroupName) > 0) return 1;
+                    return 0;
+                    
+                case Criteries.surname:
+                    if (st1.SurName.CompareTo(st2.SurName) < 0) return -1;
+                    if (st1.SurName.CompareTo(st2.SurName) > 0) return 1;
+                    return 0;
+                    
+                default:
+                    return 0;
+            }
+            }
         }
 
         void IPrintable.Print()
@@ -58,29 +118,20 @@ namespace TestProj
     class Program
     {
         static void Main(string[] args)
-        {
-            Person p = new Person("Ivan", "Petrov");
-            Student st = new Student("Ivan", "Petrov", "Other Group");
+        { 
+            Student st1 = new Student("Ivan", "Petrov", "Other Group");
+            Student st2 = new Student("Ivannna", "Petrova", "1-st Group");
+            Student st3 = new Student("Victor", "Sidorov", "Next Group");
 
-            p.Print();
-            st.Print();
+            Student [] studList= new Student[3] { st1, st2,st3 };
 
-            Console.WriteLine("Explicit: \n");
+            //Student.SortKey = Student.Criteries.name; 
+            //Array.Sort(studList);
 
-            ((IPrintable) p).Print();
-            
-            ((IPrintable) st).Print();
+            Array.Sort(studList, new Student.StudentComparer(Student.Criteries.surname));
+            Array.Reverse(studList);
 
-            Console.WriteLine();
 
-            IPrintable obj1 = new Person();
-            obj1.Print();
-
-            IPrintable obj2 = new Student();
-            obj2.Print();
-
-            List<IPrintable> studList = new List<IPrintable>() { p, st, obj1, obj2 };
-            
             Console.WriteLine();
 
             foreach (var item in studList)
