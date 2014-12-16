@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace StorageProject
@@ -27,7 +28,12 @@ namespace StorageProject
             //}
 
             Storage store = new Storage();
-            store.ReciveProduct();
+            for (int i = 0; i < 5; i++)
+            {
+               Thread.Sleep(20);
+               store.ReciveProduct(); 
+            }
+            store.ReciveProduct(5);
             Console.WriteLine(store);
         }
     }
