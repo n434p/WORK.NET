@@ -11,20 +11,32 @@ namespace collectionFirst
     {
         static void Main(string[] args)
         {
-            ArrayList strArray = new ArrayList();
-            strArray.AddRange(new string[] { "First", "Second", "Third" });
-            // Отобразить количество элементов в ArrayList.
-            Console.WriteLine("This collection has {0} items.", strArray.Count);
-            Console.WriteLine();
-            // Добавить новый элемент и отобразить текущее их количество.
-            strArray.Add("Fourth!");
-            Console.WriteLine("This collection has {0} items.", strArray.Count);
-            // Отобразить содержимое.
-            foreach (string s in strArray)
+            SortedList sort = new SortedList();
+            sort.Add("1", "sdf");
+            sort.Add("2", "sdf");
+            sort.Add("3", "sdf");
+            sort.Add("4", "sdfd");
+
+            foreach (SortedList item in sort)
             {
-                Console.WriteLine("Entry: {0}", s);
+                Console.WriteLine(item.Count);
             }
-            Console.WriteLine();
+            
+            //ArrayList strArray = new ArrayList();
+            //strArray.AddRange(new string[] { "First", "Second", "Third" });
+            
+            //// Отобразить количество элементов в ArrayList.
+            //Console.WriteLine("This collection has {0} items.", strArray.Count);
+            //Console.WriteLine();
+            //// Добавить новый элемент и отобразить текущее их количество.
+            //strArray.Add("Fourth!");
+            //Console.WriteLine("This collection has {0} items.", strArray.Count);
+            //// Отобразить содержимое.
+            //foreach (string s in strArray)
+            //{
+            //    Console.WriteLine("Entry: {0}", s);
+            //}
+            //Console.WriteLine();
         }
     }
 }
