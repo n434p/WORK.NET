@@ -4,6 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace collectionFirst
 {
@@ -11,32 +12,17 @@ namespace collectionFirst
     {
         static void Main(string[] args)
         {
-            SortedList sort = new SortedList();
-            sort.Add("1", "sdf");
-            sort.Add("2", "sdf");
-            sort.Add("3", "sdf");
-            sort.Add("4", "sdfd");
-
-            foreach (SortedList item in sort)
+            string s = "abcd_вапвапвап~`!@#$%^&*()-=+|:;\",.<>?/12345";
+            Regex regex = new Regex(@"\W");
+            MatchCollection matchcollection = regex.Matches(s);
+            string Text = "";
+            for (int i = 0; i < matchcollection.Count; i++)
             {
-                Console.WriteLine(item.Count);
+                Text += matchcollection[i].Value + " ";
             }
-            
-            //ArrayList strArray = new ArrayList();
-            //strArray.AddRange(new string[] { "First", "Second", "Third" });
-            
-            //// Отобразить количество элементов в ArrayList.
-            //Console.WriteLine("This collection has {0} items.", strArray.Count);
-            //Console.WriteLine();
-            //// Добавить новый элемент и отобразить текущее их количество.
-            //strArray.Add("Fourth!");
-            //Console.WriteLine("This collection has {0} items.", strArray.Count);
-            //// Отобразить содержимое.
-            //foreach (string s in strArray)
-            //{
-            //    Console.WriteLine("Entry: {0}", s);
-            //}
-            //Console.WriteLine();
+
+            Console.WriteLine(Text);
+
         }
     }
 }
