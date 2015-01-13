@@ -11,19 +11,14 @@ namespace Parcer
     {
         static void Main(string[] args)
         {
-            string str = ".23.15 3.45  5.6.8 ee15.2tt 65.e45e 44e.11 11.88";
-            Regex rx = new Regex(@"(?<!\.)(?<number>[\d]+\.[\d]+)(?!\.)");
+            string str = "23.16.15 3.45  5.6.8 ee15.2tt 65.e45e 44e.11 11.88";
+            Regex rx = new Regex(@"(?<!\.\k<first>)(?<number>(?<first>[\d]+)\.[\d]+)(?!\.)");
             MatchCollection mc = rx.Matches(str);
             foreach (Match item in mc)
             {
-                // GroupCollection g = item.Groups;
-                //Console.WriteLine(item.Groups["0"].Value);
-                //Console.WriteLine(item.Groups["1"].Value);
-                Console.WriteLine(item.Groups["0"].Value);
-                Console.WriteLine(item.Groups["number"].Value);
-
-
-                Console.WriteLine("***********");
+                Console.WriteLine(item.Groups["first"].Value);
+               Console.WriteLine(item.Groups["number"].Value);
+               Console.WriteLine("***********");
             }
 
             foreach (var item in rx.GetGroupNames())
