@@ -62,3 +62,5 @@ door
 дверь
 root
 корень
+integer
+целое

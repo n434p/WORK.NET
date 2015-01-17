@@ -11,7 +11,9 @@ namespace Translator
     class Vocabulary
     {
         Dictionary<string, string> vocabulary; 
+
         public string Path {get; protected set;}
+
         public Vocabulary(string path) 
         {
             vocabulary = new Dictionary<string, string>();
@@ -27,6 +29,7 @@ namespace Translator
                 }
             }
         }
+
         public void Add(string phrase, string translation)
         { 
             if (Translate(phrase) != "" || Translate(translation) !="") return;
@@ -44,6 +47,7 @@ namespace Translator
                 Console.WriteLine("Next pair was added:\t {0} - {1}", phrase,translation);
             }
         }
+
         public override string ToString()
         {
             Console.WriteLine("Vocabulary contains:\n");
@@ -53,6 +57,7 @@ namespace Translator
             }
             return "*******************";
         }
+
         public string Translate(string word) 
         {
             foreach (KeyValuePair<string,string> item in vocabulary)
