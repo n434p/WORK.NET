@@ -276,6 +276,13 @@ namespace CarImplementation
             return "";
         }
 
+        public void OnTimer(object sender, ElapsedEventArgs e)
+        {
+            Console.Clear();
+            Console.WriteLine(this);
+            if (Driver) Drive();
+        }
+
       
     }
 

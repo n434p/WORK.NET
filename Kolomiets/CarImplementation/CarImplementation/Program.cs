@@ -15,12 +15,13 @@ namespace CarImplementation
         {
             Car car = new Car();
             car.ChangeInfo += car.ShowInfo;
-
+            Timer t = new Timer(200);
+            t.Start();
+            t.Elapsed += car.OnTimer;  
+            t.Enabled = true;
 
             for (; ; )
             {
-                Console.Clear();
-
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.S: car.Driver = !car.Driver;
@@ -51,12 +52,13 @@ namespace CarImplementation
                         break;
                     case ConsoleKey.Spacebar: return;
                 }
-                Console.WriteLine(car);
-                if (car.Driver) car.Drive();
-                Console.ReadKey();
             }
 
             
+
+            
         }
+
+      
     }
 }
