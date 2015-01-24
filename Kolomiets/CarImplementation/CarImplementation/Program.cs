@@ -3,32 +3,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace CarImplementation
 {
     class Program
     {
-        
+     
+
         static void Main(string[] args)
         {
             Car car = new Car();
             car.ChangeInfo += car.ShowInfo;
-            Console.ReadKey();
-            car.Driver = true;
-            Console.ReadKey();
-            car.SeatBelt = true;
-            Console.ReadKey();
-            car.SeatBelt = true;
-            Console.ReadKey();
-            car.HandBrake = false;
-            Console.ReadKey();
-            car.KeyEngine = false;
-            Console.ReadKey();
-            car.Drive();
+
+
+            for (; ; )
+            {
+                Console.Clear();
+
+                switch (Console.ReadKey().Key)
+                {
+                    case ConsoleKey.S: car.Driver = !car.Driver;
+                        break;
+                    case ConsoleKey.Z: car.SeatBelt = !car.SeatBelt;
+                        break;
+                    case ConsoleKey.T: car.ThrottlePedal = !car.ThrottlePedal;
+                        break;
+                    case ConsoleKey.C: car.ClutchPedal = !car.ClutchPedal;
+                        break;
+                    case ConsoleKey.B: car.BrakePedal = !car.BrakePedal;
+                        break;
+                    case ConsoleKey.H: car.HandBrake = !car.HandBrake;
+                        break;
+                    case ConsoleKey.K: car.KeyEngine = !car.KeyEngine;
+                        break;
+                    case ConsoleKey.N: car.Gear = Car.Transmission.N;
+                        break;
+                    case ConsoleKey.R: car.Gear = Car.Transmission.R;
+                        break;
+                    case ConsoleKey.D1: car.Gear = Car.Transmission.G1;
+                        break;
+                    case ConsoleKey.D2: car.Gear = Car.Transmission.G2;
+                        break;
+                    case ConsoleKey.D3: car.Gear = Car.Transmission.G3;
+                        break;
+                    case ConsoleKey.D4: car.Gear = Car.Transmission.G4;
+                        break;
+                    case ConsoleKey.Spacebar: return;
+                }
+                Console.WriteLine(car);
+                if (car.Driver) car.Drive();
+                Console.ReadKey();
+            }
+
             
-            
-           
-            Console.ReadKey();
         }
     }
 }
