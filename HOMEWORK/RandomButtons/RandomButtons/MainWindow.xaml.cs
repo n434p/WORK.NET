@@ -27,10 +27,13 @@ namespace RandomButtons
         List<GameButton> btnList = new List<GameButton>();
         Random r = new Random();
         int lives = 3;
-        int Score = 1;
+        int level = 1;
+        int num = 1;
         int count = 10;
-        long interval = 500000;
-        double speed = 5;
+        int score = 0;
+        double angle = 0;
+        double levelSpeed = 0.5;
+        double btnSize = 40;
 
 
         public MainWindow()
@@ -38,6 +41,7 @@ namespace RandomButtons
             InitializeComponent();
             dt.Tick += ChangePosition;
             round.Tick += RunProgress;
+           
             Game();
         }
 
@@ -48,22 +52,23 @@ namespace RandomButtons
             foreach (GameButton b in btnList)
                 {
                 Thickness t = b.Margin;
-               
-                if (t.Left < -150 ) b.Track = (b.Track == Direction.UpLeft) ? Direction.UpRight : Direction.DownRight;
-                if (t.Top < -125) b.Track = (b.Track == Direction.UpLeft) ? Direction.DownLeft : Direction.DownRight;
-                if (t.Left > 200) b.Track = (b.Track == Direction.DownRight) ? Direction.DownLeft : Direction.UpLeft;
-                if (t.Top > 125) b.Track = (b.Track == Direction.DownRight) ? Direction.UpRight : Direction.UpLeft;
+
+                if (t.Left < -150) { b.Track = (b.Track == Direction.UpLeft) ? Direction.UpRight : Direction.DownRight; b.f(0); }
+                if (t.Top < -125) { b.Track = (b.Track == Direction.UpLeft) ? Direction.DownLeft : Direction.DownRight; b.f(90); }
+                if (t.Left > 200) { b.Track = (b.Track == Direction.DownRight) ? Direction.DownLeft : Direction.UpLeft; b.f(180); }
+                if (t.Top > 125) { b.Track = (b.Track == Direction.DownRight) ? Direction.UpRight : Direction.UpLeft; b.f(270); }
                 switch (b.Track)
                 {
-                    case Direction.UpLeft: t.Left--; t.Top--;
+                    case Direction.UpLeft: t.Left -=levelSpeed; t.Top-=levelSpeed;
                         break;
-                    case Direction.UpRight:t.Left++; t.Top--;
+                    case Direction.UpRight:t.Left+=levelSpeed; t.Top-=levelSpeed;
                         break;
-                    case Direction.DownLeft:t.Left--; t.Top++;
+                    case Direction.DownLeft:t.Left-=levelSpeed; t.Top+=levelSpeed;
                         break;
-                    case Direction.DownRight:t.Left++; t.Top++;
+                    case Direction.DownRight:t.Left+=levelSpeed; t.Top+=levelSpeed;
                         break;
                 }
+                
                 b.Margin = t;
             }
             
@@ -73,14 +78,15 @@ namespace RandomButtons
         {
             for (int i = count; i >= 1; i--)
             {
-                this.CreateBtn(i);
+                this.CreateBtn(i, btnSize);
             }
             ProgBar.Maximum = count*2;
             ProgBar.Minimum = 0;
             ProgBar.Value = 0;
+            Score.Content = "SCORE: " + score;
+            Level.Content = "LEVEL: " + level;
 
-
-            dt.Interval = new TimeSpan(0,0,0,0,1);
+            dt.Interval = new TimeSpan(0,0,0,0,10);
             round.Interval = new TimeSpan(0, 0, 1);
             
 
@@ -94,15 +100,21 @@ namespace RandomButtons
             {
                 MessageBox.Show("You lose!");
                 Reset();
-                speed = 25;
+                levelSpeed = 0.5;
+                btnSize = 40;
+                score = 0;
+                level = 1;
                 Game();
             }
-            if (ProgBar.Value != ProgBar.Maximum && btnList.Count == 0)
+            if ( btnList.Count == 0)
             {
                 MessageBox.Show("You win!");
                 Reset();
-                speed += 5;
-                Game();
+                level++;
+                if (btnSize > 20) { btnSize -= 5; Game(); }
+                else
+                MessageBox.Show("Game by NET14/2...Thank you!");
+                return;
             }
             ProgBar.Value++;
             
@@ -113,7 +125,10 @@ namespace RandomButtons
             dt.Stop();
             round.Stop();
             ProgBar.Value = 0;
-            Score = 1;
+            num = 1;
+            levelSpeed = 0.5;
+            
+            
             foreach (var item in btnList)
             {
                 MyGrid.Children.Remove(item);
@@ -122,18 +137,17 @@ namespace RandomButtons
             
         }
        
-
-        
-
-        public void CreateBtn(int current) 
+        public void CreateBtn(int current, double size) 
         {
             GameButton b = new GameButton();
-            b.Height = 30;
-            b.Width = 30;
+            b.Height = size;
+            b.Width = size;
+            if (size <= 20) b.FontSize = 8;
             b.Content = current;
             b.Track = Direction.DownLeft;
             b.Tag = current;
             b.Click += b_Click;
+            
             b.MouseMove += (o, e) =>
             {
                 switch (r.Next(3))
@@ -153,16 +167,21 @@ namespace RandomButtons
             MyGrid.Children.Add(b);
         }
 
-        void b_Click(object sender, RoutedEventArgs e)
+        void b_Click(object sender, EventArgs e)
         {
             GameButton b = sender as GameButton;
-            if ((int)b.Tag == Score)
+            if ((int)b.Tag == num)
             {
                 MyGrid.Children.Remove(b);
                 btnList.Remove(b);
-                Score++;
+                levelSpeed += 0.25;
+                score++;
+                Score.Content = "SCORE: " + score;
+                Level.Content = "LEVEL: " + level;
+                num++;
             }
             else lives--;
+            b.Focus();
         }
 
         public Thickness RandomLocation()
