@@ -15,7 +15,7 @@ namespace RandomButtons
 
         public void f(double angle)
         {
-            RotateTransform rt = new RotateTransform(angle);
+            RotateTransform rt = new RotateTransform(angle, this.Margin.Top + (this.Height / 2), this.Margin.Left + (this.Width / 2));
             this.RenderTransform = rt;
         }
         

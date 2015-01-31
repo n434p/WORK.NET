@@ -1,0 +1,13 @@
+﻿<Window x:Class="MainProjectImage.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="427.641" Width="617.43" Loaded="Window_Loaded_1">
+    <Grid x:Name="grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="myImage" HorizontalAlignment="Left" Height="273" Margin="24,22,0,0" VerticalAlignment="Top" Width="392"/>
+        <ListBox x:Name="lbNamePlugin" HorizontalAlignment="Left" Height="176" Margin="421,22,0,0" VerticalAlignment="Top" Width="168"/>
+
+    </Grid>
+</Window>
