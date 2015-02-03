@@ -13,7 +13,7 @@
     <Grid x:Name="MyGrid" RenderTransformOrigin="0,0" Margin="25,50,25,25" ShowGridLines="True" >
        
         <ProgressBar x:Name="ProgBar" Margin="91,-40,69,0" RenderTransformOrigin="0,0" Width="184" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Maximum="30" SmallChange="1" Value="0" FlowDirection="RightToLeft" Foreground="#FFE7E8EC" Background="#FF06B025" />
-        <Label x:Name="Score" Content="" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="97" IsEnabled="False" Margin="-11,-40,0,0" FontSize="16" FontWeight="Bold"/>
+        <Label x:Name="Score" Content="" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="107" IsEnabled="False" Margin="-21,-40,0,0" FontSize="16" FontWeight="Bold"/>
         <Label x:Name="Level" Content=""  VerticalAlignment="Top" IsEnabled="False" HorizontalAlignment="Right" Width="75" Height="30" Margin="0,-40,-11,0" FontSize="16" FontWeight="Bold"/>
         <Label x:Name="TimeInd" Content="" HorizontalAlignment="Center" Margin="162,-40,131.6,0" VerticalAlignment="Top" Height="30" Width="50" FontSize="18" FontWeight="Bold" IsEnabled="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="WhiteSmoke">
             <Label.Foreground>

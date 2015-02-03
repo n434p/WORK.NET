@@ -28,7 +28,7 @@ namespace Reflection
 
             //mf.Invoke(test, new object[1] {123});
 
-            Assembly asm = Assembly.LoadFile("D:/Kolomiets/ClassLibrary2.dll");
+            Assembly asm = Assembly.LoadFile("D:/Kolomiets/sdfds.dll");
             Console.WriteLine(asm.FullName);
 
             Type[] type = asm.GetTypes();
@@ -59,11 +59,11 @@ namespace Reflection
                         {
                             Console.WriteLine(pi.Name + " " + pi.ParameterType);
                             Console.WriteLine("****************\n");
-                            objTemp[i] = new pi.DefaultValue;
+                          //objTemp[i] = new pi.DefaultValue;
 
                         }
 
-                        Console.WriteLine("\n*\n" + Convert.ToString(mi.Invoke(obj, objTemp)) + "\n*\n");
+                   //     Console.WriteLine("\n*\n" + Convert.ToString(mi.Invoke(obj, objTemp)) + "\n*\n");
 
                     }
 

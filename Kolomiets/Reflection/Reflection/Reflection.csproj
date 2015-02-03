@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="4dfg">
+      <HintPath>..\..\DLLConstructor\DLLConstructor\bin\Debug\4dfg.dll</HintPath>
+    </Reference>
     <Reference Include="ClassLibrary2">
       <HintPath>..\..\..\..\ClassLibrary2.dll</HintPath>
     </Reference>

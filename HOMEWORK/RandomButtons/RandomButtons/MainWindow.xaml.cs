@@ -33,7 +33,7 @@ namespace RandomButtons
         int num = 1;
         int count=10;
         int score = 0;
-        int interval = 25;
+        int interval = 10;
         int roundTime=20;
         double levelSpeed = 1;
         double btnSize = 40;
@@ -153,6 +153,7 @@ namespace RandomButtons
                     }
                 };
                 b.Margin = this.RandomLocation();
+                b.TabIndex = i;
                 btnList.Add(b);
                 MyGrid.Children.Add(b);
             }
