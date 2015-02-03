@@ -19,44 +19,91 @@ using System.Windows.Shapes;
 namespace RandomButtons
 {
 
-   
     public partial class MainWindow : Window
     {
         DispatcherTimer dt = new DispatcherTimer();
         DispatcherTimer round = new DispatcherTimer();
         List<GameButton> btnList = new List<GameButton>();
+        List<object> ConMenu = new List<object>();
         Random r = new Random();
-        int lives = 3;
+        Slider s1;
+        Slider s2;
+        Slider s3;
         int level = 1;
         int num = 1;
-        int count = 10;
+        int count=10;
         int score = 0;
-        double angle = 0;
-        double levelSpeed = 0.5;
+        int interval = 25;
+        int roundTime=20;
+        double levelSpeed = 1;
         double btnSize = 40;
-
 
         public MainWindow()
         {
             InitializeComponent();
             dt.Tick += ChangePosition;
+            
             round.Tick += RunProgress;
-           
+            s1 = new Slider { Width =60,Minimum = 10, Maximum = 60, SmallChange = 1, Value = count};
+            s2 = new Slider {  Width = 60, Minimum = 10, Maximum = count*2, SmallChange = 1 ,Value = roundTime};
+            s3 = new Slider {  Width = 60, Minimum = 0, Maximum = 3, LargeChange = 0.25 ,Value = levelSpeed};
+            Label l1 = new Label { Content = string.Format("Count: {0:##}",count)};
+            Label l2 = new Label { Content = string.Format("Round: {0:##}", roundTime) };
+            Label l3 = new Label { Content = "Speed: " };
+            
+            ConMenu.Add(l1);
+            ConMenu.Add(s1);
+            ConMenu.Add(l2);
+            ConMenu.Add(s2);
+            ConMenu.Add(l3);
+            ConMenu.Add(s3);
+
+            ContextMenu.ItemsSource = ConMenu;
+            s1.ValueChanged += (o, e) => { count = (int)e.NewValue; l1.Content = string.Format("Count: {0}", count); s2.Maximum = 2 * count; };
+            s2.ValueChanged += (o, e) => { roundTime = (int)e.NewValue; l2.Content = string.Format("Round: {0}", roundTime); };
+            s3.ValueChanged += (o, e) => { levelSpeed = (int)e.NewValue; };
+            ContextMenu.Closed += (o, e) =>
+            {
+                Reset();
+                btnSize = 40;
+                score = 0;
+                level = 1; 
+                Game();
+            };
+            ContextMenu.Opened += (o, e) => { round.Stop(); };
+
             Game();
         }
+     
 
         void ChangePosition(object sender, EventArgs e)
         {
-           
-         
+
             foreach (GameButton b in btnList)
                 {
                 Thickness t = b.Margin;
 
-                if (t.Left < -150) { b.Track = (b.Track == Direction.UpLeft) ? Direction.UpRight : Direction.DownRight; b.f(0); }
-                if (t.Top < -125) { b.Track = (b.Track == Direction.UpLeft) ? Direction.DownLeft : Direction.DownRight; b.f(90); }
-                if (t.Left > 200) { b.Track = (b.Track == Direction.DownRight) ? Direction.DownLeft : Direction.UpLeft; b.f(180); }
-                if (t.Top > 125) { b.Track = (b.Track == Direction.DownRight) ? Direction.UpRight : Direction.UpLeft; b.f(270); }
+                if (t.Left <= 10) 
+                {
+                   
+                b.Track = (b.Track == Direction.UpLeft) ? Direction.UpRight : Direction.DownRight;
+                b.Bound = true;
+                }
+                if (t.Top <= 10)
+                    
+                { b.Track = (b.Track == Direction.UpLeft) ? Direction.DownLeft : Direction.DownRight;
+                b.Bound = true;
+                }
+                if (t.Left >= MyGrid.RenderSize.Width-b.Height)
+                   
+                { b.Track = (b.Track == Direction.DownRight) ? Direction.DownLeft : Direction.UpLeft;
+                b.Bound = true;
+                }
+                if (t.Top >= MyGrid.RenderSize.Height-b.Height)
+                  
+                { b.Track = (b.Track == Direction.DownRight) ? Direction.UpRight : Direction.UpLeft;
+                b.Bound = true;
+                }
                 switch (b.Track)
                 {
                     case Direction.UpLeft: t.Left -=levelSpeed; t.Top-=levelSpeed;
@@ -68,7 +115,17 @@ namespace RandomButtons
                     case Direction.DownRight:t.Left+=levelSpeed; t.Top+=levelSpeed;
                         break;
                 }
-                
+                if (b.Bound)
+                {
+                    b.Speed -= 0.005;
+                    if (b.Track == Direction.DownLeft||b.Track == Direction.DownRight)
+                    b.Angle += 2 * b.Speed;
+                    else
+                    b.Angle -= 2 * b.Speed;
+                    if (b.Speed <=0) { b.Bound = false; b.Speed = levelSpeed; }
+                    b.Rotate(b.Angle, b.RenderTransformOrigin.X + btnSize / 2, b.RenderTransformOrigin.Y + btnSize / 2);
+                }
+
                 b.Margin = t;
             }
             
@@ -76,22 +133,39 @@ namespace RandomButtons
 
         private void Game() 
         {
-            for (int i = count; i >= 1; i--)
+            for (int i = (int)count; i >= 1; i--)
             {
-                this.CreateBtn(i, btnSize);
+                GameButton b = new GameButton(i,btnSize,levelSpeed);
+                b.Click += b_Click;
+                b.GotFocus += (o,e) =>
+                {
+                    GameButton but = o as GameButton;
+                    switch (r.Next(3))
+                    {
+                        case 0: but.Track = Direction.DownLeft;
+                            break;
+                        case 1: but.Track = Direction.DownRight;
+                            break;
+                        case 2: but.Track = Direction.UpLeft;
+                            break;
+                        case 3: but.Track = Direction.UpRight;
+                            break;
+                    }
+                };
+                b.Margin = this.RandomLocation();
+                btnList.Add(b);
+                MyGrid.Children.Add(b);
             }
-            ProgBar.Maximum = count*2;
-            ProgBar.Minimum = 0;
+            dt.Interval = TimeSpan.FromMilliseconds(interval);
+            round.Interval = TimeSpan.FromSeconds(1);
             ProgBar.Value = 0;
+            ProgBar.Maximum = roundTime+1;
+            ProgBar.Minimum = 0;
             Score.Content = "SCORE: " + score;
             Level.Content = "LEVEL: " + level;
-
-            dt.Interval = new TimeSpan(0,0,0,0,10);
-            round.Interval = new TimeSpan(0, 0, 1);
-            
-
-            dt.Start();
             round.Start();
+            dt.Start();
+            
         }
 
         void RunProgress(object sender, EventArgs e)
@@ -100,71 +174,47 @@ namespace RandomButtons
             {
                 MessageBox.Show("You lose!");
                 Reset();
-                levelSpeed = 0.5;
                 btnSize = 40;
                 score = 0;
                 level = 1;
                 Game();
+               
             }
-            if ( btnList.Count == 0)
+            if (btnList.Count == 0)
             {
-                MessageBox.Show("You win!");
-                Reset();
                 level++;
-                if (btnSize > 20) { btnSize -= 5; Game(); }
+                
+                Reset();
+                if (btnSize > 20) { btnSize -= 4; Game(); }
                 else
-                MessageBox.Show("Game by NET14/2...Thank you!");
-                return;
+                {
+                    MessageBox.Show("Game by NET14/2...Thank you!");
+                    Close();
+                }
             }
             ProgBar.Value++;
+
+            TimeInd.Content = roundTime;
+            roundTime--;
             
-        }
+        }        
 
         public void Reset() 
         {
-            dt.Stop();
             round.Stop();
+            dt.Stop();
+            TimeInd.Content = "";
             ProgBar.Value = 0;
+            roundTime = (int)s2.Value;
             num = 1;
-            levelSpeed = 0.5;
-            
-            
+            levelSpeed = s3.Value;
+
             foreach (var item in btnList)
             {
                 MyGrid.Children.Remove(item);
             }
             btnList.Clear();
             
-        }
-       
-        public void CreateBtn(int current, double size) 
-        {
-            GameButton b = new GameButton();
-            b.Height = size;
-            b.Width = size;
-            if (size <= 20) b.FontSize = 8;
-            b.Content = current;
-            b.Track = Direction.DownLeft;
-            b.Tag = current;
-            b.Click += b_Click;
-            
-            b.MouseMove += (o, e) =>
-            {
-                switch (r.Next(3))
-                {
-                    case 0: b.Track = Direction.DownLeft;
-                        break;
-                    case 1: b.Track = Direction.DownRight;
-                        break;
-                    case 2: b.Track = Direction.UpLeft;
-                        break;
-                    case 3: b.Track = Direction.UpRight;
-                        break;
-                }
-            };
-            b.Margin = this.RandomLocation();
-            btnList.Add(b);
-            MyGrid.Children.Add(b);
         }
 
         void b_Click(object sender, EventArgs e)
@@ -174,36 +224,46 @@ namespace RandomButtons
             {
                 MyGrid.Children.Remove(b);
                 btnList.Remove(b);
-                levelSpeed += 0.25;
-                score++;
+                if (levelSpeed !=0 )levelSpeed += 0.1;
+                score += (levelSpeed == 0) ? 1 : (int)(level + s3.Value);
                 Score.Content = "SCORE: " + score;
                 Level.Content = "LEVEL: " + level;
                 num++;
             }
-            else lives--;
-            b.Focus();
+            MyGrid.Focus();
         }
 
         public Thickness RandomLocation()
         {
             Thickness t = new Thickness();
 
-                t.Left = r.Next(-100,100);
-                t.Top = r.Next(-100, 100);
-                t.Right = r.Next(-100,100);
-                t.Bottom = r.Next(-100,100);
+            if (MyGrid.RenderSize.Width != 0)
+            {
+                t.Left = r.Next((int)(MyGrid.RenderSize.Width-btnSize));
+                t.Top = r.Next((int)(MyGrid.RenderSize.Height-btnSize));
+            }
+            else 
+            {
+                t.Left = r.Next((int)(300-btnSize));
+                t.Top = r.Next((int)(180-btnSize));
+            }
+                t.Right = 0;
+                t.Bottom = 0;
 
-                //foreach (GameButton b in btnList)
-                //{
-                //    if (Math.Abs(b.Margin.Left - t.Left) <= 10 || Math.Abs(b.Margin.Top - t.Top) <= 10)
-                //    {
-                //        equal = true;
-                //    }
-                //}     
-          
             return t;
         }
 
+        private void MainWindow1_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (this.Height < 300 || this.Width < 400)
+            {
+                this.Height = 300;
+                this.Width = 400;
+            }
+
+        }
+
        
+ 
     }
 }

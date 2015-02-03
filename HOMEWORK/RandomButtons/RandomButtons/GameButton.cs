@@ -12,11 +12,39 @@ namespace RandomButtons
 
     {
         public Direction Track { get; set; }
+        public double Angle { get; set; }
+        public double Speed { get; set; }
+        public bool Bound { get; set; }
 
-        public void f(double angle)
+
+        public GameButton(int butNum,double size, double speed)
         {
-            RotateTransform rt = new RotateTransform(angle, this.Margin.Top + (this.Height / 2), this.Margin.Left + (this.Width / 2));
+            Height = size;
+            Width = size;
+            FontSize = size-10;
+            Content = (butNum == 6||butNum == 9)?butNum+".":butNum.ToString();
+            Track = Direction.DownLeft;
+            Tag = butNum;
+            Angle = 0;
+            Bound = false;
+            Speed = speed;
+
+            HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            VerticalAlignment = System.Windows.VerticalAlignment.Top;
+        }
+
+        public void Rotate(double angle, double x, double y)
+        {
+            RotateTransform rt = new RotateTransform(angle, x, y);
             this.RenderTransform = rt;
+        }
+
+        public override string ToString()
+        {
+            return " " + Tag + " \nLeft " + this.Margin.Left +
+                               " \nTop " + this.Margin.Top+
+                               " \nRight " + this.Margin.Right+
+                               " \nBottom "+this.Margin.Bottom;
         }
         
     }
