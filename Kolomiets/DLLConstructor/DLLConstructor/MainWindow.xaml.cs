@@ -22,8 +22,9 @@ namespace DLLConstructor
     /// </summary>
     public partial class MainWindow : Window
     {
-        Button b = new Button() { Content = "Generate DLL", Width = 80, Height = 30, VerticalAlignment = VerticalAlignment.Bottom};
-        List<object> varList = new List<object>();
+        Button b = new Button() { Content = "Generate DLL", Width = 100, Height = 40, VerticalAlignment = VerticalAlignment.Bottom, HorizontalAlignment=HorizontalAlignment.Center};
+        List<FieldBuilder> varList = new List<FieldBuilder>();
+        bool created = false;
 
         public MainWindow()
         {
@@ -33,6 +34,8 @@ namespace DLLConstructor
 			{
                 numFields.Items.Add(i);
 			}
+            b.BorderThickness = new Thickness(5);
+            
         }
 
         void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -40,35 +43,47 @@ namespace DLLConstructor
             StackVarPanel.Children.Clear();
             for (int i = 0; i < (int)numFields.SelectedValue; i++)
             {
-                VarComboBox vbx = new VarComboBox();
-                TextBox txb = new TextBox() { Text = "var" + i };
+                VarComboBox vbx = new VarComboBox() { Width = 100, HorizontalAlignment = System.Windows.HorizontalAlignment.Center};
+                TextBox txb = new TextBox() { Width = 100, HorizontalAlignment = System.Windows.HorizontalAlignment.Center };
+                txb.Text = "var" + i ;
                 vbx.SelectionChanged += vbx_SelectionChanged;
                 vbx.ToolTip = txb.Text;
                 StackVarPanel.Children.Add(txb);
-                StackVarPanel.Children.Add(vbx);
-                varList.Add(new object());
+                StackVarPanel.Children.Add(vbx); 
             }
-            StackPanel.Children.Add(b);
-            b.Click += (o, ee) => { Body(); };
+            
         }
 
-        void vbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        void vbx_SelectionChanged(object sender, EventArgs e)
         {
-            VarComboBox vb = sender as VarComboBox;
-            switch (vb.SelectedValue.ToString())
+            VarComboBox vbx = sender as VarComboBox;
+            if (vbx.SelectedIndex != -1) 
             {
-                case "STR": vb.Tag = Convert.ToString(new object());   
-                    break;
-                case "BOOL": vb.Tag = Convert.ToBoolean(new object());  
-                    break;
-                case "INT": vb.Tag = Convert.ToInt32(new object());  
-                    break;
+                bool flag = false;
+                foreach (var item in StackVarPanel.Children)
+                {
+                    try
+                    {
+                        VarComboBox vcb = item as VarComboBox;
+                        if (vcb.SelectedIndex == -1) flag = true;
+                    }
+                    catch { }
+                }
+                if (!flag && !created)
+                {
+                    StackVarPanel.Children.Add(b);
+                   
+                    b.Click += (o, ee) => { Body(); };
+                }
             }
+            
+            
 
         }
 
         public void Body() 
         {
+             
             try
             {
                 // Динамическое создание Сборки с классом
@@ -89,35 +104,69 @@ namespace DLLConstructor
 
                 //создаем тип для модуля
                 TypeBuilder tb = mb.DefineType(textClass.Text, TypeAttributes.Public);
+                tb.DefineDefaultConstructor(MethodAttributes.Public);
+
 
                 foreach (var item in StackVarPanel.Children)
                 {
                     try
                     {
-                        
                         VarComboBox vb = item as VarComboBox;
-                        tb.DefineField(vb.ToolTip.ToString(), vb.Tag.GetType(), FieldAttributes.Public);
+                        switch ((VarType)vb.SelectedValue)
+                        {
+                            case VarType.INT: 
+                                varList.Add(tb.DefineField(vb.ToolTip.ToString(), typeof(int), FieldAttributes.Public));
+                                break;
+                            case VarType.STR:
+                                varList.Add(tb.DefineField(vb.ToolTip.ToString(), typeof(string), FieldAttributes.Public));
+                                break;
+                            case VarType.BOOL:
+                                varList.Add(tb.DefineField(vb.ToolTip.ToString(), typeof(bool), FieldAttributes.Public));
+                                break;
+                            default:
+                                break;
+                        }      
+                              
+                        
                     }
                     catch { }
                 }
                 
 
-                Type[] parameters = { typeof(int) };
+                Type[] parameters = new Type[varList.Count];
 
-                ////нужно наполнять тип, изч  чего будет состоять класс.
-                ////создадим конструктор и добавим туда код.
-            //    ConstructorBuilder cb1 = tb.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, null);
+                for (int i = 0; i < varList.Count; i++)
+			{
+			    parameters[i] = varList[i].FieldType;
+			}
+                Type objType = Type.GetType("System.Object");
+                ConstructorInfo objCtor = objType.GetConstructor(new Type[0]);
+                ConstructorBuilder cb1 = tb.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, parameters);
+               
+                ILGenerator il1 = cb1.GetILGenerator();
 
-                ////Добавим код в констурктор через IL генератор
-                //ILGenerator il1 = cb1.GetILGenerator();
-                //il1.EmitWriteLine("этот текст отобразится в консоли при создании экземпляра класса");
+                il1.EmitWriteLine("TEST 1");
+                il1.Emit(OpCodes.Ldarg_0);
+                il1.Emit(OpCodes.Call, objCtor);
+                for (int i = 0; i < parameters.Length; i++)
+                { 
+                    il1.Emit(OpCodes.Ldarg_0);
+                    il1.Emit(OpCodes.Ldarg);
+                    il1.Emit(OpCodes.Stfld, varList[i]);
+                }
+                il1.Emit(OpCodes.Ret);
 
-                //il1.Emit(OpCodes.Ldarg_0);
 
-
-                ////необходимо выполнить завершение для IL конструкции
-                //// Ret - return осуществляет выход из конструктора
-                //il1.Emit(OpCodes.Ret);
+                MethodBuilder metB = tb.DefineMethod("Show", MethodAttributes.Public, CallingConventions.Standard, null, null);
+                ILGenerator ilm = metB.GetILGenerator();
+                string str = "";
+                foreach (var item in varList)
+                {
+                    ilm.EmitWriteLine(item.FieldType+" "+item.Name+" = "+item);
+                    //ilm.Emit(OpCodes.Ldarg_0);
+                    //ilm.Emit(OpCodes.Ldarg,str);
+                    //ilm.EmitWriteLine(str);
+                }
 
                 ////когда тип уже создан, создаем его
                 tb.CreateType();
