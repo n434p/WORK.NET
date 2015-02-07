@@ -23,7 +23,7 @@ namespace DLLConstructor
     public partial class MainWindow : Window
     {
         Button b = new Button() { Content = "Generate DLL", Width = 100, Height = 40, VerticalAlignment = VerticalAlignment.Bottom, HorizontalAlignment=HorizontalAlignment.Center};
-        List<FieldBuilder> varList = new List<FieldBuilder>();
+        public List<FieldBuilder> varList = new List<FieldBuilder>();
         bool created = false;
 
         public MainWindow()
@@ -34,7 +34,7 @@ namespace DLLConstructor
 			{
                 numFields.Items.Add(i);
 			}
-            b.BorderThickness = new Thickness(5);
+            b.BorderThickness = new Thickness(20);
             
         }
 
@@ -45,9 +45,9 @@ namespace DLLConstructor
             {
                 VarComboBox vbx = new VarComboBox() { Width = 100, HorizontalAlignment = System.Windows.HorizontalAlignment.Center};
                 TextBox txb = new TextBox() { Width = 100, HorizontalAlignment = System.Windows.HorizontalAlignment.Center };
+                txb.TextChanged += (o, ee) => { vbx.ToolTip = txb.Text; };
                 txb.Text = "var" + i ;
                 vbx.SelectionChanged += vbx_SelectionChanged;
-                vbx.ToolTip = txb.Text;
                 StackVarPanel.Children.Add(txb);
                 StackVarPanel.Children.Add(vbx); 
             }
@@ -92,7 +92,7 @@ namespace DLLConstructor
                 // класс AssemblyName
                 // затем AssemblyBilder - аоздает сборку
 
-                AssemblyName an = new AssemblyName(textClass.Text+".dll");
+                AssemblyName an = new AssemblyName(textClass.Text);
                 // версия сборки
                 an.Version = new Version("1.0.0.0");
 
@@ -105,7 +105,6 @@ namespace DLLConstructor
                 //создаем тип для модуля
                 TypeBuilder tb = mb.DefineType(textClass.Text, TypeAttributes.Public);
                 tb.DefineDefaultConstructor(MethodAttributes.Public);
-
 
                 foreach (var item in StackVarPanel.Children)
                 {
@@ -126,19 +125,18 @@ namespace DLLConstructor
                             default:
                                 break;
                         }      
-                              
-                        
                     }
-                    catch { }
+                    catch (Exception ex)
+                    { MessageBox.Show(ex.Message); }
                 }
                 
 
                 Type[] parameters = new Type[varList.Count];
 
                 for (int i = 0; i < varList.Count; i++)
-			{
-			    parameters[i] = varList[i].FieldType;
-			}
+			    {
+			        parameters[i] = varList[i].FieldType;
+			    }
                 Type objType = Type.GetType("System.Object");
                 ConstructorInfo objCtor = objType.GetConstructor(new Type[0]);
                 ConstructorBuilder cb1 = tb.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, parameters);
@@ -148,25 +146,26 @@ namespace DLLConstructor
                 il1.EmitWriteLine("TEST 1");
                 il1.Emit(OpCodes.Ldarg_0);
                 il1.Emit(OpCodes.Call, objCtor);
-                for (int i = 0; i < parameters.Length; i++)
+                for (int i = 0; i < parameters.Length-1; i++)
                 { 
                     il1.Emit(OpCodes.Ldarg_0);
-                    il1.Emit(OpCodes.Ldarg);
+                    il1.Emit(OpCodes.Ldarg_S,i+1);
                     il1.Emit(OpCodes.Stfld, varList[i]);
+                    il1.EmitWriteLine(varList[i]);
                 }
                 il1.Emit(OpCodes.Ret);
 
 
                 MethodBuilder metB = tb.DefineMethod("Show", MethodAttributes.Public, CallingConventions.Standard, null, null);
                 ILGenerator ilm = metB.GetILGenerator();
-                string str = "";
-                foreach (var item in varList)
+
+                
+                for (int i = 0; i < varList.Count; i++)
                 {
-                    ilm.EmitWriteLine(item.FieldType+" "+item.Name+" = "+item);
-                    //ilm.Emit(OpCodes.Ldarg_0);
-                    //ilm.Emit(OpCodes.Ldarg,str);
-                    //ilm.EmitWriteLine(str);
+
+                    ilm.EmitWriteLine(varList[i]);
                 }
+                ilm.Emit(OpCodes.Ret);
 
                 ////когда тип уже создан, создаем его
                 tb.CreateType();
