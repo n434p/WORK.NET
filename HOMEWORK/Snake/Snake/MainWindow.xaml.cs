@@ -114,7 +114,7 @@ namespace Snake
                 Part n = new Part(snake[snake.Count - 1].X, snake[snake.Count - 1].Y, Parts.snakeBody,butSize);
                 n.Move = Direction.stop;
                 score++;
-                l.Content = "Score: " + score + " " + 500 / f;
+                l.Content = "Score: " + score;
                 if (500 / f > 75)
                 {
                     t.Interval = TimeSpan.FromMilliseconds(500 / (f));

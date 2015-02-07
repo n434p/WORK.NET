@@ -1,0 +1,6 @@
+﻿<Window x:Class="PaintWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Painter" Height="350" Width="525">
+    <Canvas x:Name="field" HorizontalAlignment="Left" Height="274" VerticalAlignment="Top" Width="450" Margin="33,21,0,0" Background="AntiqueWhite" MouseDown="field_MouseDown" MouseMove="field_MouseMove" MouseUp="field_MouseUp" MouseLeave="field_MouseLeave"/>
+</Window>

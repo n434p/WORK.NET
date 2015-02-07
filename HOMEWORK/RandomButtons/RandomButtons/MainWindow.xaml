@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="MainWindow1" x:Class="RandomButtons.MainWindow"
-        Title="KillTheButton" Cursor="Cross" Background="#FF97C2E6" Height="300" Width="400" SizeChanged="MainWindow1_SizeChanged" ResizeMode="CanResizeWithGrip" >
+        Title="KillTheButton" Cursor="Arrow" Background="#FF97C2E6" Height="300" Width="400" SizeChanged="MainWindow1_SizeChanged" ResizeMode="CanResizeWithGrip" >
     <Window.ContextMenu>
         <ContextMenu>
             
@@ -10,7 +10,7 @@
         </ContextMenu>
     </Window.ContextMenu>
 
-    <Grid x:Name="MyGrid" RenderTransformOrigin="0,0" Margin="25,50,25,25" ShowGridLines="True" >
+    <Grid x:Name="MyGrid" RenderTransformOrigin="0,0" Margin="25,50,25,25" ShowGridLines="True" Background="AntiqueWhite" >
        
         <ProgressBar x:Name="ProgBar" Margin="91,-40,69,0" RenderTransformOrigin="0,0" Width="184" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Maximum="30" SmallChange="1" Value="0" FlowDirection="RightToLeft" Foreground="#FFE7E8EC" Background="#FF06B025" />
         <Label x:Name="Score" Content="" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="107" IsEnabled="False" Margin="-21,-40,0,0" FontSize="16" FontWeight="Bold"/>
