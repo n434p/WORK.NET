@@ -85,12 +85,12 @@ namespace PaintWPF
 
         private void field_MouseLeave(object sender, MouseEventArgs e)
         {
-            //if (trian != null) trian.path.Stroke = Brushes.Red;
+            if (trian != null) trian.path.Stroke = Brushes.Red;
         }
 
         private void field_MouseEnter(object sender, MouseEventArgs e)
         {
-            //if (trian != null) trian.path.Stroke = Brushes.Blue;
+           if (trian != null) trian.path.Stroke = Brushes.Blue;
         }
 
         
