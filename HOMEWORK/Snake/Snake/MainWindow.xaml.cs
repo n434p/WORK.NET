@@ -48,7 +48,7 @@ namespace Snake
             
             tc.Interval = TimeSpan.FromMilliseconds(50);
             canvas.Background = new ImageBrush() { 
-                ImageSource = new BitmapImage((new Uri(@".\..\..\background.jpg", UriKind.RelativeOrAbsolute))) };
+                ImageSource = new BitmapImage((new Uri(@"..\..\Image\background.jpg", UriKind.Relative))) };
             Start();
             
         }
