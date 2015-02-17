@@ -76,9 +76,9 @@ namespace Puzzle15
             
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void field_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            g.Rotation(2);
+            g.Rotation(1);
             Button b = new Button();
             foreach (var item in field.Children)
             {
@@ -89,5 +89,8 @@ namespace Puzzle15
             Swap();
             if (g.Win()) MessageBox.Show("You win!", "Congrats!");
         }
+
+    
+       
     }
 }

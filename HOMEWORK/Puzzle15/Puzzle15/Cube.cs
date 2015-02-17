@@ -12,6 +12,7 @@ namespace Puzzle15
         public Point goal, target, space;
         public int Number { get; set; }
         public List<byte> children = new List<byte>();
+        public List<Point> Points = new List<Point>();
 
         
         public Cube()

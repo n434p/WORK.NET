@@ -68,6 +68,7 @@ namespace Puzzle15
                 {
                     if ((sectorGrid[i] - item.Key).Length < btnSize * 1.5 / 2)
                         c.children.Add(item.Value);
+                        c.Points.Add(item.Key);
                 }
                 sectors.Add(c);
             }
@@ -83,6 +84,11 @@ namespace Puzzle15
             {
                 if (item.children.Contains(0) && item.children.Contains(table.Values.ToArray()[current - 1]) && item.children.Contains(current)) cube = item;    
             }
+            foreach (var item in table)
+            {
+                if (item.Value == current) target = item.Key;
+            }
+
             if (cube.children.Count == 0) 
             {
                 double len = 5*btnSize;
@@ -91,11 +97,32 @@ namespace Puzzle15
                 {
                     if (len > (target - place).Length) { newTarget = place; len = (target - place).Length; }
                 }
-                target = newTarget;
+                target = (newTarget!=space)?newTarget:target;
             }
             else
             {
-                //List<byte> l = children;
+                foreach (var item in table)
+	            {
+		            if (item.Value == current) goal = item.Key;
+	            }
+                List<Point> move = new List<Point>();
+                foreach (var point in cube.Points)
+                {
+                     if ((point - space).Length == btnSize) move.Add(point);
+                }
+
+                if ((goal - target).Length >= 1.3 * btnSize) 
+                {
+                    if ((target.X == goal.X || target.Y == goal.Y)&&((space-target).Length == btnSize))
+                    {
+                        foreach (var item in move)
+	                        {
+		                        if (item != goal|| item != target) target = item;
+	                        }
+                    }
+
+                }
+                
                 //if (children.Contains(0))
                 //    if (cw)
                 //    {
