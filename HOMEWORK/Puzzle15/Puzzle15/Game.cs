@@ -10,6 +10,7 @@ namespace Puzzle15
     class Game
     {
         public byte[] temp;
+        public byte Current { get; set; }
         public Point space, target, goal;
         public int btnSize = 10;
         public Dictionary<Point, byte> table = new Dictionary<Point,byte>();
@@ -20,6 +21,7 @@ namespace Puzzle15
         {
             temp = new byte[16] {3,2,4,7,1,11,6,5,13,0,9,12,10,15,8,14};
             btnSize = s;
+            Current = 0;
             int n = 0;
                 for (int j = 0; j < 4; j ++)
                     for (int i = 0; i < 4; i++)  
@@ -41,13 +43,9 @@ namespace Puzzle15
         }
         public void Process() 
         {
-            for (int i = 1; i < table.Count; i++)
-            {
-                if (table.Values.ToArray()[i] != order[i])
-                {
-
-                }
-
+            for (byte i = 1; i <= table.Count; i++)
+            {               
+                if (table.Values.ToArray()[i-1] != order[i-1]) {Current = i; break;} 
             }
         }
         public void Rotation(byte current)
@@ -67,86 +65,148 @@ namespace Puzzle15
                 foreach (var item in table)
                 {
                     if ((sectorGrid[i] - item.Key).Length < btnSize * 1.5 / 2)
+                    {
                         c.children.Add(item.Value);
                         c.Points.Add(item.Key);
+                    }
                 }
                 sectors.Add(c);
             }
-#endregion
+            #endregion
+            Point blank = new Point(-200,-200);
+            
+            // prev -предыдушая фишка - на своем ли месте?
+            Point prev = (current > 1)? table.Keys.ElementAt(current - 2):blank;
 
+            // spacePlace - все возможные ходы(соседние фишки) 
             List<Point> spacePlace = new List<Point>();
             foreach (var point in table.Keys)
             {
                 if ((point - space).Length == btnSize) spacePlace.Add(point);
             }
             Cube cube = new Cube();
+            // options -перечень секторов в которых есть - ИСКОМАЯ и ПРОБЕЛ
+            List<Cube> options = new List<Cube>();
+            
+
             foreach (Cube item in sectors)
             {
-                if (item.children.Contains(0) && item.children.Contains(table.Values.ToArray()[current - 1]) && item.children.Contains(current)) cube = item;    
+                if (item.children.Contains(0) && item.children.Contains(current)) 
+                    options.Add(item);
             }
+            // target - направление для ПРОБЕЛа. Поумолчанию - ИСКОМАЯ.
             foreach (var item in table)
             {
                 if (item.Value == current) target = item.Key;
             }
 
-            if (cube.children.Count == 0) 
-            {
-                double len = 5*btnSize;
+            // goal - требуемое место для ИСКОМОЙ.
+            goal = table.Keys.ElementAt(current - 1);
+
+              
+                double len = 5 * btnSize;
                 Point newTarget = new Point();
-                foreach (var place in spacePlace)
-                {
-                    if (len > (target - place).Length) { newTarget = place; len = (target - place).Length; }
-                }
-                target = (newTarget!=space)?newTarget:target;
-            }
-            else
-            {
-                foreach (var item in table)
-	            {
-		            if (item.Value == current) goal = item.Key;
-	            }
+                
+            // Если ПРОБЕЛ не в секторе с ИСКОМОЙ - двигаем к ИСКОМОЙ
+               
+                Cube next = new Cube();
+                
+                   
+                    
+                    foreach (var c in sectors)
+                    {
+                        if (c.Points.Contains(target) && !c.Points.Contains(prev)) { next = c; }
+                    }
+                    //foreach (var place in spacePlace)
+                    //    foreach (var point in next.Points)
+                    //{
+                    //    if (len > (place - point).Length && place != target && place != space) { newTarget = place; len = (point - place).Length; }
+                    //}
+                    //target = newTarget;
+                    
+                
+                
+                if ((target - space).Length > btnSize)
+                    {
+                    MessageBox.Show("Going to sector");
+                  
+                    foreach (var place in spacePlace)     
+                    {
+                        if (len > (place - target).Length && place != target && place != space) { newTarget = place; len = (target - place).Length; }
+                    }
+                    target = newTarget;
+                    }
+                else
+	                {
+                    MessageBox.Show("ELSE - quadrant options");
+
+                    foreach (Cube item in sectors)
+                    {
+                        if (item.children.Contains(0) && item.children.Contains(current) && item.Points.Contains(goal))
+                            cube = item;
+                    }
+
+                        foreach (Cube c in options)
+                            foreach (Point p in c.Points)
+                            {
+                                if (len > (goal - p).Length && p != target && p != space) { newTarget = p; len = (goal - p).Length; }
+                            }
+                        goal = (cube.children.Count == 0)?newTarget:table.Keys.ElementAt(current - 1);
+
+
+
+                        foreach (Cube item in sectors)
+                        {
+                            if (item.children.Contains(0) && item.children.Contains(current) && item.Points.Contains(goal))
+                                cube = item;
+                        }
+                   
                 List<Point> move = new List<Point>();
                 foreach (var point in cube.Points)
                 {
                      if ((point - space).Length == btnSize) move.Add(point);
                 }
 
-                if ((goal - target).Length >= 1.3 * btnSize) 
+                if ((goal - target).Length == btnSize) 
                 {
-                    if ((target.X == goal.X || target.Y == goal.Y)&&((space-target).Length == btnSize))
+                    
+                    if ((space - target).Length == btnSize)
                     {
-                        foreach (var item in move)
-	                        {
-		                        if (item != goal|| item != target) target = item;
-	                        }
+                        if (space != goal)
+                        {
+                            foreach (var item in move)
+                            {
+                                if (item != goal && item != target)
+                                {
+                                    target = item;
+                                    break;
+                                }
+                            }
+                            MessageBox.Show("Blank cell");
+                        }
+                        else 
+                        {
+                            MessageBox.Show(string.Format("Fit place {0} {1}", target.X, target.Y));
+                        }
                     }
+                    else 
+                    {
+                        target = goal;
+                        
+                    }
+                   
 
+                //}
                 }
+
+                    
                 
-                //if (children.Contains(0))
-                //    if (cw)
-                //    {
-                //        byte n = children[0];
-                //        children[0] = children[1];
-                //        children[1] = children[3];
-                //        children[3] = children[2];
-                //        children[2] = n;
-                //    }
-                //    else
-                //    {
-                //        byte n = children[0];
-                //        children[0] = children[2];
-                //        children[2] = children[3];
-                //        children[3] = children[1];
-                //        children[2] = n;
-                //    } 
+             
             }
            
            
             
         }
-
-
         public bool Swap() 
         {
             if ((space-target).Length == btnSize)
@@ -154,6 +214,7 @@ namespace Puzzle15
                 byte b = table[space];
                 table[space] = table[target];
                 table[target] = b;
+                space = target;
                 return true;
             }
             return false;

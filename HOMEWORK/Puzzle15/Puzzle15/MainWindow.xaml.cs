@@ -78,7 +78,8 @@ namespace Puzzle15
 
         private void field_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            g.Rotation(1);
+            g.Process();
+            g.Rotation(g.Current);
             Button b = new Button();
             foreach (var item in field.Children)
             {

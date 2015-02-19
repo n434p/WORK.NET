@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Puzzle15.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Puzzle15" Height="199.596" Width="165.372" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+        Title="Puzzle15" Height="155.883" Width="142.641" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
 
-    <Canvas x:Name="field" HorizontalAlignment="Left" Background="BurlyWood" Margin="0,0,-16,-18" Width="169" MouseRightButtonDown="field_MouseRightButtonDown" Height="181" VerticalAlignment="Top"/>
+    <Canvas x:Name="field" HorizontalAlignment="Center" Background="BurlyWood" Margin="0,0,0,0" Width="160" MouseRightButtonDown="field_MouseRightButtonDown" Height="160
+            " VerticalAlignment="Center"/>
 </Window>
