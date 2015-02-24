@@ -62,7 +62,7 @@ class Game
                 fit.Add(table.Keys.ToArray()[i]);
                 Current = (byte)(i + 2);
             }
-          //  else break;
+            else break;
         }
     }
     public void Rotation(byte current)

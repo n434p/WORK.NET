@@ -83,8 +83,9 @@ namespace Puzzle15
 
             //
             g.Process();
-            byte[] mas = { 1,13, 9, 14, 10, 2,3,4, 5, 6, 7, 8, 9, 11,12, 1, 15 };
-            g.Rotation(mas[g.Current-1]);
+         //   byte[] mas = { 1,13, 9, 14, 10, 2,3,4, 5, 6, 7, 8, 9, 11,12, 1, 15 };
+         //   g.Rotation(mas[g.Current-1]);
+            g.Rotation(g.Current);
 
             spaceL.Content = "SPACE: " + g.space;
             targetL.Content = "TARGET: " + g.target;
