@@ -83,8 +83,13 @@ namespace Puzzle15
 
             //
             g.Process();
+            byte[] mas = { 1,13, 9, 14, 10, 2,3,4, 5, 6, 7, 8, 9, 11,12, 1, 15 };
+            g.Rotation(mas[g.Current-1]);
 
-            g.Rotation(g.Current);
+            spaceL.Content = "SPACE: " + g.space;
+            targetL.Content = "TARGET: " + g.target;
+            goalL.Content = "GOAL: " + g.goal;
+
             Button b = new Button();
             foreach (var item in field.Children)
             {
@@ -92,12 +97,11 @@ namespace Puzzle15
                 if (b.Margin.Left == g.target.X && b.Margin.Top == g.target.Y) break;
             }
             target = b;
-            spaceL.Content = "SPACE: " + g.space;
-            targetL.Content = "TARGET: " + g.target;
-            goalL.Content = "FIT: " + g.fit.Count;
+           
             move++;
             window.Title = "Puzzle15 MOVE: " + move;
             Swap();
+            
            
             if (g.Win()) MessageBox.Show("Puzzle complete!", "Congrats!");
         }

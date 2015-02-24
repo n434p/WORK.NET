@@ -12,7 +12,7 @@ class Game
     public byte[] temp;
     bool avoid = false;
     bool collision = false;
-    public List<Cube> colList = new List<Cube>();
+    public List<Cube> cubes = new List<Cube>();
     public Dictionary<byte, Point> change = new Dictionary<byte, Point>();
     public List<Point> fit = new List<Point>();
     public byte Current { get; set; }
@@ -23,7 +23,10 @@ class Game
         
     public Game(int s=40)
     {
-        temp = new byte[16] {3,2,4,7,1,11,6,5,13,0,9,12,10,15,8,14};
+        temp = new byte[16] { 12, 7, 3, 8, 2, 13, 15, 0, 1, 5, 4, 10, 6, 14, 11, 9 };
+            /// {12,7,3,8,2,13,15,0,1,5,4,10,6,14,11,9}
+        /// {3,2,4,7,1,11,6,5,13,0,9,12,10,15,8,14}
+            ///
         btnSize = s;
         Current = 1;
         
@@ -35,8 +38,8 @@ class Game
                     table[p] = temp[n];
                     n++;
                     if (table[p] == 0) space = p;
-                    if (table[p] == 1) target = p;
-                    if (i == 0 && j == 0) goal = p;
+                    //if (table[p] == 1) target = p;
+                    //if (i == 0 && j == 0) goal = p;
                 }
     }
 
@@ -59,7 +62,7 @@ class Game
                 fit.Add(table.Keys.ToArray()[i]);
                 Current = (byte)(i + 2);
             }
-            else break;
+          //  else break;
         }
     }
     public void Rotation(byte current)
@@ -88,12 +91,27 @@ class Game
             sectors.Add(c);
         }
 
+        if (cubes.Count > 0)
+        {
+            foreach (var item in table)
+            {
+                if (item.Value == cubes[0].targ) target = item.Key;
+            }
+            goal = cubes[0].goal;
+
+            if (target == goal)
+                cubes.RemoveAt(0);
+        }
+
+        if (cubes.Count == 0)
+        {
             foreach (var item in table)
             {
                 if (item.Value == current) target = item.Key;
             }
 
             goal = (avoid) ? goal : table.Keys.ElementAt(current - 1);
+        }
 
         List<Cube> options = new List<Cube>();
 
@@ -106,131 +124,114 @@ class Game
 
         #endregion
 
-        if ((target-space).Length >= 1.5*btnSize && change.Count == 0)
+
+        if ((target-space).Length >= 1.5*btnSize && cubes.Count == 0)
         {
                 foreach (Point place in table.Keys)
                 {
-                    if ((place - space).Length == btnSize && len > (place - target).Length && place != target && place != space)
+                    if ((place - space).Length == btnSize && len > (place - target).Length && place != target && place != space && !fit.Contains(place))
                     { newTarget = place; len = (target - place).Length; }
                 }
             target = newTarget;
         }
         else
         {
+            #region IN CUBE LOGIC
             Cube cube = new Cube();
-
-            Point best = new Point();
-            double ln = 0;
-
-            #region DETERMINATION
-            if (avoid && goal == space)
+            if (cubes.Count == 0)
             {
-                foreach (Cube item in options)
-                    foreach (Point point in item.Points)
+                Point best = new Point();
+                double ln = 5 * btnSize;
+           
+                if (avoid && goal == space)
+                {
+                    Point g = table.Keys.ElementAt(current-1);
+                    if (options.Count < 2)
                     {
-                        if ((point - space).Length == btnSize)
-                            foreach (var p in fit)
+                        avoid = false;
+                    }
+                    else
+                    {
+                        foreach (Cube item in options)
+                            foreach (Point point in item.Points)
                             {
-                                if (ln < (p - point).Length)
-                                { best = point; ln = (p - point).Length; }
+                                if (point != target && (point - space).Length == btnSize && ln >= (g - point).Length)
+                                { best = point; ln = (g - point).Length; }
                             }
+                        target = best;
+                        avoid = false;
                     }
-                target = best;
-                avoid = false;
-            }
-            else
-            {
-
-
-
-                if ((space-target).Length == btnSize && (space-goal).Length == btnSize && (goal-target).Length == 2*btnSize && change.Count ==0)
-               
-                {
-                    change.Clear();
-                    Point bl1 = new Point();
-                    Point bl2 = new Point();
-                    Point pass = new Point();
-                    Cube c1 = new Cube();
-                    Cube c2 = new Cube();
-                    foreach (var p in fit)
-                    foreach (var item in sectors)
-                    {
-                        if (item.Points.Contains(goal) && item.Points.Contains(space) && item.Points.Contains(p))
-                        {c1 = item; pass = p;}
-                    }
-                    foreach (var item in c1.Points)
-                    {
-                        if (item != goal && item != space && item != pass)
-                            bl1 = item;
-                    }
-                    c1.target = goal;
-                    c1.goal = bl1;
-                    foreach (var item in sectors)
-                    {
-                        if (item.Points.Contains(bl1) && item.Points.Contains(space) && item.Points.Contains(target))
-                        { c2 = item; }
-                    }
-                    foreach (var item in c2.Points)
-                    {
-                        if (item != bl1 && item != space && item != target)
-                            bl2 = item;
-                    }
-                    foreach (var item in table)
-	                {
-		                if (item.Key == goal) change[item.Value] = bl1;
-                        if (item.Key == bl2) change[item.Value] = target;
-	                }
-                    //change[]
-                    c2.target = bl2;
-                    c2.goal = target;
-                    colList.Add(c1);
-                    colList.Add(c2);   
                 }
-
-                foreach (Cube c in options)
+                else
                 {
-                    foreach (Point point in c.Points)
+                    if ((goal - target).Length == 2 * btnSize && (space - goal).Length == btnSize && (space - target).Length == btnSize)
                     {
-                        if (fit.Any(item => item == point))
+                        Cube c1 = new Cube();
+                        Cube c2 = new Cube();
+                        foreach (var c in sectors)
                         {
-                            avoid = true;
-                            break;
+                            if (c.Points.Contains(goal) && c.Points.Contains(space)) c1 = c;
+                            if (c.Points.Contains(target) && c.Points.Contains(space)) c2 = c;
                         }
-                        if (len > (goal - point).Length && !fit.Contains(point) && point != target && point != space)
-                        { newTarget = point; len = (goal - point).Length; }
+                        if (goal.X == space.X && space.X == target.X && space.X == 3 * btnSize)
+                        {
+                            c1.goal = new Point(space.X - btnSize, space.Y);
+                            c1.targ = table[goal];
+                            c2.goal = new Point(target.X - btnSize, target.Y);
+                            c2.targ = c1.targ;
+                            cubes.Add(c1);
+                            cubes.Add(c2);
+
+                        }
+                        if (goal.Y == space.Y && space.Y == target.Y && space.Y == 3 * btnSize)
+                        {
+                            c1.goal = new Point(space.X, space.Y - btnSize);
+                            c1.targ = table[goal];
+                            c2.goal = new Point(target.X, target.Y - btnSize);
+                            c2.targ = c1.targ;
+                            cubes.Add(c1);
+                            cubes.Add(c2);
+                        }
+                        
+                    }
+
+                    if (cubes.Count == 0)
+                    {
+                        foreach (Cube c in options)
+                        {
+                            foreach (Point point in c.Points)
+                            {
+                                if (fit.Any(item => item == point))
+                                {
+                                    avoid = true;
+                                    break;
+                                }
+                                if (len >= (goal - point).Length && !fit.Contains(point) && point != target && point != space)
+                                { newTarget = point; len = (goal - point).Length; }
+                            }
+                        }
+                        goal = newTarget;
                     }
                 }
-                goal = newTarget;
             }
+
+         
             #endregion
 
-            if (change.Count >= 1)
+            
+
+            if (cubes.Count > 0)
             {
                 foreach (var item in table)
                 {
-                    if (item.Value == change.ElementAt(0).Key) target = item.Key;
+                    if (item.Value == cubes[0].targ) target = item.Key;
                 }
-                goal = change.ElementAt(0).Value;
+                goal = cubes[0].goal;
 
                 options.Clear();
-                options.Add(colList[0]);
-
-                if (change.Count > 0 && target == goal)
-                {
-                    colList.RemoveAt(0);
-                    change.Remove(change.ElementAt(0).Key);
-                }
-
-                if (change.Count == 0)
-                {
-                    foreach (var item in table)
-                    {
-                        if (item.Value == current) target = item.Key;
-                    }
-
-                    goal = (avoid) ? goal : table.Keys.ElementAt(current - 1);
-                }
+                options.Add(cubes[0]);
             }
+
 
             foreach (Cube c in options)
                 if (c.children.Contains(0) && c.Points.Contains(target) && c.Points.Contains(goal))
@@ -247,10 +248,6 @@ class Game
                             if ((point - space).Length == btnSize && point != goal && point != target)
                             {
                                 target = point;
-                                if (colList.Count > 0)
-                                {
-                                    colList[0].target = point;
-                                }
                                 break;
                             }
                         }
@@ -263,25 +260,14 @@ class Game
                 else
                 {
                     target = goal;
-                    if (colList.Count > 0)
-                    {
-                        colList[0].target = goal;
-                    }
                 }
             }       
             else
-            { 
-              
+            {
+                avoid = false;
             }
                 
-           
-          
-
-
-        }
-
-        
-            
+        }           
     }
 
 
@@ -294,7 +280,7 @@ class Game
             table[space] = table[target];
             table[target] = b;
             space = target;
-            
+
             return true;
         }
         return false;
