@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Puzzle15
 {
@@ -26,18 +26,22 @@ namespace Puzzle15
         Button space;
         Button target;
         Game g = new Game();
+        DispatcherTimer dt = new DispatcherTimer();
 
         public MainWindow()
         {
             InitializeComponent();
             Init();
-            currentNum.ItemsSource = g.table.Values;
-           
+            dt.Interval = TimeSpan.FromMilliseconds(1000/speedSlider.Value); 
+            dt.Tick += Run;
+            
                 
         }
 
         public void Init() 
         {
+            move = 0;
+            field.Children.Clear();
             btnSize = g.btnSize;
             foreach (var item in g.table)
             {
@@ -53,13 +57,13 @@ namespace Puzzle15
 
         void b_Click(object sender, RoutedEventArgs e)
         {
-            target = sender as Button;
-            move++;
-            Swap();
-            if (g.Win()) MessageBox.Show("You win!", "Congrats!");
+            if (!dt.IsEnabled)
+            {
+                target = sender as Button;
+                Swap();
+                if (g.Win()) MessageBox.Show("You win!", "Congrats!");
+            }
         }
-
-
 
         void Swap() 
         {   
@@ -72,21 +76,17 @@ namespace Puzzle15
             Thickness s = target.Margin;
             target.Margin = space.Margin;
             space.Margin = s;
+
+            move++;
+            window.Title = "Puzzle15 MOVE: " + move;
             }
            
             
         }
 
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Run(object sender, EventArgs e)
         {
-
-            //
-            g.Process();
-         //   byte[] mas = { 1,13, 9, 14, 10, 2,3,4, 5, 6, 7, 8, 9, 11,12, 1, 15 };
-         //   g.Rotation(mas[g.Current-1]);
-            g.Rotation(g.Current);
-
+            g.Rotation();
             spaceL.Content = "SPACE: " + g.space;
             targetL.Content = "TARGET: " + g.target;
             goalL.Content = "GOAL: " + g.goal;
@@ -98,13 +98,41 @@ namespace Puzzle15
                 if (b.Margin.Left == g.target.X && b.Margin.Top == g.target.Y) break;
             }
             target = b;
-           
-            move++;
-            window.Title = "Puzzle15 MOVE: " + move;
+
+
             Swap();
+
+
+            if (g.Win())
+            {
+                dt.Stop();
+                MessageBox.Show("TOAL MOVES: "+ move, "Puzzle complete!");
+                g = new Game();
+                Init();
+                nextBtn.Content = "START";
+            }
+        }
+
+        private void Button_Click(object sender, EventArgs e)
+        {
             
-           
-            if (g.Win()) MessageBox.Show("Puzzle complete!", "Congrats!");
+            if (dt.IsEnabled)
+            {
+                dt.Stop();
+                nxtBtn.IsEnabled = true;
+                nextBtn.Content = "START";            
+            }
+            else 
+            {
+                dt.Start();
+                nxtBtn.IsEnabled = false;
+                nextBtn.Content = "STOP"; 
+            }
+        }
+
+        private void speedSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            dt.Interval = TimeSpan.FromMilliseconds(1000 / speedSlider.Value);
         }
 
     

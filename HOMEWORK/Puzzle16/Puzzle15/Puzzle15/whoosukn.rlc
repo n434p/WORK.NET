@@ -17,19 +17,16 @@ class Game
     public Point space, target, goal;
     public int btnSize = 10;
     public Dictionary<Point, byte> table = new Dictionary<Point,byte>();
-    byte[] solveSeq = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 10, 14, 15, 12 };
+    byte[] solveSeq = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 10, 14, 11, 15, 12 };
     byte[] order = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0 };
         
     public Game(int s=40)
     {
-        temp = new byte[16] { 7, 1, 15, 6, 10, 9, 5, 4, 13, 2, 0, 3, 14, 8, 12, 11 };
+        temp = new byte[16] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 12, 13, 0, 11, 14 };
             /// {12,7,3,8,2,13,15,0,1,5,4,10,6,14,11,9}
             /// {3,2,4,7,1,11,6,5,13,0,9,12,10,15,8,14}
-            /// {1,2,3,4,5,6,7,8,9,10,15,12,13,0,11,14} - issue backward move!
-        /// { 5, 7, 3, 10, 4, 8, 6, 2, 0, 1, 14, 11, 9, 12, 15, 13 } - bw issue
+            /// {1,2,3,4,5,6,7,8,9,10,15,12,13,0,11,14}
             /// {1,2,3,4,5,6,7,8,9,0,11,15,14,10,13,12}
-            /// {5,7,3,10,4,8,6,2,0,1,14,11,9,12,15,13}
-            /// {7,1,15,6,10,9,5,4,13,2,0,3,14,8,12,11}
         btnSize = s;
         Current = 1;
         
@@ -59,7 +56,7 @@ class Game
         Point block = new Point(-1, -1);
 
         fit.Clear();
-        for (int i = 0; i < order.Length; i++)
+        for (int i = 0; i < order.Length-2; i++)
         {
             if (order[solveSeq[i] - 1] == table.Values.ToArray()[solveSeq[i] - 1])
             {
@@ -183,11 +180,8 @@ class Game
                 else
                 {
 
-                    if (target != goal && HorizBlock() || VertBlock())
+                    if (HorizBlock() || VertBlock())
                     {
-                        if (HorizBlock()) 
-                        { }
-
                         Cube c0 = new Cube();
                         Cube c1 = new Cube();
                         Cube c2 = new Cube();
@@ -257,8 +251,6 @@ class Game
                 }
                 goal = MovesChain[0].goal;
 
-                if ((space - target).Length == 2 * btnSize)
-                { target = new Point(space.X - btnSize, space.Y); return; }
                 options.Clear();
                 options.Add(MovesChain[0]);
             }
@@ -314,15 +306,15 @@ class Game
     }
     public bool VertBlock()
     {
-        if (goal.X == 3 * btnSize && target.X >= goal.X-btnSize && space.X >= goal.X-btnSize && fit.Contains(new Point(goal.X - btnSize, goal.Y)))
-        { if ( space.Y > goal.Y && space.Y < goal.Y + 2 * btnSize && target.Y > goal.Y && target.Y <= goal.Y + 2 * btnSize) return true; }
+        if (goal.X == 3 * btnSize && fit.Contains(new Point(goal.X - btnSize, goal.Y)))
+        { if ( space.Y > goal.Y && space.Y <= goal.Y + 2 * btnSize && target.Y > goal.Y && target.Y <= goal.Y + 2 * btnSize) return true; }
         return false;
     }
 
     public bool HorizBlock()
     {
-        if (goal.Y == 3 * btnSize && target.Y >= goal.Y - btnSize && space.Y >= goal.Y - btnSize && fit.Contains(new Point(goal.X, goal.Y - btnSize)))
-        { if ( space.X > goal.X && space.X < goal.X + 2 * btnSize && target.X > goal.X && target.X <= goal.X + 2 * btnSize) return true; }
+        if (goal.Y == 3 * btnSize && fit.Contains(new Point(goal.X, goal.Y - btnSize)))
+        { if ( space.X >= goal.X && space.X <= goal.X + 2 * btnSize && target.X > goal.X && target.X <= goal.X + 2 * btnSize) return true; }
         return false;
     }
 

@@ -4,11 +4,12 @@
         Title="Puzzle15" Height="244.417" Width="357.041" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <Grid x:Name="grid" Background="#FFCDD4E0" Height="179" VerticalAlignment="Top" HorizontalAlignment="Left" Width="303">
         <Canvas x:Name="field" HorizontalAlignment="Left" Background="BurlyWood" Height="160" Margin="7,7,0,0" VerticalAlignment="Top" Width="160"/>
-        <Button Content="NEXT" HorizontalAlignment="Left" Height="23" Margin="182,146,0,0" VerticalAlignment="Top" Width="98" Click="Button_Click"/>
-        <Label x:Name="spaceL" Content="" HorizontalAlignment="Left" Margin="172,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="targetL" Content="" HorizontalAlignment="Left" Margin="172,36,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="goalL" Content="" HorizontalAlignment="Left" Margin="172,62,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="currentNum" HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Margin="182,111,0,0" Height="20" />
+        <Button x:Name="nextBtn" Content="START" HorizontalAlignment="Left" Height="23" Margin="188,146,0,0" VerticalAlignment="Top" Width="98" Click="Button_Click"/>
+        <Label x:Name="spaceL" Content="" HorizontalAlignment="Left" Margin="172,5,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="targetL" Content="" HorizontalAlignment="Left" Margin="172,31,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="goalL" Content="" HorizontalAlignment="Left" Margin="172,57,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="speedSlider" HorizontalAlignment="Left" Margin="188,123,0,0" VerticalAlignment="Top" Width="98" Minimum="1" SmallChange="0.5" Value="1" ValueChanged="speedSlider_ValueChanged" Maximum="6"/>
+        <Button x:Name="nxtBtn" Content="NEXT" HorizontalAlignment="Left" Margin="188,99,0,0" VerticalAlignment="Top" Width="98" Click="Run"/>
     </Grid>
 
 
