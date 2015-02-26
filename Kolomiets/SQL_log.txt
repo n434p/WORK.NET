@@ -1,0 +1,125 @@
+-- Создание базы с иными параметрами
+
+--create database Test
+--on
+--(
+--name = Test,
+--filename = 'D:\Kolomiets\WORK.NET\Kolomiets\Test.mdf',
+--size = 7MB,
+--maxsize = 22MB,
+--filegrowth = 1MB
+--)
+--log on
+--(
+--name = Test_log,
+--filename = 'D:\Kolomiets\WORK.NET\Kolomiets\Test.ldf',
+--size = 1MB,
+--maxsize = 10MB,
+--filegrowth = 10%
+--)
+
+-- Изменение параметров базы
+
+--alter database Test
+--modify file (name = Test, filegrowh = 1MB)
+
+-- Удаление базы
+
+--drop database Test
+
+
+-- Создание цепочки действий - создание БД - таблицы - поля
+
+--create database Test
+
+--go
+
+--use Test
+--go
+
+--create table Instruments
+--(
+--Id int not null primary key identity(1,1),
+--Name nvarchar(50) not null
+--)
+
+--go
+
+--insert into Instruments(Name) values('Violin')
+
+-- Удаление поля из таблицы
+
+--use Test
+--go
+
+--alter table Instruments
+--drop column Name 
+
+
+-- Создание нового поля в таблице
+
+--use Test
+--go
+
+--alter table Instruments
+--add Name nvarchar(50) not null default('qwerty') 
+
+
+--  Удаление таблицы
+--drop table Instruments
+
+
+--use Test
+--go
+
+--create table Instruments
+--(
+--Id int not null primary key identity(1,1),
+--Name nvarchar(20) not null,
+--constraint cstUniq unique(Name)
+--)
+
+
+--use Test
+--go
+
+--drop table Instruments	
+
+
+
+--use Test
+--go
+
+--create table People
+--(
+--Id int not null identity(1,1),
+--Name nvarchar(20) not null,
+--Age int,
+--constraint cstUniq unique(Name),
+--constraint PK_Instruments primary key (Id),
+--constraint checkAge check(Age >=16)
+--)
+
+--use Test
+--go
+
+--alter table Instruments
+--add constraint ...
+
+-- REQUEST CHAIN
+
+--create table Country
+--(
+--Id int not null primary key identity(1,1),
+--Name nvarchar(50) not null
+--)
+
+--go
+
+--alter table People
+--add IdCountry int not null
+
+--go
+
+--alter table People
+--add constraint FKPeopleCountry foreign key(IdCountry) references Country(Id) 
