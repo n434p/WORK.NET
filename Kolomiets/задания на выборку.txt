@@ -1,0 +1,51 @@
+1.¬ытащить название учебников, которые издавались не издательством 'BHV', и тираж которых >= 3000 экземпл€ров.
+
+select Books.Name
+From Books, Press
+Where Books.IdPress = Press.Id 
+and Press.Name like '%BHV%' 
+and Books.Pressrun >= 3000 
+
+2.¬ытащить все книги-новинки, цена которых ниже 30р.
+
+select Books.Name
+From Books
+Where Books.New = 1 and Books.Price >= 3000 
+
+3.¬ытащить все книги, у которых в имени белее четырех слов.
+
+select Books.Name
+From Books
+Where Books.Name like '% % % %' 
+
+4.¬ытащить книги, в названи€х которых есть слово Microsoft, но нет слова Windows
+
+select Books.Name
+From Books
+Where Books.Name like '%Microsoft%' and like '^Windows'  
+
+5.¬ытащить книги, у которых цена одной страницы меньше 10 копеек.
+6.¬ытащить книги и цену в у.е. дл€ всех книг новинок.
+7.¬ычитать все книги, год издани€ у которых 2000, а цена >30.
+8.¬ычитать все издательства, которые издали новинки с ценой >40р.
+9.¬ычитать все тематики, у которых не указана категори€, при этом из результата исключить повторени€.
+10.¬ытащить название учебников, которые издавались издательством 'BHV', а перва€ буква тематики находитс€ в диапазоне от ≈ до  .
+11.¬ычитать название учебников, в названии издательств которых более 3 слов.
+12.¬ычитать название учебников, в названии издательств которых ровно 3 слова.
+
+
+
+use [BooksForNet14-2]
+go
+
+select Books.Name
+From Books, Press
+Where Books.IdPress = Press.Id 
+and Press.Name not like 'BHV%' 
+and Books.Pressrun >= 3000 
+
+--select Books.Name
+--From Books, Press
+--Where Books.New = 1 
+--and Press.Name like '%BHV%' 
+--and Books.Pressrun >= 3000 

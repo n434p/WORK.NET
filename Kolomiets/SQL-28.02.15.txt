@@ -1,0 +1,43 @@
+use [BooksForNet14-2]
+go 
+
+--select Name as 'New name', Price
+--from Books
+
+
+-- Возможны различныен арифметические операции между полями
+--select Name, Price*Pressrun as AllPrice
+--from Books
+
+--select Name + ' ' + Books.Format as AllPrice
+--from Books
+
+--select *
+--from Books
+----where Pressrun between 3000 and 5000 and IdCategory = 3
+----where IdCategory in (3,7)
+----where Name like '[к-я]%'
+----where Name between 'л%' and 'я%' 
+ 
+--order by Name desc, Price asc
+
+--select b.Name, Category.Name
+--from Books as b, Category
+--where b.IdCategory = Category.Id
+
+--select *
+--from Books
+--where IdCategory is null
+
+--select *
+--from Books
+--where IdCategory is not null
+
+
+--select Books.Name, Category.Name, Theme.Name
+--from Books, Category, Theme 
+--where Books.IdCategory = Category.Id
+--and Books.IdTheme = Theme.Id
+--and Category.Name = 'Учебники'
+
+
