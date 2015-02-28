@@ -9,20 +9,9 @@ namespace Puzzle15
 {
     class Cube
     {
-        public Point center,target,goal;
+        public Point center, goal;
         public byte targ;
         public int Number { get; set; }
-        public List<byte> children = new List<byte>();
         public List<Point> Points = new List<Point>();
-
-        
-        public Cube()
-        {
-            
-        }
-
-        
-
-
     }
 }

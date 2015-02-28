@@ -7,33 +7,53 @@ using System.Windows;
 
 namespace Puzzle15
 {
+
 class Game
-{
-    public byte[] temp;
+{   
+    #region INIT
+
+    public int mistakes = 0;
+    /// <summary>
+    /// value returns "true" if closer way to goal passes through fitted cell.
+    /// </summary>
     bool avoid = false;
-    public List<Cube> MovesChain = new List<Cube>();
-    public List<Point> fit = new List<Point>();
-    public byte Current { get; set; }
+    /// <summary>
+    /// Contains sequence of cube's rotation (Vertical or Horizontal block that formed by two near cubes)
+    /// </summary>
+    List<Cube> MovesChain = new List<Cube>();
+    /// <summary>
+    /// Contains all fitted cells at current moment.
+    /// </summary>
+    List<Point> fit = new List<Point>();
+    /// <summary>
+    /// Current cell's number.
+    /// </summary>
+    byte Current { get; set; }
+    /// <summary>
+    /// space - blank cell
+    /// target - cell with current number
+    /// goal - needed place for current cell
+    /// </summary>
     public Point space, target, goal;
+    /// <summary>
+    /// Cell geometry size
+    /// </summary>
     public int btnSize = 10;
+    /// <summary>
+    /// Contains structure of plotted cells
+    /// </summary>
     public Dictionary<Point, byte> table = new Dictionary<Point,byte>();
-    byte[] solveSeq = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 10, 14, 15, 12 };
+    /// <summary>
+    /// Presents order of cells for reach solution
+    /// </summary>
+    byte[] solveSeq = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 10, 14, 11, 15, 12 };
+    /// <summary>
+    /// Needed order of cells
+    /// </summary>
     byte[] order = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0 };
-        
-    public Game(int s=40)
+    #endregion
+    public Game(byte[] mas,int s=40)
     {
-        temp = new byte[16] { 14, 9, 6, 12, 13, 1, 15, 7, 4, 0, 10, 11, 5, 3, 2, 8 };
-            /// {12,7,3,8,2,13,15,0,1,5,4,10,6,14,11,9}
-            /// {3,2,4,7,1,11,6,5,13,0,9,12,10,15,8,14}
-            /// {1,2,3,4,5,6,7,8,9,10,15,12,13,0,11,14} - issue backward move!
-        /// { 5, 7, 3, 10, 4, 8, 6, 2, 0, 1, 14, 11, 9, 12, 15, 13 } - bw issue
-            /// {1,2,3,4,5,6,7,8,9,0,11,15,14,10,13,12}
-            /// {5,7,3,10,4,8,6,2,0,1,14,11,9,12,15,13}
-            /// {7,1,15,6,10,9,5,4,13,2,0,3,14,8,12,11}
-            /// {7,1,15,6,10,9,5,4,13,2,0,3,14,8,12,11}
-            /// {14,9,6,12,13,1,15,7,4,0,10,11,5,3,2,8}
-            /// 
-        ///  { 7, 1, 15, 6, 10, 9, 5, 4, 13, 2, 0, 3, 14, 8, 12, 11 }
         btnSize = s;
         Current = 1;
         
@@ -42,11 +62,15 @@ class Game
                 for (int i = 0; i < 4; i++)  
                 {
                     Point p = new Point(i * btnSize, j * btnSize);
-                    table[p] = temp[n];
+                    table[p] = mas[n];
                     n++;
                     if (table[p] == 0) space = p;
                 }
     }
+    /// <summary>
+    /// Returns true if all cells on needed places
+    /// </summary>
+    /// <returns></returns>
     public bool Win()
     {
         for (int i = 0; i < 16; i++)
@@ -55,16 +79,43 @@ class Game
         }
         return true;
     }
-
+    /// <summary>
+    /// Returns list of moves witout overloop mistakes.
+    /// </summary>
+    public List<Point> Process()
+    {
+        List<Point> Solution = new List<Point>();
+        int i = 0; 
+        while (!Win()|| i > 250) 
+        {
+            Rotation();
+            Swap();
+            i++;
+            if (Solution.Count > 2 && Solution[Solution.Count - 2] == target)
+            {
+                mistakes++;
+                Solution.RemoveAt(Solution.Count - 1);
+            }
+            else Solution.Add(target);
+        }
+        return Solution;
+    }
+    /// <summary>
+    /// Detrminates in what cell's place do next move(target).
+    /// </summary>
     public void Rotation()
     {
         #region Sector INIT
-
+        // For the process sequence - remembers pre-last goal position to avoid misstatement for last rotation
+        // |S1|S2| S0-2 - sequence of moves.
+        // |S0|G | 
+        // (do not go through goal place in last rotation)
         Point block = new Point(-1, -1);
 
         fit.Clear();
         for (int i = 0; i < order.Length; i++)
         {
+            // Fills by elements according to order of solution sequence.
             if (order[solveSeq[i] - 1] == table.Values.ToArray()[solveSeq[i] - 1])
             {
                 fit.Add(table.Keys.ToArray()[solveSeq[i] - 1]);
@@ -72,7 +123,10 @@ class Game
             }
             else break;
         }
-
+        /// |1|2|5| | 1-4 - Sectors[0]
+        /// |3|4|6| | 2,4,5,6 - Sectors[1]
+        /// |7|8| | | 3,4,7,8 - Sectors[3]
+        /// | | | | | total 9 sectors
         List<Cube> sectors = new List<Cube>();
         List<Point> sectorGrid = new List<Point>();
         for (int j = 0; j < 3; j++)
@@ -89,12 +143,13 @@ class Game
                 if ((sectorGrid[i] - item.Key).Length < btnSize * 1.5 / 2)
                 {
                     c.center = sectorGrid[i];
-                    c.children.Add(item.Value);
                     c.Points.Add(item.Key);
                 }
             }
             sectors.Add(c);
         }
+
+        /// Determinates goal&target points in Vertical or Horizontal block.
 
         if (MovesChain.Count > 0)
         {
@@ -103,7 +158,7 @@ class Game
                 if (item.Value == MovesChain[0].targ) target = item.Key;
             }
             goal = MovesChain[0].goal;
-
+            // Removes current sequence from chain if target reaches goal.
             if (target == goal)
             {
                 if (MovesChain.Count == 1) block = goal;
@@ -111,6 +166,7 @@ class Game
             }
         }
 
+        // Determinates goal&target in case - chain is empty after previous logic; chain is empty at beginning  
         if (MovesChain.Count == 0)
         {
             foreach (var item in table)
@@ -120,7 +176,8 @@ class Game
 
             goal = (avoid) ? goal : table.Keys.ElementAt(Current - 1);
         }
-
+        
+        // options - all cubes where rotation is allowed(possible)
         List<Cube> options = new List<Cube>();
 
         foreach (Cube sec in sectors)
@@ -128,6 +185,7 @@ class Game
             if (sec.Points.Contains(target) && sec.Points.Contains(space)) options.Add(sec);
         }
 
+        /// After removing element from chain. Redetermination space&target by new values of next sequence.
         if (MovesChain.Count > 0)
         {
             foreach (var item in table)
@@ -139,13 +197,20 @@ class Game
             options.Clear();
             options.Add(MovesChain[0]);
         }
-
+        // value helps to find closer way between points
         double len = 5 * btnSize;
+        // keeps new value for the target
         Point newTarget = new Point();
 
         #endregion
 
-        if ((target-space).Length >= 1.5*btnSize)
+        #region OUTCUBE LOGIC
+        // Move space to the cube that contains target
+        // | |  |  |  |
+        // |T|  |  |  |
+        // | |S3|S2|  |
+        // | |  |S1|S0|
+        if ((target-space).Length > 1.5*btnSize)
         {
                 foreach (Point place in table.Keys)
                 {
@@ -156,15 +221,28 @@ class Game
             target = newTarget;
 
         }
+        #endregion
+
         else
         {
             #region IN CUBE LOGIC
+            // If cube contains target&Space:
+            // | | | | |
+            // | | | | |
+            // |.|S| | |
+            // |T|.| | |
+
             Cube cube = new Cube();
             if (MovesChain.Count == 0)
             {
                 Point best = new Point();
                 double ln = 5 * btnSize;
-           
+
+                // Equipotential case:
+                // |F|G| | | A,B - possible moves
+                // | |T| | | A->G = B->G
+                // |A|S|B| |
+                // | | | | | B - prefer target (avoiding F)
                 if (avoid && goal == space)
                 {
                     Point g = table.Keys.ElementAt(Current - 1);
@@ -184,21 +262,28 @@ class Game
                         avoid = false;
                     }
                 }
+                
                 else
                 {
+                    // Determinates are exist any vertical or horizontal blocks
+
+                    // |F|*|*| 
+                    // |G|*|*| 
+
+                    /// |F|G| F- fitted cell
+                    /// |*|*| G - goal cell
+                    /// |*|*| * - possible places for T(target) and S(space)
 
                     if (target != goal && HorizBlock() || VertBlock())
-                    {
-                        if (HorizBlock()) 
-                        { }
-
+                    {   
                         Cube c0 = new Cube();
                         Cube c1 = new Cube();
                         Cube c2 = new Cube();
+
                         foreach (var c in sectors)
                         {
                             if (c.Points.Contains(fit[fit.Count-1]) && c.Points.Contains(goal)) { c1 = c; }
-                            if (c.Points.Contains(target) && c.Points.Contains(space))
+                            if (c.Points.Contains(target)) // && c.Points.Contains(space))
                             {
                                 if (HorizBlock() && c.center.X == c1.center.X+btnSize)
                                 {
@@ -212,11 +297,17 @@ class Game
                         }
                         if (c1.Points.Count > 0 && c2.Points.Count > 0)
                         {
+                            // |.|.|  |.|T| | 
+                            // |T| |  |.| |G|  T -> G
+                            // | |G|
                             c0.Points = c2.Points;
                             c0.goal = c2.Points[3];
                             c0.targ = table[target];
                             if (c2.Points[3] != target) MovesChain.Add(c0);
-                            
+
+                            // |F|G|  |F| |.| 
+                            // | | |  |G| |.|  F -> G
+                            // |.|.|
                             if (VertBlock())
                                 c1.goal = c1.Points[1];
                             else if (HorizBlock())
@@ -224,35 +315,58 @@ class Game
                             c1.targ = table[fit[fit.Count - 1]];
                             MovesChain.Add(c1);
 
+                            // |.|F|  |.| | | 
+                            // | |G|  |F|G|T|  T -> G
+                            // | |T|
                             if (VertBlock())
                                 c2.goal = c2.Points[1];
                             else if (HorizBlock())
                                 c2.goal = c2.Points[2];
                             c2.targ = table[target];
                             MovesChain.Add(c2);
+
+                            // |.|F|  |.|.|.| 
+                            // |.|T|  |F|T|.|  
+                            // |.|.|
                         }
                     }
 
-                    if (MovesChain.Count == 0 && goal != space)
+                    if (MovesChain.Count == 0) 
                     {
-                        foreach (Cube c in options)
+                        if (goal == space && (goal - target).Length > btnSize)
                         {
-                            foreach (Point point in c.Points)
-                            {
-                                if (fit.Any(item => item == point))
-                                {
-                                    avoid = true;
-                                    break;
-                                }
-                                if (len >= (goal - point).Length && !fit.Contains(point) && point != target && point != space)
-                                { newTarget = point; len = (goal - point).Length; }
-                            }
+                            // Equipotential case:
+                            // |   | T |
+                            // |G=S|   |
+                            double l1 = (space-table.Keys.ElementAt(table[new Point(target.X, space.Y)]-1)).Length;
+                            double l2 = (space-table.Keys.ElementAt(table[new Point(target.Y, space.X)]-1)).Length;
+                            target = (l1<l2)?new Point(target.X, space.Y):new Point(target.Y, space.X);
                         }
-                        goal = newTarget;
+                        else
+                        {
+                            foreach (Cube c in options)
+                            {
+                                foreach (Point point in c.Points)
+                                {
+                                    // |F|G| |
+                                    // |S|T|*|
+                                    // |*|*|*| * - space's moves
+                                    if (fit.Any(item => item == point))
+                                    {
+                                        avoid = true;
+                                        break;
+                                    }
+                                    if (len >= (goal - point).Length && !fit.Contains(point) &&point != target && point != space)
+                                    { newTarget = point; len = (goal - point).Length; }
+                                }
+                            }
+                            goal = newTarget;
+                        }
                     }
                 }
             }
 
+            // If in previous logic exists any block - renew values target&goal
             if (MovesChain.Count > 0)
             {
                 foreach (var item in table)
@@ -261,13 +375,15 @@ class Game
                 }
                 goal = MovesChain[0].goal;
 
+                // In case where space and target are on diametrical places in block
+                // |T| |S|
+                // | | | |
                 if ((space - target).Length == 2 * btnSize)
                 { target = new Point(space.X - btnSize, space.Y); return; }
                 options.Clear();
                 options.Add(MovesChain[0]);
             }
 
-         
             #endregion
 
             #region IN CUBE MOVE
@@ -277,11 +393,18 @@ class Game
                 { cube = c; }
 
             if ((goal - target).Length == btnSize)
-            { 
+            {
+                // |G|T|  | |T|
+                // | | |  | |G|
                 if ((space - target).Length == btnSize)
                 {
+                    // |G=S|T|  |S|T  |
+                    // |   |S|  | |G=S|
+
                     if (space != goal)
                     {
+                        // |G|T|  |S|T|
+                        // |*|S|  |*|G|  * - prefer move
                         foreach (var point in cube.Points)
                         {
                             if ((point - space).Length == btnSize && point != goal && point != target)
@@ -293,44 +416,83 @@ class Game
                     }
                     else
                     {
-
+                        // |G=S|T|  | |T  |
+                        // |   | |  | |G=S|  T - prefer move
                     }
                 }
                 else
                 {
+                    // |G|T|  | |T|
+                    // |S| |  |S|G| G - prefer move
                     target = goal;
                 }
             }
             else if(avoid)
             {
+                // Rotation processes in cube without fitted cells (but G, T and S in same cube)
+                // |F|F|F|
+                // | |.|T|
+                // | |G|.|
                 avoid = false;
             }
             else
             {
+                ///Horizontal queue bridge between blocks
+                /// | |  |  | |
+                /// | |  |  | | G - T > btnSize
+                /// |F|T1|T2| | T1-3 - possible cases
+                /// |G|* |T3| | * - prefer move
+                    
                 if (goal.Y == 3 * btnSize && fit.Contains(new Point(goal.X, goal.Y - btnSize)))
-                    target = new Point(goal.X + btnSize, goal.Y);        
+                    target = new Point(goal.X + btnSize, goal.Y);
+
+                ///Vertical queue bridge between blocks
+                /// | | |  |  |
+                /// | | |F | G| G - T > btnSize
+                /// | | |T1| *| T1-3 - possible cases
+                /// | | |T2|T3| * - prefer move
+                
+                else if (goal.X == 3 * btnSize && fit.Contains(new Point(goal.X - btnSize, goal.Y)))
+                    target = new Point(goal.X, goal.Y + btnSize);  
             }
 
             #endregion
-
         }  
          
     }
+    /// <summary>
+    /// Determinates next situation:
+    /// |F|G| F- fitted cell
+    /// |*|*| G - goal cell
+    /// |*|*| * - possible places for T(target) and S(space)
+    /// </summary>
+    /// <returns></returns>
     public bool VertBlock()
     {
-        if (goal.X == 3 * btnSize && target.X >= goal.X-btnSize && space.X >= goal.X-btnSize && fit.Contains(new Point(goal.X - btnSize, goal.Y)))
-        { if ( space.Y > goal.Y && space.Y < goal.Y + 2 * btnSize && target.Y > goal.Y && target.Y <= goal.Y + 2 * btnSize) return true; }
+        if (goal.X == 3 * btnSize && goal.Y < 2 * btnSize && target.X >= goal.X - btnSize && space.X >= goal.X - btnSize && fit.Contains(new Point(goal.X - btnSize, goal.Y)))
+        { if (space.Y > goal.Y && space.Y < goal.Y + 2 * btnSize && target.Y > goal.Y && target.Y <= goal.Y + 2 * btnSize) return true; }
         return false;
-    }
 
+    }
+    /// <summary>
+    /// Determinates next situation:
+    /// |F|*|*| F- fitted cell
+    /// |G|*|*| G - goal cell
+    ///  * - possible places for T(target) and S(space)
+    /// </summary>
+    /// <returns></returns>
     public bool HorizBlock()
     {
-        if (goal.Y == 3 * btnSize && target.Y >= goal.Y - btnSize && space.Y >= goal.Y - btnSize && fit.Contains(new Point(goal.X, goal.Y - btnSize)))
-        { if ( space.X > goal.X && space.X < goal.X + 2 * btnSize && target.X > goal.X && target.X <= goal.X + 2 * btnSize) return true; }
+        if (goal.Y == 3 * btnSize && goal.X < 2 * btnSize && target.Y >= goal.Y - btnSize && space.Y >= goal.Y - btnSize && fit.Contains(new Point(goal.X, goal.Y - btnSize)))
+        { if (space.X > goal.X && space.X < goal.X + 2 * btnSize && target.X > goal.X && target.X <= goal.X + 2 * btnSize) return true; }
         return false;
+
     }
-
-
+    /// <summary>
+    /// If space is near by the target returns true. 
+    /// Replaces space&target places in "table" between each other and equals space as target
+    /// </summary>
+    /// <returns></returns>
     public bool Swap() 
     {
         if ((space-target).Length == btnSize)
@@ -338,10 +500,13 @@ class Game
             byte b = table[space];
             table[space] = table[target];
             table[target] = b;
+            
             space = target;
+            
             return true;
         }
         return false;
     }
+
 }
 }

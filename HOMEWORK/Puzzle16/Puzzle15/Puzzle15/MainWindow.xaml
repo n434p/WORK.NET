@@ -9,7 +9,7 @@
         <Label x:Name="targetL" Content="" HorizontalAlignment="Left" Margin="172,31,0,0" VerticalAlignment="Top"/>
         <Label x:Name="goalL" Content="" HorizontalAlignment="Left" Margin="172,57,0,0" VerticalAlignment="Top"/>
         <Slider x:Name="speedSlider" HorizontalAlignment="Left" Margin="188,123,0,0" VerticalAlignment="Top" Width="98" Minimum="1" SmallChange="0.5" Value="1" ValueChanged="speedSlider_ValueChanged" Maximum="6"/>
-        <Button x:Name="nxtBtn" Content="NEXT" HorizontalAlignment="Left" Margin="188,99,0,0" VerticalAlignment="Top" Width="98" Click="Run"/>
+        <Button Content="LOAD..." HorizontalAlignment="Left" Margin="188,10,0,0" VerticalAlignment="Top" Width="98" Height="26" Click="Button_Click_1"/>
     </Grid>
 
 
