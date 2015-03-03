@@ -11,7 +11,9 @@ namespace Puzzle15
 class Game
 {   
     #region INIT
-
+    /// <summary>
+    /// count of mirrored moves in the sequence
+    /// </summary>
     public int mistakes = 0;
     /// <summary>
     /// value returns "true" if closer way to goal passes through fitted cell.
@@ -50,7 +52,7 @@ class Game
     /// <summary>
     /// Needed order of cells
     /// </summary>
-    byte[] order = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0 };
+    public byte[] order = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0 };
     #endregion
     public Game(byte[] mas,int s=40)
     {
@@ -85,12 +87,10 @@ class Game
     public List<Point> Process()
     {
         List<Point> Solution = new List<Point>();
-        int i = 0; 
-        while (!Win()|| i > 250) 
+        while (!Win()) 
         {
             Rotation();
             Swap();
-            i++;
             if (Solution.Count > 2 && Solution[Solution.Count - 2] == target)
             {
                 mistakes++;
