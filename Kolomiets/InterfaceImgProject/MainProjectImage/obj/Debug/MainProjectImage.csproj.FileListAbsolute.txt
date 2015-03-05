@@ -1,0 +1,15 @@
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\bin\Debug\MainProjectImage.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\obj\Debug\MainProjectImage.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\obj\Debug\MainWindow.baml
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\obj\Debug\MainWindow.g.cs
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\obj\Debug\App.g.cs
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\obj\Debug\MainProjectImage_MarkupCompile.cache
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\obj\Debug\MainProjectImage.g.resources
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\obj\Debug\MainProjectImage.Properties.Resources.resources
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\obj\Debug\MainProjectImage.csproj.GenerateResource.Cache
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\bin\Debug\MainProjectImage.exe
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\bin\Debug\MainProjectImage.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\bin\Debug\InterfaceImgProject.dll
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\bin\Debug\InterfaceImgProject.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\obj\Debug\MainProjectImage.exe
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\MainProjectImage\obj\Debug\MainProjectImage.pdb

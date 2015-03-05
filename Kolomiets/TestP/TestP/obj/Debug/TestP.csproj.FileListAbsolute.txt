@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\Kolomiets\TestP\TestP\bin\Debug\TestP.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\TestP\TestP\bin\Debug\TestP.exe
+D:\Kolomiets\WORK.NET\Kolomiets\TestP\TestP\bin\Debug\TestP.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\TestP\TestP\obj\Debug\TestP.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\TestP\TestP\obj\Debug\TestP.exe
+D:\Kolomiets\WORK.NET\Kolomiets\TestP\TestP\obj\Debug\TestP.pdb

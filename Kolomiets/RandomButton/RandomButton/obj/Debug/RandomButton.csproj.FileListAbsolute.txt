@@ -1,0 +1,13 @@
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\bin\Debug\RandomButton.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\bin\Debug\RandomButton.exe
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\bin\Debug\RandomButton.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\obj\Debug\RandomButton.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\obj\Debug\MainWindow.baml
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\obj\Debug\MainWindow.g.cs
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\obj\Debug\App.g.cs
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\obj\Debug\RandomButton_MarkupCompile.cache
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\obj\Debug\RandomButton.g.resources
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\obj\Debug\RandomButton.Properties.Resources.resources
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\obj\Debug\RandomButton.csproj.GenerateResource.Cache
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\obj\Debug\RandomButton.exe
+D:\Kolomiets\WORK.NET\Kolomiets\RandomButton\RandomButton\obj\Debug\RandomButton.pdb

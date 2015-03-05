@@ -1,0 +1,5 @@
+D:\Kolomiets\WORK.NET\Kolomiets\ThreadMatrix\ThreadMatrix\bin\Debug\ThreadMatrix.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\ThreadMatrix\ThreadMatrix\bin\Debug\ThreadMatrix.exe
+D:\Kolomiets\WORK.NET\Kolomiets\ThreadMatrix\ThreadMatrix\bin\Debug\ThreadMatrix.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\ThreadMatrix\ThreadMatrix\obj\Debug\ThreadMatrix.exe
+D:\Kolomiets\WORK.NET\Kolomiets\ThreadMatrix\ThreadMatrix\obj\Debug\ThreadMatrix.pdb

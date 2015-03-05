@@ -1,0 +1,5 @@
+D:\Kolomiets\WORK.NET\HOMEWORK\FractionsCalc\FractionsCalc\bin\Debug\FractionsCalc.exe.config
+D:\Kolomiets\WORK.NET\HOMEWORK\FractionsCalc\FractionsCalc\bin\Debug\FractionsCalc.exe
+D:\Kolomiets\WORK.NET\HOMEWORK\FractionsCalc\FractionsCalc\bin\Debug\FractionsCalc.pdb
+D:\Kolomiets\WORK.NET\HOMEWORK\FractionsCalc\FractionsCalc\obj\Debug\FractionsCalc.exe
+D:\Kolomiets\WORK.NET\HOMEWORK\FractionsCalc\FractionsCalc\obj\Debug\FractionsCalc.pdb

@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\HOMEWORK\StorageProject\StorageProject\bin\Debug\StorageProject.exe.config
+D:\Kolomiets\WORK.NET\HOMEWORK\StorageProject\StorageProject\bin\Debug\StorageProject.exe
+D:\Kolomiets\WORK.NET\HOMEWORK\StorageProject\StorageProject\bin\Debug\StorageProject.pdb
+D:\Kolomiets\WORK.NET\HOMEWORK\StorageProject\StorageProject\obj\Debug\StorageProject.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\HOMEWORK\StorageProject\StorageProject\obj\Debug\StorageProject.exe
+D:\Kolomiets\WORK.NET\HOMEWORK\StorageProject\StorageProject\obj\Debug\StorageProject.pdb

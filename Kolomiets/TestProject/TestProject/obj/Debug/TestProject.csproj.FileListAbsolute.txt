@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\Kolomiets\TestProject\TestProject\bin\Debug\TestProject.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\TestProject\TestProject\bin\Debug\TestProject.exe
+D:\Kolomiets\WORK.NET\Kolomiets\TestProject\TestProject\bin\Debug\TestProject.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\TestProject\TestProject\obj\Debug\TestProject.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\TestProject\TestProject\obj\Debug\TestProject.exe
+D:\Kolomiets\WORK.NET\Kolomiets\TestProject\TestProject\obj\Debug\TestProject.pdb

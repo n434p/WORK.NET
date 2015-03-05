@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\HOMEWORK\LibraryWindow\LibraryWindow\bin\Debug\LibraryWindow.exe.config
+D:\Kolomiets\WORK.NET\HOMEWORK\LibraryWindow\LibraryWindow\bin\Debug\LibraryWindow.exe
+D:\Kolomiets\WORK.NET\HOMEWORK\LibraryWindow\LibraryWindow\bin\Debug\LibraryWindow.pdb
+D:\Kolomiets\WORK.NET\HOMEWORK\LibraryWindow\LibraryWindow\obj\Debug\LibraryWindow.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\HOMEWORK\LibraryWindow\LibraryWindow\obj\Debug\LibraryWindow.exe
+D:\Kolomiets\WORK.NET\HOMEWORK\LibraryWindow\LibraryWindow\obj\Debug\LibraryWindow.pdb

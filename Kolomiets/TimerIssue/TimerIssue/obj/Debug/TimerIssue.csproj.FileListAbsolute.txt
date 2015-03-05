@@ -1,0 +1,5 @@
+D:\Kolomiets\WORK.NET\Kolomiets\TimerIssue\TimerIssue\bin\Debug\TimerIssue.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\TimerIssue\TimerIssue\bin\Debug\TimerIssue.exe
+D:\Kolomiets\WORK.NET\Kolomiets\TimerIssue\TimerIssue\bin\Debug\TimerIssue.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\TimerIssue\TimerIssue\obj\Debug\TimerIssue.exe
+D:\Kolomiets\WORK.NET\Kolomiets\TimerIssue\TimerIssue\obj\Debug\TimerIssue.pdb

@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\Kolomiets\DirectoryProj\DirectoryProj\bin\Debug\DirectoryProj.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\DirectoryProj\DirectoryProj\bin\Debug\DirectoryProj.exe
+D:\Kolomiets\WORK.NET\Kolomiets\DirectoryProj\DirectoryProj\bin\Debug\DirectoryProj.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\DirectoryProj\DirectoryProj\obj\Debug\DirectoryProj.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\DirectoryProj\DirectoryProj\obj\Debug\DirectoryProj.exe
+D:\Kolomiets\WORK.NET\Kolomiets\DirectoryProj\DirectoryProj\obj\Debug\DirectoryProj.pdb

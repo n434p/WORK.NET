@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\Kolomiets\Capitals\Capitals\bin\Debug\Capitals.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\Capitals\Capitals\obj\Debug\Capitals.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\Capitals\Capitals\bin\Debug\Capitals.exe
+D:\Kolomiets\WORK.NET\Kolomiets\Capitals\Capitals\bin\Debug\Capitals.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\Capitals\Capitals\obj\Debug\Capitals.exe
+D:\Kolomiets\WORK.NET\Kolomiets\Capitals\Capitals\obj\Debug\Capitals.pdb

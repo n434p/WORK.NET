@@ -1,0 +1,189 @@
+----1. Вывести статистику посещений библиотеки по каждой группе студентов.
+--select t3.Name                  as "Group Name",
+--	   convert(date,t1.DateOut) as "Date",
+--	   count(t1.Id_Student)     as "Qty"
+--  from S_Cards  as t1,
+--	   Students as t2,
+--	   Groups   as t3
+-- where t1.Id_Student = t2.Id
+--   and t2.Id_Group   = t3.Id 
+-- group by t3.Name,
+--		  t1.DateOut
+-- order by [Group Name],
+--		  Date
+--go
+
+
+-- 2. Вывести количество книг, взятых в библиотеке программистами по тематикам "Программирование" и "Базы данных", и сумму страниц в этих книгах. 
+--select t1.Name       as "Theme",
+--	   count(t2.Id)  as "Book Count",
+--	   sum(t2.Pages) as "Sum of pages" 
+--  from Themes    as t1,
+--       Books     as t2,
+--	   S_Cards   as t3,
+--	   Students  as t4,
+--	   Groups    as t5,
+--	   Faculties as t6
+-- where t1.Id         = t2.Id_Themes
+--   and t2.Id         = t3.Id_Book
+--   and t3.Id_Student = t4.Id
+--   and t4.Id_Group   = t5.Id
+--   and t5.Id_Faculty = t6.Id
+--   and t6.Name       = 'Программирования'
+--   and t1.Name       in ('Программирование','Базы данных')
+-- group by t1.Name
+--go
+
+
+----3. Вывести информацию о книге с наибольшим количеством страниц. 
+--select *
+--  from Books
+-- where Pages = (select max(Pages)
+--                  from Books)
+--go
+
+
+--4. Вывести информацию о книге по программированию с наибольшим количеством страниц. 
+--select *
+--  from Books as t3
+-- where Pages = (select max(Pages)
+--                  from Books  as t1,
+--					   Themes as t2
+--				 where t1.Id_Themes = t2.Id
+--				   and t2.Id        = t3.Id_Themes
+--				   and t2.Name      = 'Программирование')
+--go
+
+----5. Допустим, что студент имеет право держать книгу у себя дома только 1 месяц, а за каждую неделю сверх того он обязан "выставить" уважаемому библиотекарю Максу (Сергею Максименко) полбутылки (емкость бутылки 0.5 л) светлого пива. Необходимо вывести сколько литров должен каждый студент, а также суммарное количество литров пива. Итоговая сумма должна округляться в большую сторону, то есть суммарное число литров должно быть целым. (Для округления можно использовать функцию ). 
+--select t2.FirstName,
+--	   t2.LastName, 
+--	   sum(round((datediff(WEEK,t1.DateOut,t1.DateIn) - 4) * 0.25,0)) as "Litres for dear max"
+--  from S_Cards  as t1,
+--       Students as t2
+-- where t1.Id_Student = t2.Id
+--   and datediff(WEEK,t1.DateOut,t1.DateIn) > 4
+-- group by t2.FirstName,
+--	      t2.LastName 
+-- union
+-- select '',
+--	    'Total', 
+--	    sum(round((datediff(WEEK,DateOut,DateIn) - 4) * 0.25,0)) as "Litres for dear max"
+--   from S_Cards
+--  where datediff(WEEK,DateOut,DateIn) > 4
+-- go
+
+
+----6. Если считать общее количество книг в библиотеке за 100%, то необходимо подсчитать сколько книг (в процентном отношении) брал каждый факультет. 
+--select t4.Name,
+--	   convert(numeric(15,2),convert(numeric(15,2),count(*)) / convert(numeric(15,2),(select count(*) from Books)) * 100 ) as "Part"                                        
+--  from S_Cards   as t1,
+--	   Students  as t2,
+--	   Groups    as t3,
+--	   Faculties as t4
+-- where t1.Id_Student = t2.Id
+--   and t2.Id_Group   = t3.Id
+--   and t3.Id_Faculty = t4.Id
+-- group by t4.Name
+--go
+
+----7. Вывести самого популярного автора(ов) среди студентов. 
+--select t2.FirstName,
+--	   t2.LastName
+--  from (
+--         select t1.Id_Author,
+--	            count(t2.Id_Book) as "Books" 
+--           from Books   as t1,
+--	            S_Cards as t2
+--         where t1.Id = t2.Id_Book
+--         group by t1.Id_Author
+--       )       as t1,
+--	   Authors as t2
+-- where t1.Id_Author = t2.Id
+--  and t1.Books = (
+--                  select max(Books)
+--                    from ( 	
+--						  select count(t2.Id_Book) as "Books" 
+--                            from Books   as t1,
+--	                             S_Cards as t2
+--                           where t1.Id = t2.Id_Book
+--                           group by t1.Id_Author
+--                          ) as t3
+--			     )
+--go
+
+---- 8. Вывести самого популярного автора(ов) среди преподавателей и количество книг этого автора, взятых в библиотеке.
+--select t2.FirstName,
+--	   t2.LastName,
+--	   (select count(*) from Books as t4,S_Cards as t5 where t4.Id = t5.Id_Book and t4.Id_Author = t1.Id_Author) + 
+--	   (select count(*) from Books as t4,T_Cards as t5 where t4.Id = t5.Id_Book and t4.Id_Author = t1.Id_Author) as "Total sum"
+--  from (
+--         select t1.Id_Author,
+--	            count(t2.Id_Book) as "Books" 
+--           from Books   as t1,
+--	            T_Cards as t2
+--         where t1.Id = t2.Id_Book
+--         group by t1.Id_Author
+--       )       as t1,
+--	   Authors as t2
+-- where t1.Id_Author  = t2.Id
+--   and t1.Books = (
+--                    select max(Books)
+--                      from ( 	
+--					         select count(t2.Id_Book) as "Books" 
+--                             from Books   as t1,
+--	                              T_Cards as t2
+--                             where t1.Id = t2.Id_Book
+--                             group by t1.Id_Author
+--                           ) as t3
+--			      )
+--go				
+
+---- 9. Вывести самого популярную(ые) тематику(и) среди студентов и преподавателей.
+--select t1.Name as "Theme"
+--  from Themes                               as t1,
+--       ( 
+--		 select t1.Id_Themes,
+--	            (t1.Num + t2.Num) as "Nums"	
+--           from (
+--                 select t1.Id_Themes,
+--                        count(*) as Num
+--                   from Books   as t1,
+--	                    S_Cards as t2
+--                  where t1.Id = t2.Id_Book 
+--                  group by t1.Id_Themes
+--                ) as t1,
+--                (
+--                  select t1.Id_Themes,
+--                         count(*) as Num
+--                    from Books   as t1,
+--	                     T_Cards as t2
+--                   where t1.Id = t2.Id_Book 
+--                   group by t1.Id_Themes
+--                 ) as t2
+--           where t2.Id_Themes = t1.Id_Themes) as t3
+-- where t1.Id = t3.Id_Themes
+--   and Nums  = (
+--				( 
+--				  select max (t1.Num + t2.Num) as "Nums"	
+--                    from (
+--                           select t1.Id_Themes,
+--                                  count(*) as Num
+--                             from Books   as t1,
+--	                              S_Cards as t2
+--                            where t1.Id = t2.Id_Book 
+--                            group by t1.Id_Themes
+--                         ) as t1,
+--						 (
+--						   select t1.Id_Themes,
+--                                  count(*) as Num
+--                             from Books   as t1,
+--	                              T_Cards as t2
+--                            where t1.Id = t2.Id_Book 
+--                            group by t1.Id_Themes
+--                         ) as t2
+--                   where t2.Id_Themes = t1.Id_Themes
+--				 )
+--				) 
+--go
+
+ 

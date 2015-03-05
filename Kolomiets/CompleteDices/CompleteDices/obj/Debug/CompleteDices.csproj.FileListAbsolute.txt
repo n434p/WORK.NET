@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\Kolomiets\CompleteDices\CompleteDices\bin\Debug\CompleteDices.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\CompleteDices\CompleteDices\obj\Debug\CompleteDices.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\CompleteDices\CompleteDices\bin\Debug\CompleteDices.exe
+D:\Kolomiets\WORK.NET\Kolomiets\CompleteDices\CompleteDices\bin\Debug\CompleteDices.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\CompleteDices\CompleteDices\obj\Debug\CompleteDices.exe
+D:\Kolomiets\WORK.NET\Kolomiets\CompleteDices\CompleteDices\obj\Debug\CompleteDices.pdb

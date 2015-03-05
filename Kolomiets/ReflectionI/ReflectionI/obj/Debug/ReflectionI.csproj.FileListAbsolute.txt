@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\Kolomiets\ReflectionI\ReflectionI\bin\Debug\ReflectionI.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\ReflectionI\ReflectionI\bin\Debug\ReflectionI.exe
+D:\Kolomiets\WORK.NET\Kolomiets\ReflectionI\ReflectionI\bin\Debug\ReflectionI.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\ReflectionI\ReflectionI\obj\Debug\ReflectionI.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\ReflectionI\ReflectionI\obj\Debug\ReflectionI.exe
+D:\Kolomiets\WORK.NET\Kolomiets\ReflectionI\ReflectionI\obj\Debug\ReflectionI.pdb

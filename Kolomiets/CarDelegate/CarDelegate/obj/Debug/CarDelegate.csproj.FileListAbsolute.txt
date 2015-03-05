@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\Kolomiets\CarDelegate\CarDelegate\bin\Debug\CarDelegate.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\CarDelegate\CarDelegate\obj\Debug\CarDelegate.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\CarDelegate\CarDelegate\bin\Debug\CarDelegate.exe
+D:\Kolomiets\WORK.NET\Kolomiets\CarDelegate\CarDelegate\bin\Debug\CarDelegate.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\CarDelegate\CarDelegate\obj\Debug\CarDelegate.exe
+D:\Kolomiets\WORK.NET\Kolomiets\CarDelegate\CarDelegate\obj\Debug\CarDelegate.pdb

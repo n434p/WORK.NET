@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\Kolomiets\EventsVic\EventsVic\bin\Debug\EventsVic.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\EventsVic\EventsVic\obj\Debug\EventsVic.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\EventsVic\EventsVic\bin\Debug\EventsVic.exe
+D:\Kolomiets\WORK.NET\Kolomiets\EventsVic\EventsVic\bin\Debug\EventsVic.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\EventsVic\EventsVic\obj\Debug\EventsVic.exe
+D:\Kolomiets\WORK.NET\Kolomiets\EventsVic\EventsVic\obj\Debug\EventsVic.pdb

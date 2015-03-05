@@ -1,0 +1,12 @@
+D:\Kolomiets\WORK.NET\Kolomiets\PaintWPF\PaintWPF\bin\Debug\PaintWPF.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\PaintWPF\PaintWPF\bin\Debug\PaintWPF.exe
+D:\Kolomiets\WORK.NET\Kolomiets\PaintWPF\PaintWPF\bin\Debug\PaintWPF.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\PaintWPF\PaintWPF\obj\Debug\MainWindow.baml
+D:\Kolomiets\WORK.NET\Kolomiets\PaintWPF\PaintWPF\obj\Debug\MainWindow.g.cs
+D:\Kolomiets\WORK.NET\Kolomiets\PaintWPF\PaintWPF\obj\Debug\App.g.cs
+D:\Kolomiets\WORK.NET\Kolomiets\PaintWPF\PaintWPF\obj\Debug\PaintWPF_MarkupCompile.cache
+D:\Kolomiets\WORK.NET\Kolomiets\PaintWPF\PaintWPF\obj\Debug\PaintWPF.g.resources
+D:\Kolomiets\WORK.NET\Kolomiets\PaintWPF\PaintWPF\obj\Debug\PaintWPF.Properties.Resources.resources
+D:\Kolomiets\WORK.NET\Kolomiets\PaintWPF\PaintWPF\obj\Debug\PaintWPF.csproj.GenerateResource.Cache
+D:\Kolomiets\WORK.NET\Kolomiets\PaintWPF\PaintWPF\obj\Debug\PaintWPF.exe
+D:\Kolomiets\WORK.NET\Kolomiets\PaintWPF\PaintWPF\obj\Debug\PaintWPF.pdb

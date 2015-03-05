@@ -1,0 +1,12 @@
+D:\Kolomiets\WORK.NET\Kolomiets\ListView\ListView\bin\Debug\ListView.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\ListView\ListView\bin\Debug\ListView.exe
+D:\Kolomiets\WORK.NET\Kolomiets\ListView\ListView\bin\Debug\ListView.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\ListView\ListView\obj\Debug\MainWindow.baml
+D:\Kolomiets\WORK.NET\Kolomiets\ListView\ListView\obj\Debug\MainWindow.g.cs
+D:\Kolomiets\WORK.NET\Kolomiets\ListView\ListView\obj\Debug\App.g.cs
+D:\Kolomiets\WORK.NET\Kolomiets\ListView\ListView\obj\Debug\ListView_MarkupCompile.cache
+D:\Kolomiets\WORK.NET\Kolomiets\ListView\ListView\obj\Debug\ListView.g.resources
+D:\Kolomiets\WORK.NET\Kolomiets\ListView\ListView\obj\Debug\ListView.Properties.Resources.resources
+D:\Kolomiets\WORK.NET\Kolomiets\ListView\ListView\obj\Debug\ListView.csproj.GenerateResource.Cache
+D:\Kolomiets\WORK.NET\Kolomiets\ListView\ListView\obj\Debug\ListView.exe
+D:\Kolomiets\WORK.NET\Kolomiets\ListView\ListView\obj\Debug\ListView.pdb

@@ -1,0 +1,5 @@
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\InterfaceImgProject\obj\Debug\InterfaceImgProject.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\InterfaceImgProject\bin\Debug\InterfaceImgProject.dll
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\InterfaceImgProject\bin\Debug\InterfaceImgProject.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\InterfaceImgProject\obj\Debug\InterfaceImgProject.dll
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceImgProject\InterfaceImgProject\obj\Debug\InterfaceImgProject.pdb

@@ -1,0 +1,9 @@
+C:\Users\user_01\Desktop\InterfaceProject\InterfaceProject\bin\Debug\InterfaceProject.exe.config
+C:\Users\user_01\Desktop\InterfaceProject\InterfaceProject\obj\Debug\InterfaceProject.csprojResolveAssemblyReference.cache
+C:\Users\user_01\Desktop\InterfaceProject\InterfaceProject\bin\Debug\InterfaceProject.exe
+C:\Users\user_01\Desktop\InterfaceProject\InterfaceProject\bin\Debug\InterfaceProject.pdb
+C:\Users\user_01\Desktop\InterfaceProject\InterfaceProject\obj\Debug\InterfaceProject.exe
+C:\Users\user_01\Desktop\InterfaceProject\InterfaceProject\obj\Debug\InterfaceProject.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceProject\InterfaceProject\InterfaceProject\bin\Debug\InterfaceProject.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceProject\InterfaceProject\InterfaceProject\obj\Debug\InterfaceProject.exe
+D:\Kolomiets\WORK.NET\Kolomiets\InterfaceProject\InterfaceProject\InterfaceProject\obj\Debug\InterfaceProject.pdb

@@ -1,0 +1,5 @@
+D:\Kolomiets\WORK.NET\Kolomiets\ButtonsEvent\ButtonsEvent\bin\Debug\ButtonsEvent.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\ButtonsEvent\ButtonsEvent\bin\Debug\ButtonsEvent.exe
+D:\Kolomiets\WORK.NET\Kolomiets\ButtonsEvent\ButtonsEvent\bin\Debug\ButtonsEvent.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\ButtonsEvent\ButtonsEvent\obj\Debug\ButtonsEvent.exe
+D:\Kolomiets\WORK.NET\Kolomiets\ButtonsEvent\ButtonsEvent\obj\Debug\ButtonsEvent.pdb

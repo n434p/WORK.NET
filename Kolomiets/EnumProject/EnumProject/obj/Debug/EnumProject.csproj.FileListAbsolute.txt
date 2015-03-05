@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\Kolomiets\EnumProject\EnumProject\bin\Debug\EnumProject.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\EnumProject\EnumProject\obj\Debug\EnumProject.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\EnumProject\EnumProject\bin\Debug\EnumProject.exe
+D:\Kolomiets\WORK.NET\Kolomiets\EnumProject\EnumProject\bin\Debug\EnumProject.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\EnumProject\EnumProject\obj\Debug\EnumProject.exe
+D:\Kolomiets\WORK.NET\Kolomiets\EnumProject\EnumProject\obj\Debug\EnumProject.pdb
