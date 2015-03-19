@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="libraryForNET14" Class="LibraryDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=340-1-2;Initial Catalog=libraryForNET14;User ID=sa" SettingsObjectName="LINQProj.Properties.Settings" SettingsPropertyName="libraryForNET14ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Authors" Member="Authors">
+    <Type Name="Authors">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Authors_Books" Member="Books" ThisKey="Id" OtherKey="Id_Author" Type="Books" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Themes" Member="Themes">
+    <Type Name="Themes">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Themes_Books" Member="Books" ThisKey="Id" OtherKey="Id_Themes" Type="Books" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Books" Member="Books">
+    <Type Name="Books">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Pages" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="YearPress" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Themes" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Category" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Author" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Press" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Books_S_Cards" Member="S_Cards" ThisKey="Id" OtherKey="Id_Book" Type="S_Cards" />
+      <Association Name="Books_T_Cards" Member="T_Cards" ThisKey="Id" OtherKey="Id_Book" Type="T_Cards" />
+      <Association Name="Authors_Books" Member="Authors" ThisKey="Id_Author" OtherKey="Id" Type="Authors" IsForeignKey="true" />
+      <Association Name="Themes_Books" Member="Themes" ThisKey="Id_Themes" OtherKey="Id" Type="Themes" IsForeignKey="true" />
+      <Association Name="Categories_Books" Member="Categories" ThisKey="Id_Category" OtherKey="Id" Type="Categories" IsForeignKey="true" />
+      <Association Name="Press_Books" Member="Press" ThisKey="Id_Press" OtherKey="Id" Type="Press" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Categories" Member="Categories">
+    <Type Name="Categories">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Categories_Books" Member="Books" ThisKey="Id" OtherKey="Id_Category" Type="Books" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Departments" Member="Departments">
+    <Type Name="Departments">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Departments_Teachers" Member="Teachers" ThisKey="Id" OtherKey="Id_Dep" Type="Teachers" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Faculties" Member="Faculties">
+    <Type Name="Faculties">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Faculties_Groups" Member="Groups" ThisKey="Id" OtherKey="Id_Faculty" Type="Groups" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Groups" Member="Groups">
+    <Type Name="Groups">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Faculty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Groups_Students" Member="Students" ThisKey="Id" OtherKey="Id_Group" Type="Students" />
+      <Association Name="Faculties_Groups" Member="Faculties" ThisKey="Id_Faculty" OtherKey="Id" Type="Faculties" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Libs" Member="Libs">
+    <Type Name="Libs">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Libs_S_Cards" Member="S_Cards" ThisKey="Id" OtherKey="Id_Lib" Type="S_Cards" />
+      <Association Name="Libs_T_Cards" Member="T_Cards" ThisKey="Id" OtherKey="Id_Lib" Type="T_Cards" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Logins" Member="Logins">
+    <Type Name="Logins">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Login" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Press" Member="Press">
+    <Type Name="Press">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Press_Books" Member="Books" ThisKey="Id" OtherKey="Id_Press" Type="Books" />
+    </Type>
+  </Table>
+  <Table Name="dbo.S_Cards" Member="S_Cards">
+    <Type Name="S_Cards">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_Student" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Book" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DateOut" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateIn" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Id_Lib" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Books_S_Cards" Member="Books" ThisKey="Id_Book" OtherKey="Id" Type="Books" IsForeignKey="true" />
+      <Association Name="Libs_S_Cards" Member="Libs" ThisKey="Id_Lib" OtherKey="Id" Type="Libs" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Students_S_Cards" Member="Students" ThisKey="Id_Student" OtherKey="Id" Type="Students" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Students" Member="Students">
+    <Type Name="Students">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Group" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Term" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Login" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Students_S_Cards" Member="S_Cards" ThisKey="Id" OtherKey="Id_Student" Type="S_Cards" />
+      <Association Name="Groups_Students" Member="Groups" ThisKey="Id_Group" OtherKey="Id" Type="Groups" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.T_Cards" Member="T_Cards">
+    <Type Name="T_Cards">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_Teacher" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Book" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DateOut" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateIn" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Id_Lib" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Books_T_Cards" Member="Books" ThisKey="Id_Book" OtherKey="Id" Type="Books" IsForeignKey="true" />
+      <Association Name="Libs_T_Cards" Member="Libs" ThisKey="Id_Lib" OtherKey="Id" Type="Libs" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Teachers_T_Cards" Member="Teachers" ThisKey="Id_Teacher" OtherKey="Id" Type="Teachers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Teachers" Member="Teachers">
+    <Type Name="Teachers">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Dep" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Teachers_T_Cards" Member="T_Cards" ThisKey="Id" OtherKey="Id_Teacher" Type="T_Cards" />
+      <Association Name="Departments_Teachers" Member="Departments" ThisKey="Id_Dep" OtherKey="Id" Type="Departments" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>
