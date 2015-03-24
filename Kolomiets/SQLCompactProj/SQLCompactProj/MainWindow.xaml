@@ -1,0 +1,14 @@
+﻿<Window x:Class="SQLCompactProj.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="277.399" Width="485.991">
+    <Grid>
+        <TextBox x:Name="tbName" HorizontalAlignment="Left" Height="23" Margin="36,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="36,15,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbAge" HorizontalAlignment="Left" Height="23" Margin="36,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Age" HorizontalAlignment="Left" Margin="36,84,0,0" VerticalAlignment="Top"/>
+        <Button Content="ADD" HorizontalAlignment="Left" Margin="36,166,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click_1"/>
+        <ListBox x:Name="lb" HorizontalAlignment="Left" Height="208" Margin="179,15,0,0" VerticalAlignment="Top" Width="260"/>
+
+    </Grid>
+</Window>
