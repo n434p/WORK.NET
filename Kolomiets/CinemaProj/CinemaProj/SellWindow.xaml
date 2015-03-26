@@ -1,0 +1,10 @@
+﻿<Window x:Class="CinemaProj.SellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SellWindow" Height="334" Width="531">
+    <Grid>
+        <Canvas x:Name="placesTable" HorizontalAlignment="Left" Height="279" Margin="10,10,0,0" VerticalAlignment="Top" Width="403"/>
+        <Button Content="BUY TICKET" HorizontalAlignment="Left" Margin="432,10,0,0" VerticalAlignment="Top" Width="75" Height="279"/>
+
+    </Grid>
+</Window>
