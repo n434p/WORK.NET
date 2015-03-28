@@ -19,9 +19,32 @@ namespace CinemaProj
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+    /// 
+
+    public partial class SellWindow : Window
+    {
+        public void AddButton(string name, int butSize,Thickness m, string price)
+        {
+
+            Button b = new Button() { Content = name, Width = butSize, Height = butSize, Tag = price};
+            b.Margin = m;
+            b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            int i = Convert.ToInt32(price);
+  
+            if (i <= 15)
+	  	     b.Background = Brushes.Green;     
+            else  b.Background = Brushes.Red;
+
+            if (b.Content.ToString() == "0") { b.Opacity = 0; b.IsEnabled = false; }
+            this.placesTable.Children.Add(b);
+        }
+    }
+
+
     public partial class MainWindow : Window
     {
         CinemaContext db = new CinemaContext();
+        SellWindow sw;
         Dictionary<int, string> structure = new Dictionary<int, string>();
 
         public MainWindow()
@@ -39,23 +62,21 @@ namespace CinemaProj
 
         private void lbFilms_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SellWindow sl = new SellWindow();
+            sw = new SellWindow();
             string s = (sender as ListBox).SelectedItem.ToString();
             Films film = db.Films.Where(name => name.Name == s).Single();
-            Halls h = db.Halls.Where(id => id.FilmId == film.Id).Single();
-            GetStructure(h.FileSource.ToString());
-            sl.ShowDialog();
+            lbHalls.ItemsSource = db.Halls.Where(d => d.FilmId == film.Id).ToList();
         }
 
         private void GetStructure(string source)
         {
-            string str = "";
             using (StreamReader sr = new StreamReader(source))
             {
                 int i = 1;
                 while (!sr.EndOfStream)
                 {
                     structure[i] = sr.ReadLine();
+                    i++;
                 }               
             }
         }
@@ -63,18 +84,32 @@ namespace CinemaProj
         public void DrawStructure(Dictionary<int, string> s)
         {
             int placeNum = 1;
+            int step = 25;
+            Thickness t;
+            string[] line;
             for (int i = 0; i < s.Keys.Count(); i++)
             {
-                string[] line = s.Values.ElementAt(i).Trim().Split(new char[] { ' ', ',' });
-                Button b = new Button() { Content = placeNum.ToString(), Width = Height = 10 };
-                for (int j = 0; j < line.Length.; j++)
-                {
-                b.Margin = new Thickness(b.Width*,item.Key.Y,0,0);
-                if (b.Content.ToString() == "0") {b.Opacity = 0; space = b;}
-                puzzleField.Children.Add(b);
+                line = s.Values.ElementAt(i).Trim().Split(new char[] { ' ', ',' });
 
+                for (int j = 0; j < line.Length; j++)
+                {
+                    t = new Thickness(step * j, step * i, 0, 0);
+                    if (line[j] != "0")
+                    {
+                        sw.AddButton(placeNum.ToString(), step - 5, t, line[J]);
+                        placeNum++;
+                    }
                 }
             }
+        }
+
+        private void lbHalls_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string s = (sender as ListBox).SelectedItem.ToString();
+            Halls h = db.Halls.Where(name => name.Name == s).Single();
+            GetStructure(h.FileSource.ToString());
+            DrawStructure(structure);
+            sw.ShowDialog();
         }
 
     }
