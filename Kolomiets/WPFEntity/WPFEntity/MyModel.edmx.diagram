@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8a312242ac25406186b86546ffbc46f0" Name="Диаграмма1">
+        <EntityTypeShape EntityType="libraryModel.Authors" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Books" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Categories" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Departments" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Faculties" Width="1.5" PointX="1.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Groups" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Libs" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Press" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.S_Cards" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Students" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.T_Cards" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Teachers" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Themes" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <AssociationConnector Association="libraryModel.FK_Books_Authors" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_Books_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_Books_Press" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_Books_Themes" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_S_Cards_Books" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_T_Cards_Books" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_Teachers_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_Groups_Faculties" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_Students_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_S_Cards_Libs" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_T_Cards_Libs" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_S_Cards_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_T_Cards_Teachers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

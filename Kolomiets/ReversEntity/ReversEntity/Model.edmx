@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="ModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DepartmentsSet" EntityType="Model.Departments" />
+          <EntitySet Name="EmployeeSet" EntityType="Model.Employee" />
+          <AssociationSet Name="EmployeeDepartments" Association="Model.EmployeeDepartments">
+            <End Role="Employee" EntitySet="EmployeeSet" />
+            <End Role="Departments" EntitySet="DepartmentsSet" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeEmployee" Association="Model.EmployeeEmployee">
+            <End Role="Employee" EntitySet="EmployeeSet" />
+            <End Role="Employee1" EntitySet="EmployeeSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id_dep" />
+          </Key>
+          <Property Type="Int32" Name="Id_dep" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Model.EmployeeDepartments" FromRole="Departments" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Salary" Nullable="false" />
+          <Property Type="String" Name="CheefId" Nullable="false" />
+          <Property Type="String" Name="DepId" Nullable="false" />
+          <NavigationProperty Name="Departments" Relationship="Model.EmployeeDepartments" FromRole="Employee" ToRole="Departments" />
+          <NavigationProperty Name="Employee1" Relationship="Model.EmployeeEmployee" FromRole="Employee" ToRole="Employee1" />
+          <NavigationProperty Name="Employee2" Relationship="Model.EmployeeEmployee" FromRole="Employee1" ToRole="Employee" />
+          </EntityType>
+        <Association Name="EmployeeDepartments">
+          <End Type="Model.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="Model.Departments" Role="Departments" Multiplicity="*" />
+        </Association>
+        <Association Name="EmployeeEmployee">
+          <End Type="Model.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="Model.Employee" Role="Employee1" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model" />
+        <Alias Key="Target" Value="Model.Store" />
+        <EntityContainerMapping CdmEntityContainer="ModelContainer" StorageEntityContainer="ModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

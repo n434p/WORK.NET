@@ -1,0 +1,11 @@
+﻿<Window x:Class="WPFEntity.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="297" Width="417" Loaded="Window_Loaded_1">
+    <Grid>
+        <DataGrid x:Name="dgMain" HorizontalAlignment="Left" Margin="24,22,0,0" VerticalAlignment="Top" Height="220" Width="214" SelectedCellsChanged="dgMain_SelectedCellsChanged"/>
+        <TextBox x:Name="tbName" HorizontalAlignment="Left" Height="23" Margin="264,22,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="264,64,0,0" VerticalAlignment="Top" Width="120" Height="22" Click="Button_Click_1"/>
+
+    </Grid>
+</Window>
