@@ -1,0 +1,9 @@
+﻿<Window x:Class="CinemaProj.CheckSummary"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CheckSummary" Height="203.425" Width="402.74">
+    <Grid>
+        <DataGrid x:Name="dgSumm" Margin="10,10,10,0" VerticalAlignment="Top" Height="119"/>
+
+    </Grid>
+</Window>
