@@ -100,6 +100,7 @@ namespace CinemaProj
                             Ticket_Code = dbc.Tickets.Local.Last().Id.ToString(),
                             Film = (from f in dbc.Films where f.Id == t.IdFilm select f.Name).Single(),
                             Hall = (from h in dbc.Halls where h.Id == t.IdHall select h.Name).Single(),
+                            Place = t.place,
                             Price = t.price
                         });
                     }
@@ -123,6 +124,11 @@ namespace CinemaProj
             {
                 Header = "Hall",
                 Binding = new Binding("Hall")
+            });
+            cs.dgSumm.Columns.Add(new DataGridTextColumn()
+            {
+                Header = "Place",
+                Binding = new Binding("Place")
             });
             cs.dgSumm.Columns.Add(new DataGridTextColumn()
             {
