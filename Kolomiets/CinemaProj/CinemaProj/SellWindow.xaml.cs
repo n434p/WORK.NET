@@ -78,12 +78,13 @@ namespace CinemaProj
 
         private void buyBtn_Click(object sender, RoutedEventArgs e)
         {
+            tickets.Clear();
             CheckSummary cs = new CheckSummary();
             try
             {
                 foreach (Button item in placesTable.Children)
                 {
-                    if (item.Background == Brushes.YellowGreen)
+                    if (item.Background == Brushes.YellowGreen && item.IsEnabled != false)
                     {
                         Ticket t = new Ticket()
                         {
@@ -103,6 +104,7 @@ namespace CinemaProj
                             Place = t.place,
                             Price = t.price
                         });
+                        
                     }
                 }
             }

@@ -39,7 +39,9 @@ namespace CinemaProj
             //db.Films.Add(new Film() { Name = "Godfather2" });
             //db.Films.Add(new Film() { Name = "Godfather3" });
             //db.Halls.Add(new Hall() { FileSource = "1.txt", FilmId = 1, Name = "Favorite" });
-            //db.Halls.Add(new Hall() { FileSource = "1.txt", FilmId = 2, Name = "Favorite" });
+            //db.Halls.Add(new Hall() { FileSource = "2.txt", FilmId = 2, Name = "Other" });
+            //db.Halls.Add(new Hall() { FileSource = "1.txt", FilmId = 3, Name = "Favorite" });
+            //db.Halls.Add(new Hall() { FileSource = "2.txt", FilmId = 3, Name = "Other" });
             //db.SaveChanges();
             lbFilms.ItemsSource = db.Films.ToList();
         }
