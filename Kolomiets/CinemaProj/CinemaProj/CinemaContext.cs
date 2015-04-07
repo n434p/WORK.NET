@@ -9,16 +9,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CinemaProj
 {
-    class CinemaContext: DbContext
+    public class CinemaContext: DbContext
     {
         public CinemaContext() : base("CinemaDB") { }
-        public DbSet<Films> Films { get; set; }
-        public DbSet<Halls> Halls { get; set; }
-        public DbSet<Tickets> Tickets { get; set; }
+        public DbSet<Film> Films { get; set; }
+        public DbSet<Hall> Halls { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+
+        public void InitDB()
+        {
+            this.Database.Initialize(true);
+        }
     }
 
+   
+
     [Table("Films")]
-    class Films
+    public class Film
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -32,7 +39,7 @@ namespace CinemaProj
     }
 
     [Table("Halls")]
-    class Halls
+    public class Hall
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -48,7 +55,7 @@ namespace CinemaProj
     }
 
     [Table("Tickets")]
-    class Tickets
+    public class Ticket
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

@@ -19,57 +19,40 @@ namespace CinemaProj
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    /// 
-
-    public partial class SellWindow : Window
-    {
-        public void AddButton(string name, int butSize,Thickness m, string price)
-        {
-
-            Button b = new Button() { Content = name, Width = butSize, Height = butSize, Tag = price};
-            b.Margin = m;
-            b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            int i = Convert.ToInt32(price);
-  
-            if (i <= 15)
-	  	     b.Background = Brushes.Green;     
-            else  b.Background = Brushes.Red;
-
-            if (b.Content.ToString() == "0") { b.Opacity = 0; b.IsEnabled = false; }
-            this.placesTable.Children.Add(b);
-        }
-    }
-
 
     public partial class MainWindow : Window
     {
         CinemaContext db = new CinemaContext();
-        SellWindow sw;
+        public SellWindow sw;
         Dictionary<int, string> structure = new Dictionary<int, string>();
 
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
-            //Films f1 = new Films() { Name = "Godfather3"};
-            //db.Films.Add(f1);
+            //db.Database.Delete();
+            //db.Films.Add(new Film() { Name = "Godfather1" });
+            //db.Films.Add(new Film() { Name = "Godfather2" });
+            //db.Films.Add(new Film() { Name = "Godfather3" });
+            //db.Halls.Add(new Hall() { FileSource = "1.txt", FilmId = 1, Name = "Favorite" });
+            //db.Halls.Add(new Hall() { FileSource = "1.txt", FilmId = 2, Name = "Favorite" });
             //db.SaveChanges();
             lbFilms.ItemsSource = db.Films.ToList();
         }
 
         private void lbFilms_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            sw = new SellWindow();
-            string s = (sender as ListBox).SelectedItem.ToString();
-            Films film = db.Films.Where(name => name.Name == s).Single();
-            lbHalls.ItemsSource = db.Halls.Where(d => d.FilmId == film.Id).ToList();
+            Film f = ((sender as ListBox).SelectedItem) as Film;
+            lbHalls.ItemsSource = db.Halls.Where(d => d.FilmId == f.Id).Distinct().ToList();
         }
 
         private void GetStructure(string source)
         {
+            if (!File.Exists(source)) return;
             using (StreamReader sr = new StreamReader(source))
             {
                 int i = 1;
@@ -85,6 +68,7 @@ namespace CinemaProj
         {
             int placeNum = 1;
             int step = 25;
+            int maxWidth = 0;
             Thickness t;
             string[] line;
             for (int i = 0; i < s.Keys.Count(); i++)
@@ -96,20 +80,42 @@ namespace CinemaProj
                     t = new Thickness(step * j, step * i, 0, 0);
                     if (line[j] != "0")
                     {
-                        sw.AddButton(placeNum.ToString(), step - 5, t, line[J]);
+                        sw.AddButton(placeNum.ToString(), step - 5, t, line[j]);
                         placeNum++;
                     }
+                    if (j>=maxWidth) maxWidth = j+1;
                 }
             }
+            sw.placesTable.Height = sw.buyBtn.Height = step * s.Count;
+            sw.placesTable.Width = step * maxWidth;
+            sw.placesTable.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            sw.buyBtn.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
         }
 
         private void lbHalls_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string s = (sender as ListBox).SelectedItem.ToString();
-            Halls h = db.Halls.Where(name => name.Name == s).Single();
+            if (lbHalls.SelectedItem == null) return;
+
+            Hall h = ((sender as ListBox).SelectedItem) as Hall;
+            if (h.FileSource == null) return;
+            sw = new SellWindow();
+            sw.IdFilm = h.FilmId;
+            sw.IdHall = h.Id;
+            structure.Clear();
             GetStructure(h.FileSource.ToString());
+            if (structure.Count == 0)
+            {
+                MessageBox.Show("Can't find proper structure file for the selected hall:\n\n\t" + h.FileSource.ToString(), "Missing file");
+                return;
+            }
+            sw.DBSet(ref db);
             DrawStructure(structure);
             sw.ShowDialog();
+        }
+
+        private void CinemaWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            db.Database.Connection.Close();
         }
 
     }
