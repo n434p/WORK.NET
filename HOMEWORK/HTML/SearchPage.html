@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Search links</title>
+    <style type="text/css">
+        body {
+            background-image: url(http://www.monroerealtytx.com/wp-content/themes/mr/images/pattern2.png);  
+        }
+        .header {
+            -webkit-border-radius: 15;
+            -moz-border-radius: 15;
+            border-radius: 15px;
+            font-family: Arial;
+            color: #ffffff;
+            font-size: 20px;
+            background: #3498db;
+            padding: 10px 20px 10px 20px;
+            border: solid #1f628d 3px;
+            margin:0,auto;
+        }
+        .link {
+            -webkit-border-radius: 25;
+            -moz-border-radius: 25;
+            border-radius: 25px;
+            -webkit-box-shadow: 2px 4px 5px #666666;
+            -moz-box-shadow: 2px 4px 5px #666666;
+            box-shadow: 2px 4px 5px #666666;
+            font-family: Georgia;
+            color: #ffffff;
+            font-size: 20px;
+            background: #d98f34;
+            padding: 10px 20px 10px 20px;
+            border: solid #a633a6 1px;
+        }
+        .window {
+
+        }
+        .border {
+            width: 100px;
+            height: 50px;
+            -webkit-border-radius: 25;
+            -moz-border-radius: 25;
+            border-radius: 25px;
+        }
+    </style>
+    <script type="text/javascript">
+        function Visibility() {
+            if (content.style.display == "block")
+                content.style.display = "none";
+            else
+                content.style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <br/>
+    <br/>
+        <div class="header" id="header" onclick ="Visibility()">Links collector</div>
+    <br/>
+    <br/>
+    <div class="link" id="menu">
+        Items:
+        <ul>
+            <li><img class="border" src="http://s.4pda.to/forum/style_images/4_4pda_forum_logo.png"/><a href="http://4pda.ru/" target="content" onclick="Visibility()">4pda</a></li>
+            <li><img class="border" src="http://www.levelup.dp.ua/wp-content/uploads/2014/02/heder-opa.png"/><a href="http://www.levelup.dp.ua/" target="content" onclick="Visibility()">LevelUP</a></li>
+            <li><img class="border" src="http://bingblog.blob.core.windows.net/bing/2014/09/Bing%20Logo%20HD%20Wallpaper.jpg"/><a href="http://bing.com/" target="content" onclick="Visibility()">Bing</a></li>
+        </ul>
+    </div>
+    <br/>
+    <br/>
+    <div id="content" style="display:none"><iframe style="margin:50px,auto; width:95%; height:400px;" class="window header" name="content"></iframe></div>
+    <br/>
+    <br/>
+
+</body>
+</html>

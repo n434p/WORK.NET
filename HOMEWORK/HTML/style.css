@@ -1,0 +1,79 @@
+﻿body,html
+{
+    height:100%;
+    font-size:20px;
+    color:white;
+}
+
+#headElem
+{
+    background:red;
+    height:20%;
+}
+
+#Logo
+{
+    background:orange;
+    float:left;
+    width:20%;
+    height:20%;
+}
+
+.class1 
+{
+    border:5px solid white;
+    border-spacing:5px;
+    background:purple;
+    float:left;
+    width:25%;
+    height:100%;
+}
+
+.class2 
+{
+    border:5px solid white;
+    background:pink;
+    float:left;
+    width:45%;
+    height:50%;
+}
+
+.class3 
+{
+    background:white;
+    float:right;
+    width:5%;
+    height:100%;
+}
+
+#menu
+{
+    flex-item-align:auto;
+    margin:0,auto;
+    background:green;
+    height:7%;
+}
+#content
+{
+   margin:0,auto;
+   height:65%;
+}
+/*#text
+{
+    background:yellow;
+    float:left;
+    width:80%;
+    height:100%;
+}
+
+#reklama
+{
+    background:blue;
+     height:100%;
+}*/
+
+#footer
+{
+    background:grey;
+    height:7%;
+}
