@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\Kolomiets\AnonymousTypesProj\AnonymousTypesProj\bin\Debug\AnonymousTypesProj.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\AnonymousTypesProj\AnonymousTypesProj\bin\Debug\AnonymousTypesProj.exe
+D:\Kolomiets\WORK.NET\Kolomiets\AnonymousTypesProj\AnonymousTypesProj\bin\Debug\AnonymousTypesProj.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\AnonymousTypesProj\AnonymousTypesProj\obj\Debug\AnonymousTypesProj.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\AnonymousTypesProj\AnonymousTypesProj\obj\Debug\AnonymousTypesProj.exe
+D:\Kolomiets\WORK.NET\Kolomiets\AnonymousTypesProj\AnonymousTypesProj\obj\Debug\AnonymousTypesProj.pdb

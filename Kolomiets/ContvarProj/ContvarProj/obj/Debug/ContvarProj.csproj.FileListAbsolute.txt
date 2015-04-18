@@ -1,0 +1,6 @@
+D:\Kolomiets\WORK.NET\Kolomiets\ContvarProj\ContvarProj\bin\Debug\ContvarProj.exe.config
+D:\Kolomiets\WORK.NET\Kolomiets\ContvarProj\ContvarProj\obj\Debug\ContvarProj.csprojResolveAssemblyReference.cache
+D:\Kolomiets\WORK.NET\Kolomiets\ContvarProj\ContvarProj\bin\Debug\ContvarProj.exe
+D:\Kolomiets\WORK.NET\Kolomiets\ContvarProj\ContvarProj\bin\Debug\ContvarProj.pdb
+D:\Kolomiets\WORK.NET\Kolomiets\ContvarProj\ContvarProj\obj\Debug\ContvarProj.exe
+D:\Kolomiets\WORK.NET\Kolomiets\ContvarProj\ContvarProj\obj\Debug\ContvarProj.pdb

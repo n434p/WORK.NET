@@ -1,0 +1,45 @@
+﻿body
+{
+  background-image: url("backgraund_header.png"); 
+  background-repeat: repeat;
+  background-position: top center;
+  background-attachment: scroll;
+}
+
+div
+{
+    margin:2px;
+    border:solid 1px white;
+    overflow:hidden;
+}
+
+.spacer 
+{
+    clear:both;
+    height:1em;
+    width:100%;
+    border:hidden;
+}
+
+.MenuLi 
+{
+    
+    margin:10px;
+    padding:20px 15px;
+}
+
+li 
+{
+    display:inline-block;
+}
+
+ul
+{
+   
+}
+
+.IconsBlock 
+{
+    padding: 0px;
+    margin:0 auto;
+}
