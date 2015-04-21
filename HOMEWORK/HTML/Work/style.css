@@ -66,6 +66,7 @@ div
     margin:2px;
     border:solid 1px red;
     overflow:hidden;
+    text-align: center;
 }
 
 .spacer 
