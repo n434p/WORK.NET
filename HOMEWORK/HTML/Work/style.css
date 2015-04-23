@@ -35,6 +35,11 @@
       color: #9a9cc7;
 }
 
+    .menuBtn:hover 
+    {
+        color:#e74c3c;
+    }
+
 .downBtn 
 {  
     text-transform: uppercase;
@@ -54,6 +59,53 @@
     text-decoration:none;
 }
 
+a
+{
+    text-decoration:none;
+    color:#bf2718;
+    opacity:0.9;
+}
+
+.shader 
+{
+    opacity:0.7;
+}
+
+.shader:hover 
+{
+    opacity:1;
+}
+
+.follow 
+{
+  
+} 
+
+.follow:hover
+{
+    position:absolute;
+	content:'';
+	width:54px;
+	height:54px;
+	background:#2D2E42;
+	top:0;
+	left:0;
+	z-index:-1;
+	-webkit-border-radius:50%;
+	-moz-border-radius:50%;
+	border-radius:50%;
+	-webkit-transition:all 0.4s ease;
+	-moz-transition:all 0.4s ease;
+	-o-transition:all 0.4s ease;
+	transition:all 0.4s ease;
+}
+
+    .downBtn:hover 
+    {
+        	background:#f8c9c4;
+	color:#bf2718;
+    }
+
 .bodyForm 
 {
     color:white;
@@ -63,10 +115,10 @@
 
 div
 {
-    margin:2px;
+    margin:0px;
     border:solid 1px red;
     overflow:hidden;
-    text-align: center;
+    padding:0px;
 }
 
 .spacer 
