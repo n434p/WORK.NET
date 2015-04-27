@@ -69,7 +69,13 @@ function GetRadioValue()
     for (var i = 0; i < ans.length; i++)
     {
         if (ans[i].type == "radio" && ans[i].checked) {
-            arr[cur].ans = (arr[cur].ans == ans[i].value);
+        arr[cur].ans = (arr[cur].ans == ans[i].value);
         }
     }
 }
+
+function RandomNum(min, max)
+{
+    return Math.random() * (max - min) + min;
+}
+
