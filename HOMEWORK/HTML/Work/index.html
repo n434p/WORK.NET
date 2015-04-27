@@ -5,6 +5,21 @@
     <meta charset="utf-8">
     <title>Xsafe Mobility</title>
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" >
+        function SetSize(id) {
+            var doc = document.getElementById(id).contentWindow.document;
+            var body_ = doc.body, html_ = doc.documentElement;
+
+            var height = Math.max(body_.scrollHeight, body_.offsetHeight, html_.clientHeight, html_.scrollHeight, html_.offsetHeight);
+            var width = Math.max(body_.scrollWidth, body_.offsetWidth, html_.clientWidth, html_.scrollWidth, html_.offsetWidth);
+
+            document.getElementById(id).style.height = height;
+            document.getElementById(id).style.width = width;
+
+            parent(id)[0].style.height = height;
+            parent(id)[0].style.width = width;
+        }
+    </script>
 </head>
 
 <body>
@@ -30,7 +45,7 @@
 
     </div>
 
-    <div id="content"><iframe src="about.html" align="middle" marginwidth="0" marginheight="0" scrolling="no" name="content"></iframe></div>
+    <div id="content"><iframe id="innerDoc" src="about.html" scrolling="no" onmousewheel="SetSize('innerDoc')" name="frame"></iframe></div>
 
     <div class="footSide">
         <div class="">
@@ -44,10 +59,10 @@
             <a href="#">Xsafe</a><span>© 2015<span> | </span></span><a href="#">Privacy Policy</a>
         </div>
         <div class="common">
-                <a><img src="facebook.png" /></a>
-                <a><img src="twitter.png" /></a>
-                <a><img src="feed.png" /></a>
-                <a><img src="google.png" /></a>
+            <a><img src="facebook.png" /></a>
+            <a><img src="twitter.png" /></a>
+            <a><img src="feed.png" /></a>
+            <a><img src="google.png" /></a>
         </div>
     </div>
 

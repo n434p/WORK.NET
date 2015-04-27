@@ -9,13 +9,45 @@ function Rectangle(id,color, counter)
     this.counter = counter;
 }
 
+function ChangeColor(rect) {
+    document.getElementById(rect.id).style.backgroundColor = color[rect.counter];
+    document.getElementById(rect.id).children[0].innerHTML = color[rect.counter];
+}
+
+function ColorCheck(rect)
+{
+    if (rect.counter < color.length-1 && rect.counter >= 0)
+    {
+        rect.counter++;
+    }
+    else
+    {
+        rect.counter = 0;
+    }
+}
+
 function f(ob)
 {
     rect = new Rectangle(ob.id, ob.style.backgroundColor, 0);
-    ob.style.backgroundColor = color[rect.counter];
-    r.push(rect);
+    if (r.length > 0) {
+        for (var i = 0; i < r.length; i++) {
+            if (r[i].id == ob.id) {
+                rect = r[i];
+                break;
+            }
+        }
+
+    }
+    if (r.indexOf(rect) == -1)
+    { r.push(rect); }
+
+
+    ChangeColor(rect);
+    ColorCheck(rect);
+
+ 
     
-    
+    //Non-user defined objective model solution:
 
     //var curColor = ob.style.backgroundColor;
     //var cur = -1;
