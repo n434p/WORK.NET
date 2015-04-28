@@ -4,3 +4,9 @@ D:\Kolomiets\WORK.NET\Kolomiets\EventsProj\EventsProj\bin\Debug\EventsProj.exe
 D:\Kolomiets\WORK.NET\Kolomiets\EventsProj\EventsProj\bin\Debug\EventsProj.pdb
 D:\Kolomiets\WORK.NET\Kolomiets\EventsProj\EventsProj\obj\Debug\EventsProj.exe
 D:\Kolomiets\WORK.NET\Kolomiets\EventsProj\EventsProj\obj\Debug\EventsProj.pdb
+E:\WORK.NET\Kolomiets\EventsProj\EventsProj\bin\Debug\EventsProj.exe.config
+E:\WORK.NET\Kolomiets\EventsProj\EventsProj\obj\Debug\EventsProj.exe
+E:\WORK.NET\Kolomiets\EventsProj\EventsProj\obj\Debug\EventsProj.pdb
+E:\WORK.NET\Kolomiets\EventsProj\EventsProj\bin\Debug\EventsProj.exe
+E:\WORK.NET\Kolomiets\EventsProj\EventsProj\bin\Debug\EventsProj.pdb
+E:\WORK.NET\Kolomiets\EventsProj\EventsProj\obj\Debug\EventsProj.csprojResolveAssemblyReference.cache
