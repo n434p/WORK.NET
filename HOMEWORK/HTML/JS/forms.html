@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="formJs.js"></script>
+    <style>
+        div {
+            padding: 20px;
+            width: 300px;
+            
+            margin: 0 auto;
+            border: 2px solid grey;
+            background-color:ButtonHighlight;
+        }
+        form {
+            text-align:center;
+        }
+        textarea, select, input {
+            margin:10px;
+        }
+        form {
+            font: bold 12px sans-serif;
+        }
+    </style>
+</head>
+<body id="body">
+    <div>
+    <form name="f1"> 
+        <p>Registration form:</p>
+        <input type="checkbox" name="check[]" value="lightblue"/>lightblue<br />
+        <input type="checkbox" name="check[]" value="lightgreen"/>lightgreen<br />
+        <input type="checkbox" name="check[]" value="yellow"/>yellow<br />
+        <input type="checkbox" name="check[]" value="lightred"/>lightred<br />
+        <input type="radio" name="rad[]" checked="checked" value="12"/>condition5<br />
+        <input type="radio" name="rad[]" value="12"/>condition6<br />
+        <input type="radio" name="rad[]" value="12"/>condition7<br />
+         <p>Name:</p>
+        <input type="text" size="20" name="name" value="1"/>
+          <p>Comment:</p>
+        <textarea rows="4" cols="15" name="comment"></textarea>
+            <p>Color:</p>
+        <input type="color" name="color" />       
+          <p>Select group to join:</p>
+        <select name="group" size="4" multiple="multiple">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+          <br />
+        Enter password:<input type="password"  size="8" name="pass" id="idPass"/>
+        <p>Click OK to confirn</p>
+       <input type="button" name="but"  onclick="func();" value="OK"/>
+
+    </form>
+    </div>
+</body>
+</html>
