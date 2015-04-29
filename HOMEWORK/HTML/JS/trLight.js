@@ -7,7 +7,7 @@ var id, int, tick=15;
 
 function Init()
 {
-    Ticker();
+    //Ticker();
 }
 
 function Ticker()
@@ -38,8 +38,8 @@ function Lighting()
 var obj, t, i;
 
 function Blinking() {
-    i = setInterval("green.style.opacity = 1;", 500);
-    setTimeout('clearTimeout(id); console.log(id, i);', blinkTime);
+    i1 = setInterval("green.style.opacity = 1;", 300);
+    i2 = setInterval("green.style.opacity = 0.2;", 1000);
 }
 
 
