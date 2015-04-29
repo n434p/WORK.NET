@@ -9,12 +9,12 @@ function Rectangle(id,color, counter)
     this.counter = counter;
 }
 
-function ChangeColor(rect) {
+function ReColor(rect) {
     document.getElementById(rect.id).style.backgroundColor = color[rect.counter];
     document.getElementById(rect.id).children[0].innerHTML = color[rect.counter];
 }
 
-function ColorCheck(rect)
+function IncColor(rect)
 {
     if (rect.counter < color.length-1 && rect.counter >= 0)
     {
@@ -42,8 +42,8 @@ function f(ob)
     { r.push(rect); }
 
 
-    ChangeColor(rect);
-    ColorCheck(rect);
+    ReColor(rect);
+    IncColor(rect);
 
  
     

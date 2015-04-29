@@ -1,46 +1,52 @@
 ﻿
 var d = new Date();
 
-var readyTime = 500, goTime = 1000, blinkTime = 3000, readyTime2 = 5000;
+var interval=15, stopTime=2, readyTime = 1, goTime = 5, blinkTime = 4, readyTime2 = 2;
 
-var id, int;
+var id, int, tick=15;
 
 function Init()
 {
-    setInterval(Lighting, 5000);
+    Ticker();
+}
+
+function Ticker()
+{
+    setInterval("Lighting();tick--;", 1000);
 }
 
 function Lighting()
 {   
-    Stop();
-    
-    setTimeout("Ready(0);", readyTime);
+    switch (tick) {
+        case interval: Stop();
+            break;
+        case interval-stopTime: Ready(0);
+            break;
+        case interval-stopTime-readyTime: Go();
+            break;
+        case interval-stopTime-readyTime-goTime: Blinking();
+            break;
+        case readyTime2: Ready(1);
+            break;
+        default: 
 
-    setTimeout("Go();", goTime);
-
-    setTimeout("Blinking();", blinkTime);
-
-    setTimeout("Ready(1);", readyTime2);
+            break;
+    }
 
 }
 
 var obj, t, i;
 
 function Blinking() {
-    i = setInterval("Blink('green');", 990);
-    setTimeout('clearTimeout(id); clearInterval(i); console.log(id, i);', blinkTime);
+    i = setInterval("green.style.opacity = 1;", 500);
+    setTimeout('clearTimeout(id); console.log(id, i);', blinkTime);
 }
 
-function Blink(ob) {
-    obj = document.getElementById(ob);
-    obj.style.opacity = 1;
-    t = setTimeout("obj.style.opacity = 0; console.log('t: '+t)", 500);
-}
 
 function Go()
 {
-    red.style.opacity = 0;
-    yel.style.opacity = 0;
+    red.style.opacity = 0.2;
+    yel.style.opacity = 0.2;
     green.style.opacity = 1;
 }
 
@@ -48,15 +54,17 @@ function Ready(j) {
     if (j == 0) {
         red.style.opacity = 1;}
     else {
-        red.style.opacity = 0;}
+        clearInterval(i);
+        red.style.opacity = 0.2;
+    }
         yel.style.opacity = 1;
-        green.style.opacity = 0;
+        green.style.opacity = 0.2;
 }
 
 function Stop() {
     red.style.opacity = 1;
-    yel.style.opacity = 0;
-    green.style.opacity = 0;
+    yel.style.opacity = 0.2;
+    green.style.opacity = 0.2;
 }
 
 
