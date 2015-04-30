@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        {
+            function f(elem)
+            {
+                elem.style.backgroundColor = "red";
+                alert("1");
+                event.cancelBubble = true;
+            }
+
+            function f2(elem)
+            {
+                var el = event.srcElement;
+                el.style.borderColor = "blue";
+                
+            }
+
+            function f3()
+            {
+                alert(event.wheelDelta);
+
+            }
+
+            function m()
+            {
+                event.cancelBubble = true;
+
+                if (!confirm('Do you want to leave us?'))
+                {
+                   event.returnValue = false;                 
+                }
+            }
+            
+            function m2()
+            {
+                event.cancelBubble = true;
+
+                if (!confirm('Do you want to leave us?')) {
+                    return false;
+                }
+                return true;
+            }
+        }
+    </script>
+    <style type ="text/css">
+        
+            div
+        {
+                width:200px;
+                height: 200px;
+                border: 1px solid green;
+        }
+           div > div
+        {
+                margin: 0 auto;
+                width:100px;
+                height: 100px;
+                border: 1px solid green;
+        }
+        
+    </style>
+</head>
+<body onclick="f(this);" onload="alert(event.type);" onmousewheel="f3();" onkeydown="alert(event.keyCode);">
+    <p onclick="alert(event.type);">sdffsdfsdf</p>
+    <div onclick="f(this);">
+        <div onclick="f(this);">
+
+        </div>
+    </div>
+
+    <a href="http://google.com" target="_blank" onclick="">Google</a>
+
+</body>
+</html>
