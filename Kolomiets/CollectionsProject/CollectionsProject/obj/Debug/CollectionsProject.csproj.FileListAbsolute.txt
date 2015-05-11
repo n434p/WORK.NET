@@ -1,6 +1,0 @@
-D:\Project Net 14-1\GroupProjectNet14-1\CollectionsProject\CollectionsProject\bin\Debug\CollectionsProject.exe.config
-D:\Project Net 14-1\GroupProjectNet14-1\CollectionsProject\CollectionsProject\bin\Debug\CollectionsProject.exe
-D:\Project Net 14-1\GroupProjectNet14-1\CollectionsProject\CollectionsProject\bin\Debug\CollectionsProject.pdb
-D:\Project Net 14-1\GroupProjectNet14-1\CollectionsProject\CollectionsProject\obj\Debug\CollectionsProject.csprojResolveAssemblyReference.cache
-D:\Project Net 14-1\GroupProjectNet14-1\CollectionsProject\CollectionsProject\obj\Debug\CollectionsProject.exe
-D:\Project Net 14-1\GroupProjectNet14-1\CollectionsProject\CollectionsProject\obj\Debug\CollectionsProject.pdb

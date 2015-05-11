@@ -1,5 +1,0 @@
-D:\Kolomiets\WORK.NET\Kolomiets\CarLib.dll\CarLib.dll\bin\Debug\CarLib.dll.dll
-D:\Kolomiets\WORK.NET\Kolomiets\CarLib.dll\CarLib.dll\bin\Debug\CarLib.dll.pdb
-D:\Kolomiets\WORK.NET\Kolomiets\CarLib.dll\CarLib.dll\obj\Debug\CarLib.dll.csprojResolveAssemblyReference.cache
-D:\Kolomiets\WORK.NET\Kolomiets\CarLib.dll\CarLib.dll\obj\Debug\CarLib.dll.dll
-D:\Kolomiets\WORK.NET\Kolomiets\CarLib.dll\CarLib.dll\obj\Debug\CarLib.dll.pdb

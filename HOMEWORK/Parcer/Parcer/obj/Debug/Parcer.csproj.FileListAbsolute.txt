@@ -1,6 +1,0 @@
-D:\Kolomiets\WORK.NET\HOMEWORK\Parcer\Parcer\bin\Debug\Parcer.exe.config
-D:\Kolomiets\WORK.NET\HOMEWORK\Parcer\Parcer\bin\Debug\Parcer.exe
-D:\Kolomiets\WORK.NET\HOMEWORK\Parcer\Parcer\bin\Debug\Parcer.pdb
-D:\Kolomiets\WORK.NET\HOMEWORK\Parcer\Parcer\obj\Debug\Parcer.csprojResolveAssemblyReference.cache
-D:\Kolomiets\WORK.NET\HOMEWORK\Parcer\Parcer\obj\Debug\Parcer.exe
-D:\Kolomiets\WORK.NET\HOMEWORK\Parcer\Parcer\obj\Debug\Parcer.pdb

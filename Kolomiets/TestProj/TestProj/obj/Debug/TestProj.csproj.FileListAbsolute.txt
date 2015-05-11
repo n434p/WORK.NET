@@ -1,5 +1,0 @@
-D:\Kolomiets\WORK.NET\Kolomiets\TestProj\TestProj\bin\Debug\TestProj.exe.config
-D:\Kolomiets\WORK.NET\Kolomiets\TestProj\TestProj\bin\Debug\TestProj.exe
-D:\Kolomiets\WORK.NET\Kolomiets\TestProj\TestProj\bin\Debug\TestProj.pdb
-D:\Kolomiets\WORK.NET\Kolomiets\TestProj\TestProj\obj\Debug\TestProj.exe
-D:\Kolomiets\WORK.NET\Kolomiets\TestProj\TestProj\obj\Debug\TestProj.pdb

@@ -1,6 +1,0 @@
-D:\Kolomiets\WORK.NET\Kolomiets\collectionFirst\collectionFirst\bin\Debug\collectionFirst.exe.config
-D:\Kolomiets\WORK.NET\Kolomiets\collectionFirst\collectionFirst\bin\Debug\collectionFirst.exe
-D:\Kolomiets\WORK.NET\Kolomiets\collectionFirst\collectionFirst\bin\Debug\collectionFirst.pdb
-D:\Kolomiets\WORK.NET\Kolomiets\collectionFirst\collectionFirst\obj\Debug\collectionFirst.csprojResolveAssemblyReference.cache
-D:\Kolomiets\WORK.NET\Kolomiets\collectionFirst\collectionFirst\obj\Debug\collectionFirst.exe
-D:\Kolomiets\WORK.NET\Kolomiets\collectionFirst\collectionFirst\obj\Debug\collectionFirst.pdb

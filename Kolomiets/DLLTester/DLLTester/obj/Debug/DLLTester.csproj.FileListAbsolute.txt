@@ -1,7 +1,0 @@
-D:\Kolomiets\WORK.NET\Kolomiets\DLLTester\DLLTester\bin\Debug\DLLTester.exe.config
-D:\Kolomiets\WORK.NET\Kolomiets\DLLTester\DLLTester\obj\Debug\DLLTester.csprojResolveAssemblyReference.cache
-D:\Kolomiets\WORK.NET\Kolomiets\DLLTester\DLLTester\bin\Debug\DLLTester.exe
-D:\Kolomiets\WORK.NET\Kolomiets\DLLTester\DLLTester\bin\Debug\DLLTester.pdb
-D:\Kolomiets\WORK.NET\Kolomiets\DLLTester\DLLTester\obj\Debug\DLLTester.exe
-D:\Kolomiets\WORK.NET\Kolomiets\DLLTester\DLLTester\obj\Debug\DLLTester.pdb
-D:\Kolomiets\WORK.NET\Kolomiets\DLLTester\DLLTester\bin\Debug\testGGGG.dll

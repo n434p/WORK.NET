@@ -1,7 +1,0 @@
-D:\Kolomiets\WORK.NET\Kolomiets\ConToReflection\ConToReflection\bin\Debug\ConToReflection.exe.config
-D:\Kolomiets\WORK.NET\Kolomiets\ConToReflection\ConToReflection\bin\Debug\ConToReflection.exe
-D:\Kolomiets\WORK.NET\Kolomiets\ConToReflection\ConToReflection\bin\Debug\ConToReflection.pdb
-D:\Kolomiets\WORK.NET\Kolomiets\ConToReflection\ConToReflection\bin\Debug\MyAssembly.dll
-D:\Kolomiets\WORK.NET\Kolomiets\ConToReflection\ConToReflection\obj\Debug\ConToReflection.csprojResolveAssemblyReference.cache
-D:\Kolomiets\WORK.NET\Kolomiets\ConToReflection\ConToReflection\obj\Debug\ConToReflection.exe
-D:\Kolomiets\WORK.NET\Kolomiets\ConToReflection\ConToReflection\obj\Debug\ConToReflection.pdb
