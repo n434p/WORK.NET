@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript"> 
+        //var regStr = /(\d+)(\s*[\+\*]\s*)(\d+)/g, str = "2+4, 3+5,7*8";
+        //var mas = str.replace(regStr, "$3$2$1"); /*  */
+        //document.write(mas);
+
+        var str = "4+3=?; 5-5=?; 10 * 10=?; 5/2=?;";
+
+        var regStr = /(\d+)\s*([\+\*\-\/])\s*(\d+)=(\?)/g;
+      
+        var s = str.replace(regStr, Operation); 
+       
+        document.write(s);
+
+        function Operation(s,a, b, c,d)
+        {
+            switch (b) {
+                case "+": d = parseInt(a) + parseInt(c);
+                    break;
+                case "-": d = parseInt(a) - parseInt(c);
+                    break;
+                case "/": d = parseInt(a) / parseInt(c);
+                    break;
+                case "*": d = parseInt(a) * parseInt(c);
+                    break;
+
+                default: alert("Exception");
+                    break;
+
+            }
+            return a + b + c +"="+ d;
+        }
+
+
+
+    </script>
+</body>
+</html>
