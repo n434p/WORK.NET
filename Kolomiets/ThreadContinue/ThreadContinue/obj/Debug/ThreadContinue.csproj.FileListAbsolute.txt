@@ -1,5 +1,0 @@
-D:\Kolomiets\WORK.NET\Kolomiets\ThreadContinue\ThreadContinue\bin\Debug\ThreadContinue.exe.config
-D:\Kolomiets\WORK.NET\Kolomiets\ThreadContinue\ThreadContinue\bin\Debug\ThreadContinue.exe
-D:\Kolomiets\WORK.NET\Kolomiets\ThreadContinue\ThreadContinue\bin\Debug\ThreadContinue.pdb
-D:\Kolomiets\WORK.NET\Kolomiets\ThreadContinue\ThreadContinue\obj\Debug\ThreadContinue.exe
-D:\Kolomiets\WORK.NET\Kolomiets\ThreadContinue\ThreadContinue\obj\Debug\ThreadContinue.pdb

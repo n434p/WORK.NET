@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>
+        Arrow brainwreck
+    </title>
+    <style type="text/css">
+        div 
+        {
+            width:100px;
+            height:100px;
+            background-size: contain;
+            margin:0 auto;
+            /*display:none;*/
+        }
+        .rot 
+        {
+            transform: rotate(180deg);
+        }
+        .arrow {
+            background-image:url("arrow.png");
+        }
+        .point {
+            background-image:url("point.png");       
+        }
+
+        input {
+            margin: 50px;
+            width: 100px;
+        }
+
+        body 
+        {
+            margin:0px;
+            padding:0px;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <h1>ARROW BRAIN WRECK</h1>
+    <h2 id="count"></h2>
+    <form>
+        Field size: <input title="Field size: " type="number" placeholder="Field size" value="3" min="3" step="2" name="fieldSize" />
+        <input type="button" width="100" height="50" onclick="Init();" value="OK!" placeholder="Run!" />
+        
+    </form>
+    <div id="field"></div>
+    
+
+
+    <script type="text/javascript">
+        {
+            var point, target, ticker, step=0;
+
+            function Init()
+            {
+                step = 0;
+                count.innerHTML = "";
+                var size = document.querySelector("[name='fieldSize']").value;
+                field.innerHTML = "";
+                var mid = (size - 1) / 2 + 1;
+                for (var i = 1; i <= size; i++)
+                {
+                    if (i < mid) { field.innerHTML += "<div class='rot arrow' value='-1'></div>" }
+                    else if (i == mid) { field.innerHTML += "<div class='point' value='0' ></div>" }
+                    else
+                    {
+                        field.innerHTML += "<div class='arrow' value='1'></div>"
+                    }
+                }
+                ticker = setInterval(Run, 500);
+            }
+        
+            
+
+            function Step()
+            {
+                point = document.querySelector("[value='0']");
+                try{
+                    if (point.nextSibling.getAttribute('value') == '-1' && point.nextSibling.nextSibling.getAttribute('value') == '1')
+                    { target = point.nextSibling.nextSibling; return;}
+                }
+                catch(e){}
+                try{
+                    if (point.previousSibling.getAttribute('value') == '1' && point.previousSibling.previousSibling.getAttribute('value') == '-1')
+                    { target = point.previousSibling.previousSibling; return;}
+                }
+                catch(e){}
+                try{
+                    if (point.nextSibling.getAttribute('value') == '1' && point.nextSibling.nextSibling.getAttribute('value') == '-1' && point.previousSibling != null)
+                    { target = point.previousSibling; return; }
+                }
+                catch (e) { }
+                try{
+                    if (point.previousSibling.getAttribute('value') == '-1' && point.previousSibling.previousSibling.getAttribute('value') == '1' && point.nextSibling != null)
+                    { target = point.nextSibling; return; }
+                }
+                catch (e) { }
+                try{
+                    if (point.nextSibling.getAttribute('value') == '-1' && point.previousSibling.getAttribute('value') == '1')
+                    {
+                        target = point;
+                        
+                        return;
+                    }
+                }
+                catch(e){ }
+                    { target = point.previousSibling; }
+               
+            }
+
+            function Run()
+            {
+                var i = 0;
+                point = document.querySelector("[value='0']");
+                if (point.nextSibling != null)
+                {
+                    if (point.nextSibling.getAttribute('value') == '1')
+                    { i++; target = point.nextSibling; }
+                    else if (point.nextSibling.nextSibling != null && point.nextSibling.nextSibling.getAttribute('value') == '1')
+                    { i++; target = point.nextSibling.nextSibling; }
+                }
+
+                if (point.previousSibling != null)
+                {
+                    if (point.previousSibling.getAttribute('value') == '-1')
+                    { i++; target = point.previousSibling;}
+                    else if (point.previousSibling.previousSibling != null && point.previousSibling.previousSibling.getAttribute('value') == '-1')
+                    { i++; target = point.previousSibling.previousSibling; }
+                }
+
+                if (i >= 2) { Step(); }
+                else if (i == 0) { clearInterval(ticker); return;}
+                
+                Swap();
+                step++;
+                
+                count.innerHTML = "Move: " + step;
+            }
+
+            function Swap()
+            {
+            point.className = target.className;
+            target.className = "point";
+            point.setAttribute('value',target.getAttribute('value'));
+            target.setAttribute('value','0');
+            }
+
+        }
+    </script>
+
+</body>
+</html>

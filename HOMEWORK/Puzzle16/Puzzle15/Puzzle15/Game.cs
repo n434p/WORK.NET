@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +54,9 @@ class Game
     /// Needed order of cells
     /// </summary>
     public byte[] order = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0 };
+
+    public event EventHandler IsIssue;
+
     #endregion
     public Game(byte[] mas,int s=40)
     {
@@ -95,11 +99,23 @@ class Game
             {
                 mistakes++;
                 Solution.RemoveAt(Solution.Count - 1);
+                if (mistakes > 10) 
+                {
+                    if (IsIssue.Target != null) 
+                    { 
+                        IsIssue(this,EventArgs.Empty); 
+                    }
+                     break; 
+                }
             }
             else Solution.Add(target);
         }
+
+
         return Solution;
     }
+
+
     /// <summary>
     /// Detrminates in what cell's place do next move(target).
     /// </summary>
@@ -214,7 +230,7 @@ class Game
         {
                 foreach (Point place in table.Keys)
                 {
-                    if ((place - space).Length == btnSize && len > (place - target).Length && place != target && place != space && !fit.Contains(place) && place != block) 
+                    if ((place - space).Length == btnSize && len > (place - target).Length && place != target && place != goal && place != space && !fit.Contains(place) && place != block) 
                        
                     { newTarget = place; len = (target - place).Length; }
                 }

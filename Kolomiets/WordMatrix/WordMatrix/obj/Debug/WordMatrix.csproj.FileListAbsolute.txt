@@ -1,6 +1,0 @@
-D:\Kolomiets\WORK.NET\Kolomiets\WordMatrix\WordMatrix\bin\Debug\WordMatrix.exe.config
-D:\Kolomiets\WORK.NET\Kolomiets\WordMatrix\WordMatrix\bin\Debug\WordMatrix.exe
-D:\Kolomiets\WORK.NET\Kolomiets\WordMatrix\WordMatrix\bin\Debug\WordMatrix.pdb
-D:\Kolomiets\WORK.NET\Kolomiets\WordMatrix\WordMatrix\obj\Debug\WordMatrix.csprojResolveAssemblyReference.cache
-D:\Kolomiets\WORK.NET\Kolomiets\WordMatrix\WordMatrix\obj\Debug\WordMatrix.exe
-D:\Kolomiets\WORK.NET\Kolomiets\WordMatrix\WordMatrix\obj\Debug\WordMatrix.pdb

@@ -66,6 +66,11 @@ namespace Puzzle15
         public MainWindow()
         {
             InitializeComponent();
+            Init();
+        }
+
+        public void Init()
+        {
             dt1.Tick += Run;
             dt2.Tick += (o, e) =>
             {
@@ -73,11 +78,11 @@ namespace Puzzle15
                 {
                     Thickness t = target.Margin;
                     Thickness s = space.Margin;
-                    if ((new Point(t.Left,t.Top)- new Point(s.Left,s.Top)).Length > 5)
+                    if ((new Point(t.Left, t.Top) - new Point(s.Left, s.Top)).Length > 5)
                     {
                         if (s.Top > t.Top) t = new Thickness(t.Left, t.Top + speedReg.Value, 0, 0);
                         if (s.Top < t.Top) t = new Thickness(t.Left, t.Top - speedReg.Value, 0, 0);
-                        if (s.Left > t.Left) t = new Thickness(t.Left + speedReg.Value,t.Top, 0, 0);
+                        if (s.Left > t.Left) t = new Thickness(t.Left + speedReg.Value, t.Top, 0, 0);
                         if (s.Left < t.Left) t = new Thickness(t.Left - speedReg.Value, t.Top, 0, 0);
                         target.Margin = t;
 
@@ -91,9 +96,9 @@ namespace Puzzle15
                     }
                 }
             };
-
-           
         }
+
+
         /// <summary>
         /// Initiates new parameters and sequence for current array - mas[].
         /// </summary>
@@ -217,7 +222,7 @@ namespace Puzzle15
             Start();
             runBtn.IsEnabled = false;
         }
-        private void loadBtn_Click(object sender, RoutedEventArgs e)
+        private void loadBtn_Click(object sender, EventArgs e)
         {
             if (!dt1.IsEnabled)
             {
@@ -229,19 +234,20 @@ namespace Puzzle15
                 ofd.ShowDialog();
                 if (ofd.CheckFileExists && ofd.FileName != "")
                 {
-                    string str = "";
-                    using (StreamReader sr = new StreamReader(ofd.FileName))
+                    try
                     {
-                        while (!sr.EndOfStream)
+                        string str = "";
+                        using (StreamReader sr = new StreamReader(ofd.FileName))
                         {
-                            str += sr.ReadLine();
-                        }
-                        string[] lsd = str.Trim().Split(new char[] { ' ', ',' });
-                        try
-                        {
+                            while (!sr.EndOfStream)
+                            {
+                                str += sr.ReadLine();
+                            }
+                            string[] lsd = str.Trim().Split(new char[] { ' ', ',' });
+
                             if (lsd.Length != 16) throw new Exception("Bad format of array");
-                            Dictionary<byte, byte> test = new Dictionary<byte,byte>();
-                            byte zero =0;
+                            Dictionary<byte, byte> test = new Dictionary<byte, byte>();
+                            byte zero = 0;
                             for (byte i = 0; i < lsd.Length; i++)
                             {
                                 mas[i] = Convert.ToByte(lsd[i]);
@@ -251,67 +257,84 @@ namespace Puzzle15
                                 if (mas[i] == 0) zero = i;
                             }
                             byte sum = 0;
-                            for (int i = 0; i < mas.Length-1; i++)
+                            for (int i = 0; i < mas.Length - 1; i++)
                             {
                                 byte n = 0;
-                                for (int j = i+1; j < mas.Length; j++)
+                                for (int j = i + 1; j < mas.Length; j++)
                                 {
-                                    if ( mas[j] != 0 && mas[j] < mas[i]) n++;
+                                    if (mas[j] != 0 && mas[j] < mas[i]) n++;
                                 }
                                 sum += n;
                             }
-                            if ((sum + zero/4+1) % 2 != 0) throw new Exception("Array doesn't have solution...");
-                   
-
-            g = new Game(mas);
-
-            puzzleField = new Canvas()
-            {
-                Height = 160,
-                Width = 160,
-                Background = Brushes.BurlyWood,
-                Margin = new Thickness(20)
-            };
-            speedReg = new Slider()
-            {
-                Width = 160,
-                Minimum = 1,
-                Maximum = 6,
-                Value = 1,
-                SmallChange = 0.5
-            };
-            runBtn = new Button()
-            {
-                Margin = new Thickness(10),
-                Width = 160,
-                Height = 30,
-                Content = "START"
-            };
-
-            speedReg.ValueChanged += (o, ee) =>
-            {
-                dt1.Interval = TimeSpan.FromMilliseconds(500/ee.NewValue);
-                dt2.Interval = TimeSpan.FromMilliseconds(15/ ee.NewValue);
-            };
-
-            runBtn.Click += runBtn_Click;
-
-            stackPnl.Children.Add(puzzleField);
-            stackPnl.Children.Add(speedReg);
-            stackPnl.Children.Add(runBtn);
-
-            Start();
+                            if ((sum + zero / 4 + 1) % 2 != 0) throw new Exception("Array doesn't have solution...");
                         }
-                        catch (Exception ex)
+
+                        g = new Game(mas);
+                        g.IsIssue += IssueRecorder;
+
+                        puzzleField = new Canvas()
                         {
-                            MessageBox.Show("During load file...\n" + ex.Message, "Error");
-                        }
-                    }    
+                            Height = 160,
+                            Width = 160,
+                            Background = Brushes.BurlyWood,
+                            Margin = new Thickness(20)
+                        };
+                        speedReg = new Slider()
+                        {
+                            Width = 160,
+                            Minimum = 1,
+                            Maximum = 6,
+                            Value = 1,
+                            SmallChange = 0.5
+                        };
+                        runBtn = new Button()
+                        {
+                            Margin = new Thickness(10),
+                            Width = 160,
+                            Height = 30,
+                            Content = "START"
+                        };
+
+                        speedReg.ValueChanged += (o, ee) =>
+                        {
+                            dt1.Interval = TimeSpan.FromMilliseconds(500 / ee.NewValue);
+                            dt2.Interval = TimeSpan.FromMilliseconds(15 / ee.NewValue);
+                        };
+
+                        runBtn.Click += runBtn_Click;
+
+                        stackPnl.Children.Add(puzzleField);
+                        stackPnl.Children.Add(speedReg);
+                        stackPnl.Children.Add(runBtn);
+
+                        Start();
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("During load file...\n" + ex.Message, "Error");
+                    }
                 }
             }
         }
 
-    
+        private void IssueRecorder(object o, EventArgs e)
+        {
+            MessageBox.Show("We sorry for this situation. Browse another file.", "Bug Exception");
+            using (FileStream sr = new FileStream("Issue-" + DateTime.Now.Millisecond + ".txt", FileMode.Create))
+            {
+                StreamWriter sw = new StreamWriter(sr, Encoding.UTF8);
+                for (int i = 0; i < (mas.Length-1); i++)
+                {
+                    sw.Write(mas[i] + ",");
+                }
+                sw.Write(mas[mas.Length-1]);
+                sw.Close();
+            }
+            loadBtn_Click(o,EventArgs.Empty);
+            
+        }
        
     }
 }
