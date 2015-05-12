@@ -21,9 +21,11 @@
         }
         .arrow {
             background-image:url("arrow.png");
+            filter:invert(100%);
         }
         .point {
-            background-image:url("point.png");       
+            background-image:url("point.png");  
+                
         }
 
         input {
@@ -37,6 +39,11 @@
             padding:0px;
             text-align:center;
         }
+        .blur 
+        {
+            opacity: 0.5;
+        }
+
     </style>
 </head>
 <body>
@@ -65,7 +72,7 @@
                 for (var i = 1; i <= size; i++)
                 {
                     if (i < mid) { field.innerHTML += "<div class='rot arrow' value='-1'></div>" }
-                    else if (i == mid) { field.innerHTML += "<div class='point' value='0' ></div>" }
+                    else if (i == mid) { field.innerHTML += "<div class='blur' value='0' ></div>" }
                     else
                     {
                         field.innerHTML += "<div class='arrow' value='1'></div>"
@@ -144,7 +151,7 @@
             function Swap()
             {
             point.className = target.className;
-            target.className = "point";
+            target.className += "blur";
             point.setAttribute('value',target.getAttribute('value'));
             target.setAttribute('value','0');
             }
