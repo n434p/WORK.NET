@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        function ShowHide(el)
+        {
+            //$('#elem').toggle(); - trough css selection
+            $(el).toggle().animate({fontSize:"36px", color:"magenta"},4000); // - using parameter
+            return;
+        }
+    </script>
+
+    <style type="text/css">
+        #elem
+        {
+            color: red;
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" onclick="return ShowHide(elem);">Show/Hide item:</a>
+    <p id ="elem">123</p>
+</body>
+</html>

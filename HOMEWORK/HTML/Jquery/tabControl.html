@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Tab Control</title>
+    <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+    <script>
+        function f() {
+            $('div span').addClass('tab');
+            $('div span').each(click(toggle(event.data)));
+        }
+        function toggle(el)
+        {
+            $(el).toggleClass('check');
+        }
+    </script>
+    <style>
+        body 
+        {
+            text-align:center;
+        }
+        .tab
+        {
+            display:inline-block;
+            width:100px;
+            height:80px;
+            background-color: lightgreen;
+        }
+        .check 
+        {
+            background-color: green;
+        }
+        .content 
+        {
+            margin-top: 10px;
+            display:inline-block;
+            width:500px;
+            height:300px;
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+<body onload="f();">
+    <div>
+        <span>Tab1</span>
+        <span>Tab2</span>
+        <span>Tab3</span>
+        <span>Tab4</span>
+    </div>
+    <div class="content">
+        Conte
+    </div>
+
+</body>
+</html>
