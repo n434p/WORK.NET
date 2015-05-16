@@ -8,15 +8,13 @@
     <script>
         $(document).ready(function () {
             $('div span').addClass('tab');
-            $('div span').each(function () {
-                $(this).click(function (event)
-                {
-                    $("[class*='check']").removeClass("check");
-                    $(event.target).toggleClass('check');
-                    $('div.content').text("You are viewing " + event.target.textContent + " content now.");
-                    return false;
-                })
+            $('div span').click(function (event) {
+                $("[class*='check']").removeClass("check");
+                $(event.target).toggleClass('check');
+                $('div.content').text("You are viewing " + event.target.textContent + " content now.");
+                return false;
             });
+           
             return false;
         })
         
