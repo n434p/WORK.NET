@@ -6,14 +6,22 @@
     <title>Tab Control</title>
     <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
     <script>
-        function f() {
+        $(document).ready(function () {
             $('div span').addClass('tab');
-            $('div span').each(click(toggle(event.data)));
-        }
-        function toggle(el)
-        {
-            $(el).toggleClass('check');
-        }
+            $('div span').each(function () {
+                $(this).click(function (event)
+                {
+                    $("[class*='check']").removeClass("check");
+                    $(event.target).toggleClass('check');
+                    $('div.content').text("You are viewing " + event.target.textContent + " content now.");
+                    return false;
+                })
+            });
+            return false;
+        })
+        
+
+
     </script>
     <style>
         body 
@@ -41,15 +49,16 @@
         }
     </style>
 </head>
-<body onload="f();">
+<body>
     <div>
+        <h1>Tab Controller:</h1>
         <span>Tab1</span>
         <span>Tab2</span>
         <span>Tab3</span>
         <span>Tab4</span>
     </div>
     <div class="content">
-        Conte
+        Content
     </div>
 
 </body>

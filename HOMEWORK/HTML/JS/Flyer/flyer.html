@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Flyer - Game it!</title>
+    <link rel="stylesheet" href="mainStyle.css" />
+    <style type="text/css">
+        body 
+        {
+           /* background-image:url("field.jpg"); */
+           background-color: lightgrey;
+           line-height:0px;
+        }
+        #player 
+        {
+           transform:rotateZ(0deg);
+           transition: all linear 3s;
+           width:100px;
+           height:100px;
+           position:absolute;
+           top:50px;
+           left:50px;
+           display:block;
+        }
+    </style>
+    <script type="text/javascript" src="flyLogic.js"></script>
+    <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+
+    <script type="text/javascript">
+        var ang;
+        $(document).ready(function () {
+            ang = 0;
+            $('body').keypress(function () {
+                event.cancelBubble = true;
+                Turn(event.keyCode);
+                event.returnValue = false;
+                return false;
+            })
+        });
+
+         
+
+        function Turn(code)
+        {
+            switch (code) {
+                case 44: ang = -30;
+                    break;
+                case 46: ang = 30;
+                    break;
+                default:
+                    break;
+            }
+            $(player).css('transform', 'rotateZ('+ang+'deg)');
+            
+        };
+       
+    </script>
+
+</head>
+<body onmousedown="">
+    <img id="player" src="plane.png">
+</body>
+</html>

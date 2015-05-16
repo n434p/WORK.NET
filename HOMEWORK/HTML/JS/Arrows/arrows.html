@@ -13,7 +13,7 @@
             height:100px;
             background-size: contain;
             margin:0 auto;
-            /*display:none;*/
+            
         }
         .rot 
         {
@@ -26,7 +26,7 @@
            
         }
         .point {
-            background-image:url("point.png");  
+           /* background-image:url("point.png");  */
                 
         }
 
@@ -43,6 +43,8 @@
         }
         .blur 
         {
+            -webkit-filter: invert(.5);
+            filter: invert(.5);
             opacity: 0.5;
         }
 
@@ -53,7 +55,7 @@
     <h2 id="count"></h2>
     <form>
         Field size: <input title="Field size: " type="number" placeholder="Field size" value="3" min="3" step="2" name="fieldSize" />
-        <input type="button" width="100" height="50" onclick="Init();" value="OK!" placeholder="Run!" />
+        <input type="button" width="100" height="50" onclick="Init();" value="Run!" placeholder="Run!" />
         
     </form>
     <div id="field"></div>
@@ -74,16 +76,15 @@
                 for (var i = 1; i <= size; i++)
                 {
                     if (i < mid) { field.innerHTML += "<div class='rot arrow' value='-1'></div>" }
-                    else if (i == mid) { field.innerHTML += "<div class='blur' value='0' ></div>" }
+                    else if (i == mid) { field.innerHTML += "<div class='point' value='0' ></div>" }
                     else
                     {
                         field.innerHTML += "<div class='arrow' value='1'></div>"
                     }
                 }
-                ticker = setInterval(Run, 500);
+                count.innerHTML = "Move: ";
+                ticker = setInterval(Run, 1000);
             }
-        
-            
 
             function Step()
             {
@@ -143,8 +144,8 @@
 
                 if (i >= 2) { Step(); }
                 else if (i == 0) { clearInterval(ticker); return;}
-                
-                Swap();
+                target.classList.add('blur');
+                setTimeout(Swap, 500);
                 step++;
                 
                 count.innerHTML = "Move: " + step;
@@ -152,8 +153,9 @@
 
             function Swap()
             {
+            target.classList.remove('blur');
             point.className = target.className;
-            target.className += "blur";
+            target.className = 'point';
             point.setAttribute('value',target.getAttribute('value'));
             target.setAttribute('value','0');
             }
