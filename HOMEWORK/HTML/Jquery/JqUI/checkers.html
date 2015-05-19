@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Checkers</title>
+    <style type="text/css">
+        body 
+        {
+            text-align:center;
+            line-height: 0px;
+            margin:0px;
+            padding: 0px;
+        }
+
+
+        .checker {
+          margin: 6px auto;
+          width: 50px;
+          height: 50px;
+          border-radius: 50px;
+          border: 3px solid grey;
+        }
+
+        .cell 
+        {
+            display:inline-block;
+            width:70px;
+            height:70px;
+            border: 2px solid grey;
+        }
+
+
+        .black 
+        {
+            background-color: black;
+        } 
+        .white 
+        {
+            background-color: white;
+        }
+
+        #field {
+            margin:0 auto;
+            padding-top:50px;
+        }
+
+
+    </style>
+    <script type="text/javascript" src="jquery-2.1.4.min.js"> </script>
+    <script type="text/javascript" src="jquery-ui-1.11.4/jquery-ui.min.js"> </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            InitField(8);
+            
+            $('div.checker').draggable({drag:Drag});
+           
+              
+            
+
+
+        }
+            );
+
+        function Drag(ev,ui)
+        {
+            
+        };
+
+        function InitField(size)
+        {
+            for (var i = 0; i < size; i++) {
+                for (var j = 0; j < size/2; j++) {
+                    if (i % 2 == 0) {
+                        $('#field').append('<div class="black cell"></div>');
+                        $('#field').append('<div class="white cell"></div>');
+                    }
+                    else {
+                        $('#field').append('<div class="white cell"></div>');
+                        $('#field').append('<div class="black cell"></div>');
+                    }
+
+                }
+                $('#field').append('<br/>');
+            }
+            $('div.black.cell:lt(12)').append('<div class="black checker"></div>');
+            $('div.black.cell:gt(19)').append('<div class="white checker"></div>');
+        };
+
+    </script>
+</head>
+<body>
+    <div id="field"></div>
+
+</body>
+</html>

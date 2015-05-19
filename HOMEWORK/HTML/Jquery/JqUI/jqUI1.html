@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>UI</title>
+    <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.11.4/jquery-ui.min.js"></script>
+    <style type="text/css">
+        #test 
+        {
+           
+            width:50px;
+            height:50px;
+            border: 3px solid blue;
+            background-color: lightgrey;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$(test).draggable({ containment: 'y'});
+            //$(test).draggable({ containment: [0,0,200,200]});
+            //$(test).draggable({ distance: 200 });
+            //$(test).draggable({ cursor: 'point' });
+            //$(test).draggable({ delay: 200 });
+            //$(test).draggable({ handle: 'p' });
+            //$(test).draggable({ revert: true, revertDuration: 3000 });
+
+            $(test).draggable({
+                drag: function (event, ui) {
+
+                    $(this).css("backgroundColor", "red");
+
+                }
+            });
+          
+            
+        });
+    </script>
+</head>
+<body>
+    <div id="test">
+        <p>1234</p>
+    </div>
+
+</body>
+</html>
