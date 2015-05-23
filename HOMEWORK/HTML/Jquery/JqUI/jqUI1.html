@@ -5,7 +5,8 @@
     <meta charset="utf-8" />
     <title>UI</title>
     <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="jquery-ui-1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.css" />
     <style type="text/css">
         #test 
         {
@@ -15,9 +16,58 @@
             border: 3px solid blue;
             background-color: lightgrey;
         }
+
+        #DivTest, #DivTest3 {
+            height:200px;
+            width:200px;
+            border: 1px solid red;
+            
+        }
+
+         #DivTest2 {
+            height:100px;
+            width:100px;
+            border: 1px solid red;
+        }
+
+        .color {
+            background-color:aqua;
+            border: 2px dotted red;
+        }
+
+         .color2 {
+            background-color:lightgreen;
+        }
+
+        li {
+            padding: 2px;
+            margin: 1px;
+            border: 1px solid blue;
+            background-color:bisque;
+
+        }
+        #sub, #colorSub {
+            display:inline-block;
+            list-style-type:none;
+            
+            width:150px;
+        }
+
+            #sub .ui-selected {
+                background-color: greenyellow;
+            }
+
+            #sub .ui-selecting {
+                background-color: lightgreen;
+            }
+
+
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
+
+            // LECTION 1
+
             //$(test).draggable({ containment: 'y'});
             //$(test).draggable({ containment: [0,0,200,200]});
             //$(test).draggable({ distance: 200 });
@@ -26,22 +76,114 @@
             //$(test).draggable({ handle: 'p' });
             //$(test).draggable({ revert: true, revertDuration: 3000 });
 
-            $(test).draggable({
-                drag: function (event, ui) {
+            //--------------------------
 
-                    $(this).css("backgroundColor", "red");
+            // LECTION 2
 
-                }
-            });
+            //$("#DivTest").droppable({
+            //    accept: '#test',
+            //    activeClass: 'color',
+            //    hoverClass: 'color2',
+            //    greedy: true,
+            //    tolerance: 'fit'
+                
+            //});
+
+            //$("#DivTest2").droppable({
+            //    accept: '#test',
+            //    activeClass: 'color',
+            //    hoverClass: 'color2'
+               
+                
+            //});
+
+            //$("#DivTest2").resizable({
+            //alsoResize: '$('div')',
+            //animate: true,
+            //animateDuration: 'fast',
+            //animateEasing: 'swing',
+            //aspectRatio: true,
+            ////cancel: '',
+            ////containtment: 'document',
+            ////delay: 300,
+            //distance: 100px,
+            //ghost: true,
+            //helper: 'color'
+
+            //});
+
+
+            //// -------------------------
+
+
+            //$(test).draggable({
+            //    drag: function (event, ui) {
+
+            //        $(this).css("backgroundColor", "red");
+
+            //    }
+
+
+
+            //});
           
-            
+            //$('#sub').sortable({
+                
+            //});
+            //$('#colorSub').sortable({
+            //    axis: 'y',
+            //    connectWith: '#sub'
+            //});
+
+            $('#sub').selectable({
+                //autoRefresh: false,
+                //filter: '$('')',
+                tolerance:'touch'
+            });
+
+
         });
     </script>
 </head>
 <body>
-    <div id="test">
+<!--    <div id="test">
         <p>1234</p>
     </div>
+    <div id="DivTest">
+        
+    </div>
+
+    <div id="DivTest3">
+        <div id="DivTest2">
+        
+    </div>
+    </div>-->
+
+<!--    <ul id="sub">
+        <li > Tree</li>
+        <li >Sky</li>
+        <li >Sun</li>
+        <li >Earth</li>
+    </ul>
+
+    <ul id="colorSub">
+        <li >orange</li>
+        <li >green</li>
+        <li >blue</li>
+        <li >brown</li>
+    </ul>-->
+
+    <ul id="sub">
+        <li > Tree</li>
+        <li >Sky</li>
+        <li >Sun</li>
+        <li >Earth</li>
+        <li >orange</li>
+        <li >green</li>
+        <li >blue</li>
+        <li >brown</li>
+    </ul>
+
 
 </body>
 </html>
