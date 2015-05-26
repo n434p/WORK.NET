@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.css" />
+    <title>Test Accordion Widget</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.testAccord').accordion({
+                active: 2,
+                //animate: 1000,
+                //heightStyle: 'fill',
+                collapsible: false,
+                event: 'mouseover',
+                header: $('p')
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Menu</h1>
+        <div class="testAccord">
+            <p>1</p>
+        <a href="#">item1</a>
+        <div>Cont1 </br> </br> end.</div>
+            <p>2</p>
+        <a href="#">item2</a>
+        <div>Cont2</div>
+            <p>3</p>
+        <a href="#">item3</a>
+        <div>Cont3</div>
+            <p>4</p>
+        <a href="#">item4</a>
+        <div>Cont4</div>
+    </div>
+</body>
+</html>

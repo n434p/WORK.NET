@@ -8,7 +8,7 @@
     <script type="text/javascript" src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.css" />
     <style type="text/css">
-        #test 
+        /*#test 
         {
            
             width:50px;
@@ -59,7 +59,8 @@
 
             #sub .ui-selecting {
                 background-color: lightgreen;
-            }
+            }*/
+
 
 
     </style>
@@ -80,22 +81,22 @@
 
             // LECTION 2
 
-            $("#DivTest").droppable({
-                accept: '#test',
-                activeClass: 'color',
-                hoverClass: 'color2',
-                greedy: true,
-                tolerance: 'fit'
+            //$("#DivTest").droppable({
+            //    accept: '#test',
+            //    activeClass: 'color',
+            //    hoverClass: 'color2',
+            //    greedy: true,
+            //    tolerance: 'fit'
                 
-            });
+            //});
 
-            $("#DivTest2").droppable({
-                accept: '#test',
-                activeClass: 'color',
-                hoverClass: 'color2'
+            //$("#DivTest2").droppable({
+            //    accept: '#test',
+            //    activeClass: 'color',
+            //    hoverClass: 'color2'
                
                 
-            });
+            //});
 
             //$("#DivTest2").resizable({
             //alsoResize: '$('div')',
@@ -116,16 +117,16 @@
             //// -------------------------
 
 
-            $(test).draggable({
-                drag: function (event, ui) {
+            //$(test).draggable({
+            //    drag: function (event, ui) {
 
-                    $(this).css("backgroundColor", "red");
+            //        $(this).css("backgroundColor", "red");
 
-                }
+            //    }
 
 
 
-            });
+            //});
           
             //$('#sub').sortable({
                 
@@ -146,7 +147,7 @@
     </script>
 </head>
 <body>
-    <div id="test">
+<!--    <div id="test">
         <p>1234</p>
     </div>
     <div id="DivTest">
@@ -157,7 +158,7 @@
         <div id="DivTest2">
         
     </div>
-    </div>
+    </div>-->
 
     <!--<ul id="sub">
         <li > Tree</li>
@@ -184,6 +185,17 @@
         <li >brown</li>
     </ul>-->
 
+
+    <div class="testAccord">
+        <a href="#"></a>
+        <div>Cont1</div>
+        <a href="#"></a>
+        <div>Cont2</div>
+        <a href="#"></a>
+        <div>Cont3</div>
+        <a href="#"></a>
+        <div>Cont4</div>
+    </div>
 
 </body>
 </html>
