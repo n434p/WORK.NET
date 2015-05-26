@@ -9,12 +9,14 @@
         $(document).ready(function ()
         {
             $("p").click(function () {
-                var m = $(':animated')
-                if (m.length > 0)
-                { m.stop(); }
-                else {
-                    $("p").toggleClass('first second');
-                }
+                    $('p').animate({ width: '' + $('p[class != "$(this).className"]').width() + 'px' }, 4000, function () {
+                        $(this).toggleClass('first second'); 
+                    
+                });
+                //$('p.second').animate({ width: ''+$('p.first').attr('width') + 'px' }, 4000, function () { });
+                
+                
+                
 
             });
 
@@ -41,7 +43,7 @@
                 margin:0 auto;
                 background-color: lightgreen;
                 display:block;
-                transition:width linear 2s;
+                /*transition:width linear 10s;*/
         }
 
             .first {

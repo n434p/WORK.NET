@@ -40,6 +40,14 @@
             background-color: white;
         }
 
+        .aqua {
+            background-color: aqua;
+        }
+
+        .grey {
+            background-color: grey;
+        }
+
         #field {
             margin:0 auto;
             padding-top:50px;
@@ -48,12 +56,25 @@
 
     </style>
     <script type="text/javascript" src="jquery-2.1.4.min.js"> </script>
-    <script type="text/javascript" src="jquery-ui-1.11.4/jquery-ui.min.js"> </script>
+    <script type="text/javascript" src="jquery-ui.min.js"> </script>
     <script type="text/javascript">
+        var target, startCell;
         $(document).ready(function () {
             InitField(8);
             
-            $('div.checker').draggable({drag:Drag});
+            $('div.checker').draggable({
+                drag: Drag, start: function () {
+                    target = this;
+                    startCell = $(this).parent();
+                    startCell.css('backgroundColor', 'yellow')
+                }
+            });
+
+            $('div.cell.black').droppable({drop: Drop},{
+                accept: target,
+                hoverClass: 'grey',
+                activeClass: 'aqua'
+            });
            
               
             
@@ -62,9 +83,16 @@
         }
             );
 
+        function Drop(ev, ui) {
+            $(this).css('backgroundColor', 'red');
+            $(target).css({ position:'relative', left:'0px', top:'0px'});
+            $(this).append(target);
+
+        };
+
         function Drag(ev,ui)
         {
-            
+            //$(this).animate({ width: '60', height: '60' }, 1000);
         };
 
         function InitField(size)
