@@ -1,0 +1,15 @@
+<!ELEMENT info (#PCDATA)>
+<!ELEMENT ingredient (#PCDATA) >
+<!ELEMENT recipe (info,ingredient+)>
+<!ELEMENT recipeBook (recipe+)>
+
+<!ATTLIST recipe
+  name CDATA #REQUIRED
+  >
+
+<!ATTLIST ingredient
+  cookMode (roast|cook|boil|cut_boxes|slice|add) 'cook'
+  time CDATA #REQUIRED
+  measure (mg|g|kg|ml|l|spoon) 'g'
+  quantity CDATA #REQUIRED
+  >

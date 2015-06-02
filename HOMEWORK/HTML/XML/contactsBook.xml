@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE contactsBook SYSTEM "contact.dtd">
+<?xml-stylesheet type="text/css" href="styleBook.css"?>
+<contactsBook>
+  <contact>
+    <name>Petrov Petr</name>
+    <cell number="055555555"/>
+    <location type="afads"></location>
+  </contact>
+  <!--<contact>
+    <name>Ivanov Ivan</name>
+    <cell number="066666666"/>
+  </contact>
+  <contact>
+    <name>New Guy</name>
+    <cell>00000000</cell>
+  </contact>-->
+  <contact sex="male">
+    <name>kjlkjlkjl</name>
+    <cell number="0888888888"></cell>
+    <location type="unknown location"></location>
+    
+  </contact>
+  
+</contactsBook>

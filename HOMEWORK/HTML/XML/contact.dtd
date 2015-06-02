@@ -1,0 +1,14 @@
+<!ELEMENT cell EMPTY>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT location (#PCDATA)>
+<!ELEMENT contact (name, cell, location)> 
+<!ELEMENT contactsBook (contact+) >
+
+<!ENTITY test 'TEst text'>
+
+<!ATTLIST contact
+  sex(male|female) 'male'>
+<!ATTLIST location
+  type CDATA #REQUIRED>
+<!ATTLIST cell
+  number CDATA #REQUIRED>

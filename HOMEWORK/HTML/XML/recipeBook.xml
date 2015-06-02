@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE contactsBook SYSTEM "recipe.dtd">
+<?xml-stylesheet type="text/css" href="recipeBook.css"?>
+<recipeBook>
+  <recipe name="tea">
+    <info>launch</info>
+    <ingredient measure="spoon" quantity="2" cookMode="add" time="">sugar</ingredient>
+    <ingredient measure="spoon" quantity="2" cookMode="add" time="">tea</ingredient>
+    <ingredient measure="ml" quantity="200" cookMode="boil" time="5 min">water</ingredient>
+   
+  </recipe>
+</recipeBook>
