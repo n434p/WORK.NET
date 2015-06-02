@@ -63,14 +63,15 @@
             InitField(8);
             
             $('div.checker').draggable({
-                drag: Drag, start: function () {
-                    target = this;
+                drag: Drag, start: function (ev,ui) {
+                    $(this).zIndex(10);
+                    target = $(this);
                     startCell = $(this).parent();
                     startCell.css('backgroundColor', 'yellow')
                 }
             });
 
-            $('div.cell.black').droppable({drop: Drop},{
+            $('div.cell.black').droppable({drop: Drop, over: Over},{
                 accept: target,
                 hoverClass: 'grey',
                 activeClass: 'aqua'
@@ -82,6 +83,30 @@
 
         }
             );
+
+        function Over(ev, ui) {
+            var curChecker = $('> .checker',this);
+
+            if (curChecker.length = 1 || curChecker.css('backgroundColor') != ui.helper.css('backgroundColor')) {
+
+                console.clear();
+                console.log(curChecker.css('backgroundColor'));
+                console.log(ui.helper.css('backgroundColor'));
+
+                if (curChecker.attr('class') != ui.helper.attr('class')) {
+                    // another checker in cell - turn size doubled
+                    $(this).css('backgroundColor', 'olive');
+
+                }
+            }
+            else
+            {
+                
+            }
+        
+            
+
+        };
 
         function Drop(ev, ui) {
             $(this).css('backgroundColor', 'red');
