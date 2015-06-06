@@ -21,6 +21,7 @@
           border-radius: 50px;
           border: 3px solid grey;
           z-index:1;
+          
         }
 
         .cell {
@@ -65,18 +66,28 @@
         #field {
             margin:0 auto;
             padding-top:50px;
-            padding-left:50px;
             float:left;
+            display:block;
         }
 
-        #beaten {
-            margin: 100px auto;
-            padding-top: 50px;
-            padding-left: 100px;
-            float: left;
-            
-            width:100px;
+        .beaten {
+              margin: 50px 20px;
+              padding-top: 10px;
+              padding-left: 40px;
+              width: 150px;
+              border: 2px solid lightgrey;
+              display:block;
+              float:left;
+              
              
+        }
+
+        div 
+        {
+              -webkit-user-select: none;  /* Chrome all / Safari all */
+              -moz-user-select: none;     /* Firefox all */
+              -ms-user-select: none;      /* IE 10+ */
+              user-select: none;    
         }
 
 
@@ -107,6 +118,7 @@
 
         function Start(ev, ui) {
             long = false;
+            $('.red').removeClass('red');
             $('.cell').droppable({disabled: true});
             $(this).zIndex(10);
             target = $(this);
@@ -195,9 +207,14 @@
 
 
         function Over(ev, ui) {
-            var curChecker = $('> .checker',this);
-            $('.red').removeClass('red');
-            curChecker.addClass('red');
+            var curChecker = $(' > .checker',this);
+            
+            if (curChecker.length != 0)
+            {
+                beatenCell = $(this);
+                
+                $(curChecker).addClass('red');
+            }
 
         
             
@@ -206,9 +223,20 @@
 
         function Drop(ev, ui) {
 
-            $(target).css({ position:'relative', left:'0px', top:'0px'});
-            $(this).append(target);
-            $('.red').removeClass('red').appendTo(beaten);
+            
+                $(target).css({ position: 'relative', left: '0px', top: '0px' });
+                if ( Vector(target,startCell).l <120) $(this).append(target);
+                else if ($('div').hasClass('red') && Vector(beatenCell,target).l < 110) {
+
+                    $(this).append(target);
+
+                if ($('.red').hasClass('black')) {
+                    $('.red').removeClass('red').appendTo('.beaten:first').css('float', 'left');
+                }
+                else {
+                    $('.red').removeClass('red').appendTo('.beaten:last').css('float', 'left');
+                }
+            }
 
         };
 
@@ -240,8 +268,8 @@
     </script>
 </head>
 <body>
+    <div class="beaten enemy">You</div>
     <div id="field"></div>
-    <div id="beaten"></div>
-
+    <div class="beaten you">Enemy</div>
 </body>
 </html>

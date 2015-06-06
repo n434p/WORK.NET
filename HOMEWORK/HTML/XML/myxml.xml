@@ -7,14 +7,14 @@
   <header>Spam</header>
   <text>Test   success   !</text>
   <address>
-    <country></country>
+    <country code="+38">UA</country>
     <city></city>
     <street></street>
     <house></house>
     <appartment></appartment>
   </address>
   <address2>
-    <country></country>
+    <country code="+38">UA</country>
     <city></city>
     <street></street>
     <house></house>
@@ -22,5 +22,9 @@
     <app></app>
   </address2>
   <zipcode>12130</zipcode>
-
+  <operator name="operator1" />
+ <letter>
+   Dear <name> John</name>, we glad to invite you at our event <event> WCF 2k15</event>. It will start <date>06.06.15</date>
+ </letter>
+  <qwerty></qwerty>
 </message>

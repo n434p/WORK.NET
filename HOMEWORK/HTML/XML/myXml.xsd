@@ -9,7 +9,15 @@
 
   <xs:complexType name="myaddress">
     <xs:sequence>
-      <xs:element name="country" type="xs:string"/>
+      <xs:element name="country">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="code" type ="xs:string" use="required"></xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="city" type="xs:string"/>
       <xs:element name="street" type="xs:string"/>
       <xs:element name="house" type="xs:string"/>
@@ -20,7 +28,7 @@
   <xs:element name="message">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="to" type="test"/>
+        <xs:element name="to" type="test" maxOccurs="unbounded"/>
         <xs:element name="from" type="test"/>
         <xs:element name="date" type="xs:dateTime"/>
         <xs:element name="header">
@@ -63,6 +71,24 @@
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
+
+        <xs:element name="operator">
+          <xs:complexType>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="letter">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string"/>
+              <xs:element name="event" type="xs:string"/>
+              <xs:element name="date" type="xs:date"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:any></xs:any>
         
       </xs:sequence>
     </xs:complexType>
