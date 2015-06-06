@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="test">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\+380[0-9]{9}"></xs:pattern>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="myaddress">
+    <xs:sequence>
+      <xs:element name="country" type="xs:string"/>
+      <xs:element name="city" type="xs:string"/>
+      <xs:element name="street" type="xs:string"/>
+      <xs:element name="house" type="xs:string"/>
+      <xs:element name="appartment" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:element name="message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="to" type="test"/>
+        <xs:element name="from" type="test"/>
+        <xs:element name="date" type="xs:dateTime"/>
+        <xs:element name="header">
+          <xs:simpleType>
+            <xs:restriction base ="xs:string">
+              <xs:enumeration value="Invite"/>
+              <xs:enumeration value="Advertise"/>
+              <xs:enumeration value="Spam"/>
+              <xs:enumeration value="Work"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="text">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:whiteSpace value="replace"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="address" type="myaddress"/>
+
+        <xs:element name="address2" >
+          <xs:complexType>
+            <xs:complexContent>
+              <xs:extension base="myaddress">
+                <xs:sequence>
+                  <xs:element name ="app" type ="xs:string"/>
+                </xs:sequence>
+              </xs:extension>
+            </xs:complexContent>
+          </xs:complexType>
+        </xs:element>
+
+        
+        <xs:element name="zipcode">
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+              <xs:minInclusive value="10000"/>
+              <xs:maxInclusive value="99999"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        
+      </xs:sequence>
+    </xs:complexType>
+      </xs:element>
+</xs:schema>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<message xmlns:xsi ="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="myxml.xsd">
+  <to>+380501232525</to>
+  <from>+380991251255</from>
+  <date>2013-11-03T11:11:11</date>
+  <header>Spam</header>
+  <text>Test   success   !</text>
+  <address>
+    <country></country>
+    <city></city>
+    <street></street>
+    <house></house>
+    <appartment></appartment>
+  </address>
+  <address2>
+    <country></country>
+    <city></city>
+    <street></street>
+    <house></house>
+    <appartment></appartment>
+    <app></app>
+  </address2>
+  <zipcode>12130</zipcode>
+
+</message>
