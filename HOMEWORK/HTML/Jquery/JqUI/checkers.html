@@ -20,14 +20,23 @@
           height: 50px;
           border-radius: 50px;
           border: 3px solid grey;
+          z-index:1;
         }
 
-        .cell 
-        {
-            display:inline-block;
-            width:70px;
-            height:70px;
+        .cell {
+            display: inline-block;
+            width: 70px;
+            height: 70px;
             border: 2px solid grey;
+            background-color: black;
+        }
+
+        .blank {
+            display: inline-block;
+            width: 70px;
+            height: 70px;
+            border: 2px solid grey;
+            background-color: white;
         }
 
 
@@ -48,9 +57,26 @@
             background-color: grey;
         }
 
+        .red {
+            background-color: red;
+        }
+
+
         #field {
             margin:0 auto;
             padding-top:50px;
+            padding-left:50px;
+            float:left;
+        }
+
+        #beaten {
+            margin: 100px auto;
+            padding-top: 50px;
+            padding-left: 100px;
+            float: left;
+            
+            width:100px;
+             
         }
 
 
@@ -58,24 +84,19 @@
     <script type="text/javascript" src="jquery-2.1.4.min.js"> </script>
     <script type="text/javascript" src="jquery-ui.min.js"> </script>
     <script type="text/javascript">
-        var target, startCell;
+
+        var target, startCell, cell, inCell, beatenCell,long = false;
+
         $(document).ready(function () {
             InitField(8);
             
             $('div.checker').draggable({
-                drag: Drag, start: function (ev,ui) {
-                    $(this).zIndex(10);
-                    target = $(this);
-                    startCell = $(this).parent();
-                    startCell.css('backgroundColor', 'yellow')
-                }
+                drag: Drag, start: Start, stop: function (ev, ui) {
+                    $(this).zIndex(1);
+                }, revert: true, containment:'#field'
             });
 
-            $('div.cell.black').droppable({drop: Drop, over: Over},{
-                accept: target,
-                hoverClass: 'grey',
-                activeClass: 'aqua'
-            });
+           
            
               
             
@@ -84,34 +105,110 @@
         }
             );
 
+        function Start(ev, ui) {
+            long = false;
+            $('.cell').droppable({disabled: true});
+            $(this).zIndex(10);
+            target = $(this);
+            startCell = $(this).parent();
+            //startCell.css('backgroundColor', 'yellow')
+            DetectMoves();
+        };
+
+        function DetectMoves() {
+            
+            $('.cell').each(function () {
+                cell = $(this);
+                inCell = $(this).children(":first");
+                var v = Vector(cell, startCell);
+                MoveOver(v);
+            });
+
+            if (!long) $('.cell').each(function () {
+                cell = $(this);
+                inCell = $(this).children(":first");
+                var v = Vector(cell, startCell);
+                MoveTo(v);
+            });
+        };
+
+        function MoveOver(v)
+        {
+            if ((v.l <= 220 && v.l > 180) && ($(cell).children().length == 0)) {
+
+                $(".cell").each(function () {
+                    var c = $(this);
+                    var v1 = Vector(c, cell), v2 = Vector(c, startCell);
+                    if (v1.l == v2.l && v1.l < 120 && $(c).children().length == 1 && IsEnemy($(c).children(":first"))) {
+                        c.droppable({ over: Over, drop: function () { } , disabled: false }, {
+                            accept: target,
+                            hoverClass: 'black',
+                            activeClass: 'black'
+                        });
+                        long = true;
+                        cell.droppable({ drop: Drop, disabled: false }, {
+                            accept: target,
+                            hoverClass: 'grey',
+                            activeClass: 'aqua'
+                        });
+                    }
+
+                });
+
+
+            };
+        };
+
+        function MoveTo(v)
+        {
+            //if ($(cell).children().length == 1 && v.l <= 120 && v.l > 1 && IsEnemy(inCell))
+            //{
+            //    cell.css('backgroundColor', 'orange');
+            //}
+
+            //else 
+            if ( ($(cell).children().length == 0 && v.l <= 120 && v.l > 1) && (($(target).hasClass('white') && v.dy < 0) || ($(target).hasClass('black') && v.dy > 0)))
+            {
+                cell.droppable({ drop: Drop, over: Over, disabled: false }, {
+                    accept: target,
+                    hoverClass: 'grey',
+                    activeClass: 'aqua'
+                });
+            }
+            
+        };
+
+        function Vector(el1, el2)
+        {
+            var x1 = el1.offset().left - el2.offset().left;
+            var x2 = el1.offset().top - el2.offset().top;
+            return {dx:x1,dy:x2,l:Math.sqrt(Math.pow(x1, 2) + Math.pow(x2, 2))};
+        }
+
+        function IsEnemy(checker)
+        {
+            if ($(target).hasClass('white') && $(checker).hasClass('white')) return false;
+            else if ($(target).hasClass('black') && $(checker).hasClass('black')) return false;
+            else return true;
+        }
+
+
+
         function Over(ev, ui) {
             var curChecker = $('> .checker',this);
+            $('.red').removeClass('red');
+            curChecker.addClass('red');
 
-            if (curChecker.length = 1 || curChecker.css('backgroundColor') != ui.helper.css('backgroundColor')) {
-
-                console.clear();
-                console.log(curChecker.css('backgroundColor'));
-                console.log(ui.helper.css('backgroundColor'));
-
-                if (curChecker.attr('class') != ui.helper.attr('class')) {
-                    // another checker in cell - turn size doubled
-                    $(this).css('backgroundColor', 'olive');
-
-                }
-            }
-            else
-            {
-                
-            }
         
             
 
         };
 
         function Drop(ev, ui) {
-            $(this).css('backgroundColor', 'red');
+
             $(target).css({ position:'relative', left:'0px', top:'0px'});
             $(this).append(target);
+            $('.red').removeClass('red').appendTo(beaten);
 
         };
 
@@ -125,25 +222,26 @@
             for (var i = 0; i < size; i++) {
                 for (var j = 0; j < size/2; j++) {
                     if (i % 2 == 0) {
-                        $('#field').append('<div class="black cell"></div>');
-                        $('#field').append('<div class="white cell"></div>');
+                        $('#field').append('<div class="cell"></div>');
+                        $('#field').append('<div class="blank"></div>');
                     }
                     else {
-                        $('#field').append('<div class="white cell"></div>');
-                        $('#field').append('<div class="black cell"></div>');
+                        $('#field').append('<div class="blank"></div>');
+                        $('#field').append('<div class="cell"></div>');
                     }
 
                 }
                 $('#field').append('<br/>');
             }
-            $('div.black.cell:lt(12)').append('<div class="black checker"></div>');
-            $('div.black.cell:gt(19)').append('<div class="white checker"></div>');
+            $('.cell:lt(12)').append('<div class="black checker"></div>');
+            $('.cell:gt(19)').append('<div class="white checker"></div>');
         };
 
     </script>
 </head>
 <body>
     <div id="field"></div>
+    <div id="beaten"></div>
 
 </body>
 </html>

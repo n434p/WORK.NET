@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE contactsBook SYSTEM "recipe.dtd">
+<!DOCTYPE recipeBook SYSTEM "recipe.dtd">
 <?xml-stylesheet type="text/css" href="recipeBook.css"?>
 <recipeBook>
   <recipe name="tea">
@@ -7,6 +7,6 @@
     <ingredient measure="spoon" quantity="2" cookMode="add" time="">sugar</ingredient>
     <ingredient measure="spoon" quantity="2" cookMode="add" time="">tea</ingredient>
     <ingredient measure="ml" quantity="200" cookMode="boil" time="5 min">water</ingredient>
-   
+    <ingredient ></ingredient>
   </recipe>
 </recipeBook>

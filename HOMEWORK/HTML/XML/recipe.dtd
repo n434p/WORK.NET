@@ -1,7 +1,9 @@
+
+<!ELEMENT recipeBook (recipe+)>
 <!ELEMENT info (#PCDATA)>
 <!ELEMENT ingredient (#PCDATA) >
 <!ELEMENT recipe (info,ingredient+)>
-<!ELEMENT recipeBook (recipe+)>
+
 
 <!ATTLIST recipe
   name CDATA #REQUIRED
