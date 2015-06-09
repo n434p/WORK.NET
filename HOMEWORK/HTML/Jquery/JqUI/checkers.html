@@ -19,7 +19,7 @@
           width: 50px;
           height: 50px;
           border-radius: 50px;
-          border: 3px solid grey;
+          border: 2px solid grey;
           z-index:1;
           
         }
@@ -65,7 +65,7 @@
 
         #field {
             margin:0 auto;
-            padding-top:50px;
+            padding-top:0px;
             float:left;
             display:block;
         }
@@ -96,7 +96,7 @@
     <script type="text/javascript" src="jquery-ui.min.js"> </script>
     <script type="text/javascript">
 
-        var target, startCell, cell, inCell, beatenCell,long = false;
+        var target, startCell, cell, beatenCell,long = false;
 
         $(document).ready(function () {
             InitField(8);
@@ -124,21 +124,38 @@
             target = $(this);
             startCell = $(this).parent();
             //startCell.css('backgroundColor', 'yellow')
-            DetectMoves();
+            //DetectMoves();
+            geometryRun();
+        };
+
+        function geometryRun() {
+            $('.cell').each(function () {
+                
+                var v = Vector($(this), startCell);
+                if (isOnline($(this))) {
+                    $(this).css('backgroundColor', 'yellow');
+                }
+            });
+        };
+
+
+        function isOnline(obj) {
+            var pos = $(obj).offset();
+            var newPos = { x: pos.left - target.offset().left + 1, y: pos.top - target.offset().top - 1 };
+            if (newPos.x == newPos.y || newPos.x*(-1) == newPos.y) return true;
+            else return false;
         };
 
         function DetectMoves() {
             
             $('.cell').each(function () {
-                cell = $(this);
-                inCell = $(this).children(":first");
+                cell = $(this);   
                 var v = Vector(cell, startCell);
                 MoveOver(v);
             });
 
             if (!long) $('.cell').each(function () {
                 cell = $(this);
-                inCell = $(this).children(":first");
                 var v = Vector(cell, startCell);
                 MoveTo(v);
             });
@@ -173,12 +190,7 @@
 
         function MoveTo(v)
         {
-            //if ($(cell).children().length == 1 && v.l <= 120 && v.l > 1 && IsEnemy(inCell))
-            //{
-            //    cell.css('backgroundColor', 'orange');
-            //}
 
-            //else 
             if ( ($(cell).children().length == 0 && v.l <= 120 && v.l > 1) && (($(target).hasClass('white') && v.dy < 0) || ($(target).hasClass('black') && v.dy > 0)))
             {
                 cell.droppable({ drop: Drop, over: Over, disabled: false }, {
@@ -189,6 +201,11 @@
             }
             
         };
+
+        function EnemyTurn()
+        {
+
+        }
 
         function Vector(el1, el2)
         {
@@ -204,15 +221,13 @@
             else return true;
         }
 
-
-
         function Over(ev, ui) {
             var curChecker = $(' > .checker',this);
             
             if (curChecker.length != 0)
             {
+                $('.red').removeClass('red');
                 beatenCell = $(this);
-                
                 $(curChecker).addClass('red');
             }
 
@@ -225,19 +240,20 @@
 
             
                 $(target).css({ position: 'relative', left: '0px', top: '0px' });
-                if ( Vector(target,startCell).l <120) $(this).append(target);
-                else if ($('div').hasClass('red') && Vector(beatenCell,target).l < 110) {
+                if ( Vector($(this),startCell).l <120) $(this).append(target);
+                else if ($(beatenCell.children()).hasClass('red') && Vector(beatenCell,$(this)).l < 110) {
 
                     $(this).append(target);
 
-                if ($('.red').hasClass('black')) {
-                    $('.red').removeClass('red').appendTo('.beaten:first').css('float', 'left');
-                }
-                else {
-                    $('.red').removeClass('red').appendTo('.beaten:last').css('float', 'left');
-                }
+                    if ($('> .red', beatenCell).hasClass('black')) {
+                        $('> .red', beatenCell).removeClass('red').appendTo('.beaten:first');
+                    }
+                    else {
+                        $('> .red', beatenCell).removeClass('red').appendTo('.beaten:last');
+                    }
             }
 
+              
         };
 
         function Drag(ev,ui)
@@ -268,8 +284,8 @@
     </script>
 </head>
 <body>
-    <div class="beaten enemy">You</div>
+    <div class="beaten">You</div>
     <div id="field"></div>
-    <div class="beaten you">Enemy</div>
+    <div class="beaten">Enemy</div>
 </body>
 </html>
