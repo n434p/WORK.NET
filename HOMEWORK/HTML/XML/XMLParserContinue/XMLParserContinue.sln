@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLParserContinue", "XMLParserContinue\XMLParserContinue.csproj", "{810B6815-5FA0-4815-BFAC-0314693F83DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{810B6815-5FA0-4815-BFAC-0314693F83DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{810B6815-5FA0-4815-BFAC-0314693F83DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{810B6815-5FA0-4815-BFAC-0314693F83DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{810B6815-5FA0-4815-BFAC-0314693F83DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

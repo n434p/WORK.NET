@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<users>
+  <user>
+    <login Id="user1"/>
+    <First_name>John</First_name>
+    <Last_name>First</Last_name>
+    <Birth_date>2013-01-01</Birth_date>
+    <Registr_date>2013-11-03</Registr_date>
+    <Group>Work</Group>
+    <Contact_info>
+      <Other_accounts>name@mail.info</Other_accounts>
+    </Contact_info>
+  </user>
+
+  <user>
+    <login Id="user2"/>
+    <First_name>Jake</First_name>
+    <Last_name>Last</Last_name>
+    <Birth_date>2013-11-01</Birth_date>
+    <Registr_date>2013-11-01</Registr_date>
+    <Group>Client</Group>
+    <Contact_info>
+      <Cell>+380993212121</Cell>
+      
+    </Contact_info>
+    <Request>
+      ADD <request id="00002"/> INTO <group>Service</group> --- <date>2013-11-01</date>
+    </Request>
+  </user>
+  
+</users>
+

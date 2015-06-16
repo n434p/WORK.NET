@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="cell">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\+380[0-9]{9}"></xs:pattern>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="account">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^[a-z]+@[a-z]{1,9}[.][a-z]{1,4}"></xs:pattern>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="skype">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="3"></xs:minLength>
+      <xs:pattern value="[a-zA-Z]+">
+      </xs:pattern>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="id">
+    <xs:restriction base="xs:decimal">
+      <xs:totalDigits value="6"></xs:totalDigits>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="group">
+    <xs:restriction base ="xs:string">
+      <xs:enumeration value="Work"/>
+      <xs:enumeration value="Client"/>
+      <xs:enumeration value="Admin"/>
+      <xs:enumeration value="Service"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="login">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^[a-z]+[0-9]+$"></xs:pattern>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="name">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^[A-Z][a-z]+$"></xs:pattern>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="users">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="user" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="login" minOccurs="1" >
+              <xs:complexType>
+                <xs:attribute name="Id" type="login" use="required"></xs:attribute>
+              </xs:complexType>
+            </xs:element>
+
+            <xs:element name="First_name" type="name"></xs:element>
+            <xs:element name="Last_name" type="name"></xs:element>
+            <xs:element name="Birth_date" type="xs:date"></xs:element> 
+            <xs:element name ="Registr_date" type="xs:date" maxOccurs="1"></xs:element>
+            <xs:element name ="Group" type="group" maxOccurs="1">
+            </xs:element>
+
+            <xs:element name="Contact_info" maxOccurs="1">
+              <xs:complexType>
+                <xs:choice>
+                  <xs:element name="Skype" type="skype"></xs:element>
+                  <xs:element name="Cell" type="cell" maxOccurs="3"></xs:element>
+                  <xs:element name ="Other_accounts" type="account" maxOccurs="3"></xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+
+            <xs:element name="Request" minOccurs="0" >
+              <xs:complexType mixed="true">
+                <xs:sequence>
+                  <xs:element name="request">
+                    <xs:complexType>
+                      <xs:attribute name="id" type="id"></xs:attribute>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="group" type="group"></xs:element>
+                  <xs:element name="date" type="xs:date"></xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  </xs:element>
+</xs:schema>
