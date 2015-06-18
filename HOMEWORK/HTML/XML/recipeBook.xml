@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-<!DOCTYPE recipeBook SYSTEM "recipe.dtd">
-=======
-<!--<!DOCTYPE contactsBook SYSTEM "recipe.dtd">-->
+<?xml-stylesheet type="text/xsl" href="recipeBook.xslt"?>
 
-<!DOCTYPE contactsBook [
+<!--<!DOCTYPE recipeBook SYSTEM "recipe.dtd">-->
+
+
+<!DOCTYPE recipeBook [
 <!ELEMENT info (#PCDATA)>
 <!ELEMENT ingredient (#PCDATA) >
 <!ELEMENT recipe (info,ingredient+)>
@@ -12,9 +12,10 @@
 
 <!ATTLIST recipe
   name CDATA #REQUIRED
+  image CDATA #REQUIRED
   >
 <!ATTLIST cookM
-  cookMode (roast|cook|boil|cut_boxes|slice|add) 'add' #REQUIRED
+  cookMode (roast|cook|boil|cut_boxes|slice|add) 'add' 
   >
   
 <!ATTLIST ingredient
@@ -26,20 +27,41 @@
 ]>
 
 
->>>>>>> f1b8f89392611d96b3b0098b809d26e0e855166d
 <?xml-stylesheet type="text/css" href="recipeBook.css"?>
 <recipeBook>
-  <recipe name="tea">
+  
+  <recipe name="tea" image="1.jpg">
     <info>launch</info>
     <ingredient measure="spoon" quantity="2" cookMode="add" time="">sugar</ingredient>
 
     <ingredient measure="spoon" quantity="2" cookMode="add" time="">tea</ingredient>
 
     <ingredient measure="ml" quantity="200" cookMode="boil" time="5 min">water</ingredient>
-<<<<<<< HEAD
-    <ingredient ></ingredient>
-=======
-    
->>>>>>> f1b8f89392611d96b3b0098b809d26e0e855166d
+
   </recipe>
+
+
+  
+  <recipe name="coffee" image="2.jpg">
+    <info>launch</info>
+    <ingredient measure="spoon" quantity="2" cookMode="add" time="">sugar</ingredient>
+
+    <ingredient measure="spoon" quantity="2" cookMode="add" time="">coffee</ingredient>
+
+    <ingredient measure="spoon" quantity="2" cookMode="add" time="">milk</ingredient>
+
+    <ingredient measure="ml" quantity="200" cookMode="boil" time="5 min">water</ingredient>
+
+  </recipe>
+
+  <recipe name="tea" image="1.jpg">
+    <info>launch</info>
+    <ingredient measure="spoon" quantity="2" cookMode="add" time="">sugar</ingredient>
+
+    <ingredient measure="spoon" quantity="2" cookMode="add" time="">tea</ingredient>
+
+    <ingredient measure="ml" quantity="200" cookMode="boil" time="5 min">water</ingredient>
+
+  </recipe>
+  
 </recipeBook>

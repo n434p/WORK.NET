@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="car.xslt"?>
+<cars>
+  <car image="mycar1.jpg">
+    <manufactured>La Hispano Suiza de Automovils 1</manufactured>
+    <model>Alfonso 1</model>
+    <year>1912 1</year>
+    <speed>130 1</speed>
+    <color>black </color>
+  </car>
+  <car>
+    <manufactured>La Hispano Suiza de Automovils 2</manufactured>
+    <model>Alfonso 2</model>
+    <year>1912 2</year>
+    <speed>130 2</speed>
+    <color>black 2</color>
+  </car>
+  <car image="mycar3.jpg">
+    <manufactured>La Hispano Suiza de Automovils 3</manufactured>
+    <model>Alfonso 3</model>
+    <year>1912 3</year>
+    <speed>130 3</speed>
+    <color>black 3</color>
+  </car>
+</cars>
