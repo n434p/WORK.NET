@@ -39,16 +39,81 @@ namespace patternProj
 
             #region Abstract Factory
 
-            CarFactory BMW = new BWMFactory();
-            CarFactory Audi = new AudiFactory();
+            //CarFactory BMW = new BWMFactory();
+            //CarFactory Audi = new AudiFactory();
 
-            Client c1 = new Client(BMW);
-            Client c2 = new Client(Audi);
+            //Client c1 = new Client(BMW);
+            //Client c2 = new Client(Audi);
 
-            c1.Run();
-            c2.Run();
+            //c1.Run();
+            //c2.Run();
 
             #endregion
+
+            #region Factory Method
+
+            //Creator[] creators = { new ManagerCreator(), new DeveloperCreator()};
+
+            //foreach (var item in creators)
+            //{
+            //    Emloyee empl = item.FactoryMethod();
+            //    empl.Salary();
+            //    empl.Status();
+            //}
+
+            #endregion
+
+            #region Prototype
+
+            //ConcreteAudi audi = new ConcreteAudi();
+            //ConcreteAudi audiCopy = audi.Clone() as ConcreteAudi;
+
+            //Console.WriteLine(audi+"\n"+audiCopy);
+
+            //ConcreteBMW bmw = new ConcreteBMW();
+            //ConcreteBMW bmwCopy = bmw.Clone() as ConcreteBMW;
+
+            //Console.WriteLine(bmw + "\n" + bmwCopy);
+
+            //if (Object.ReferenceEquals(audi.Date, audiCopy.Date)) Console.WriteLine("true");
+
+            #endregion
+
+            #region Cycle
+
+            #region AbstractFactory_Cycle
+
+            //BabyCycleFactory babyCycle = new BabyCycleFactory();
+            //UkraineCycleFactory ukraineCycle = new UkraineCycleFactory();
+
+            //CycleClient c1 = new CycleClient(babyCycle);
+            //CycleClient c2 = new CycleClient(ukraineCycle);
+
+            //c1.Info();
+            //c2.Info();
+
+            #endregion
+
+            #region Singletone_Cycle
+
+            BycycleSingletone cycle = BycycleSingletone.Instance;
+            BycycleSingletone cycle2 = BycycleSingletone.Instance;
+
+            if (object.ReferenceEquals(cycle, cycle2)) Console.WriteLine("true");
+            else Console.WriteLine("false");
+
+
+            #endregion
+
+            #region Builder
+
+
+
+            #endregion
+
+
+            #endregion
+
         }
     }
 
@@ -283,6 +348,147 @@ namespace patternProj
             abstractCar.MaxSpeed(abstractEngine);
         }
     }
+
+    #endregion
+
+    #region Factory Method
+
+    /// <summary>
+    /// Implements (fake)Interface (Product) like shown on schema
+    /// </summary>
+    abstract class Emloyee 
+    {
+        public abstract void Status();
+        public abstract void Salary();
+    }
+
+    /// <summary>
+    /// ConcreteProduct
+    /// </summary>
+    class Manager : Emloyee 
+    {
+        public override void Status()
+        {
+            Console.WriteLine("Manager status");
+        }
+
+        public override void Salary()
+        {
+            Console.WriteLine("Manager salary");
+        }
+    }
+
+    /// <summary>
+    /// ConcreteProduct
+    /// </summary>
+    class Developer : Emloyee
+    {
+        public override void Status()
+        {
+            Console.WriteLine("Developer status");
+        }
+
+        public override void Salary()
+        {
+            Console.WriteLine("Developer salary");
+        }
+    }
+
+    abstract class Creator 
+    {
+        public abstract Emloyee FactoryMethod();
+
+    }
+
+    class ManagerCreator: Creator
+    {
+        public override Emloyee FactoryMethod()
+        {
+            return new Manager();
+        }
+    }
+
+    class DeveloperCreator : Creator
+    {
+        public override Emloyee FactoryMethod()
+        {
+            return new Developer();
+        }
+    }
+
+    #endregion
+
+    #region Prototype
+
+
+    /// <summary>
+    /// implements interface Prototype (on pattern scheme)
+    /// </summary>
+    abstract class Car 
+    {
+         string model;
+         string year;
+         int topSpeed;
+         string color;
+
+         object date;
+
+        
+
+         public Car(string c,string m, string y, int s)
+         {
+             model = m;
+             year = y;
+             topSpeed = s;
+             color = c;
+             date = new object();
+             date = "test";
+         }
+
+        public string Model { get { return model; } }
+        public string Year { get { return year; } }
+        public string Color { get { return color; } }
+        public int TopSpeed { get { return topSpeed; } }
+        public object Date { get { return date; } }
+
+
+         public override string ToString()
+         {
+             return string.Format("Model= {0}\t Year= {1}\t Top speed= {2}\t Color= {3}\t Date={4}",model,year,topSpeed,color,date);
+         }
+
+         public abstract Car Clone();
+
+
+    }
+
+    /// <summary>
+    /// ConcretePrototype
+    /// </summary>
+    class ConcreteAudi : Car
+    {
+        public ConcreteAudi(string c = "red", string m = "Audi", string y = "1999", int s = 220) : base(c, m, y, s) { }
+
+        public override Car Clone()
+        {
+            return this.MemberwiseClone() as Car;
+        }
+    }
+
+    /// <summary>
+    /// ConcretePrototype
+    /// </summary>
+    class ConcreteBMW : Car
+    {
+        public ConcreteBMW(string c = "green", string m = "BMW", string y = "2000", int s = 220) : base(c, m, y, s) { }
+
+        public override Car Clone()
+        {
+            return this.MemberwiseClone() as Car;
+        }
+    }
+
+
 
     #endregion
 
