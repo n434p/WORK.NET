@@ -11,6 +11,8 @@ namespace patternProj
     {
         static void Main(string[] args)
         {
+            // BASIC
+
             #region Singletone
             //Earth e = Earth.Instance();
             //Earth e1 = Earth.Instance();
@@ -79,6 +81,8 @@ namespace patternProj
 
             #endregion
 
+            //----------------------------------------
+
             #region Cycle
 
             #region AbstractFactory_Cycle
@@ -113,6 +117,10 @@ namespace patternProj
 
 
             #endregion
+
+            //----------------------------------------
+
+
 
         }
     }
