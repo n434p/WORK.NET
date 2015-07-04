@@ -19,7 +19,7 @@ namespace Mediator
             mediator.Post = post;
             customer.Send("Customer have new order for the factory."); // Factory can construct ordered unit
             constructor.Send("Factory done his work."); // Unit construction is complete. Post service can bring unit to the customer
-            post.Send("Unit was delivered"); // Customer can get unit
+            post.Send("Unit was delivered"); // Customer can get unit  
 
             Console.Read();
         }
