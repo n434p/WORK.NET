@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Invoker">
+    <Position X="3.5" Y="3.125" Height="0.302" Width="0.7" />
+  </Comment>
+  <Comment CommentText="Receiver">
+    <Position X="3.521" Y="0.656" Height="0.292" Width="0.742" />
+  </Comment>
+  <Comment CommentText="Client">
+    <Position X="5.979" Y="0.667" Height="0.292" Width="0.742" />
+  </Comment>
+  <Class Name="CommandPattern.Program">
+    <Position X="6" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Command">
+    <Position X="1.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CalculatorCommand">
+    <Position X="1.25" Y="2.75" Width="1.75" />
+    <InheritanceLine Type="Command" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="2" Y="2.296" />
+        <Point X="2" Y="2.671" />
+        <Point X="2" Y="2.671" />
+        <Point X="2" Y="2.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AQAAgAAAAAAABAYAAAAAAAAAAAAAAAAAAAAAAAEBIAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculator">
+    <Position X="3.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAEAAAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="User">
+    <Position X="3.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAABAIAAAAAAAgBgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
